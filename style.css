@@ -440,21 +440,70 @@ body.dark-mode a {
   color: #bb86fc;
 }
 
-body.dark-mode .btn {
-  background: #bb86fc;
-  color: #121212;
-  border-color: #bb86fc;
+body.dark-mode a:hover {
+  color: #ff79c6;
+  text-decoration: underline;
 }
 
-body.dark-mode .btn:hover {
-  background: #3700b3;
-  color: #ffffff;
+/* Ensure the dark mode button is visible and placed beside ENG22AM0125 */
+#dark-mode-toggle,
+#dark-mode-toggle-mobile {
+  background: none;  /* Remove any default background */
+  border: none;  /* Remove border */
+  cursor: pointer;  /* Pointer cursor */
+  padding: 0;  /* Remove any padding */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;  /* Optional: Smooth transition for the button */
 }
 
-body.dark-mode nav {
-  background-color: #1e1e1e;
+/* Image for dark mode button */
+#dark-mode-toggle img,
+#dark-mode-toggle-mobile img {
+  width: 25px;  /* Set a specific width for the icon */
+  height: 25px;  /* Set a specific height for the icon */
+  object-fit: contain;  /* Ensures the image maintains its aspect ratio without stretching */
+  background: none;  /* Remove any background color */
+  border-radius: 0;  /* Remove any border-radius if applied */
+  transition: transform 0.3s ease;  /* Optional: Rotate image on dark mode toggle */
 }
 
-body.dark-mode .menu-links {
-  background-color: #1e1e1e;
+/* Position for desktop view */
+#dark-mode-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10; /* Ensure it's always above other content */
+}
+
+/* Position for mobile view (beside ENG22AM0125) */
+#dark-mode-toggle-mobile {
+  margin-left: 10px;  /* Adjust space between text and button */
+  z-index: 10; /* Ensure it is above other content */
+}
+
+/* Make sure it's visible on mobile */
+@media (max-width: 768px) {
+  #dark-mode-toggle {
+    display: none;  /* Hide original button in mobile */
+  }
+
+  #dark-mode-toggle-mobile {
+    display: inline-flex;  /* Ensure button appears beside the text on mobile */
+  }
+}
+
+/* Optional: Rotate the image when dark mode is active */
+body.dark-mode #dark-mode-toggle img,
+body.dark-mode #dark-mode-toggle-mobile img {
+  transform: rotate(180deg);  /* Rotate icon when toggled */
+}
+
+/* Ensure mobile text positioning and button alignments */
+#dark-mode-toggle-mobile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
