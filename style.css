@@ -461,8 +461,8 @@ body.dark-mode a:hover {
 /* Image for dark mode button */
 #dark-mode-toggle img,
 #dark-mode-toggle-mobile img {
-  width: 25px;  /* Set a specific width for the icon */
-  height: 25px;  /* Set a specific height for the icon */
+  width: 30px;  /* Set a specific width for the icon */
+  height: 30px;  /* Set a specific height for the icon */
   object-fit: contain;  /* Ensures the image maintains its aspect ratio without stretching */
   background: none;  /* Remove any background color */
   border-radius: 0;  /* Remove any border-radius if applied */
@@ -481,6 +481,9 @@ body.dark-mode a:hover {
 #dark-mode-toggle-mobile {
   margin-left: 10px;  /* Adjust space between text and button */
   z-index: 10; /* Ensure it is above other content */
+  display: inline-flex; /* Ensure button is next to text */
+  justify-content: center;
+  align-items: center;
 }
 
 /* Make sure it's visible on mobile */
