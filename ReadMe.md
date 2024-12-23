@@ -1,5 +1,3 @@
-Visit the Portfolio Website here: https://retvq.github.io/RitvikV-Portfolio/
-
 # Interactive Personal Portfolio
 
 ## Table of Contents
@@ -82,3 +80,4 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 --- 
+Visit the Portfolio Website here: https://retvq.github.io/RitvikV-Portfolio/
