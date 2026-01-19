@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PORTFOLIO | Creative Engineering</title>
+
+    <!-- Core Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Fonts: Growth Page Selection (Manrope, Plus Jakarta Sans, Geist) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link id="all-fonts-link-font-newsreader" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..800&amp;display=swap">
+    <link id="all-fonts-link-font-jakarta" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap">
+    <link id="all-fonts-link-font-geist" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap">
+    <link id="all-fonts-link-font-manrope" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap">
+    <link id="all-fonts-link-font-geist-mono" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-jakarta">
+        .font-jakarta {
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+        }
+    </style>
+    <style id="all-fonts-style-font-geist">
+        .font-geist {
+            font-family: 'Geist', sans-serif !important;
+        }
+    </style>
+    <style id="all-fonts-style-font-manrope">
+        .font-manrope {
+            font-family: 'Manrope', sans-serif !important;
+        }
+    </style>
+
+    <style>
+        /* BASE SETTINGS - Growth Page Style */
+        body {
+            color: #1A1A1A;
+            font-family: 'Manrope', sans-serif;
+            /* Growth Body Font */
+            overflow-x: hidden;
+        }
+
+        .font-jakarta {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Growth Headline Font */
+        .font-geist {
+            font-family: 'Geist', sans-serif;
+        }
+
+        .font-mono {
+            font-family: 'Geist Mono', monospace;
+        }
+
+        /* Assuming Geist Mono or fallback */
+
+        /* --- 1. ALBA LOADER STYLES --- */
+        .loader {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            will-change: transform;
+        }
+
+        /* --- 2. GROWTH PARALLAX BACKGROUND --- */
+        .parallax-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            will-change: opacity;
+            transition: opacity 0.1s linear;
+        }
+
+        #hero-layer {
+            /* Growth's Dark Depth Gradient */
+            background: linear-gradient(180deg, #020617 0%, #1e293b 40%, #64748b 80%, #94a3b8 100%);
+            z-index: -20;
+            /* Deepest Layer */
+        }
+
+        #warm-layer {
+            /* Growth's Warm Reveal Gradient */
+            background: linear-gradient(0deg, rgba(255, 241, 225, 0.5) 0%, rgba(255, 255, 255, 0) 60%);
+            z-index: -10;
+        }
+
+        #cold-return-layer {
+            /* Return to Cold Gradient for Footer */
+            background: linear-gradient(0deg, #020617 0%, #1e293b 40%, #64748b 80%, transparent 100%);
+            z-index: -5;
+            /* Above warm layer, below noise */
+        }
+
+        /* --- 3. ALBA/VANTAGE NOISE OVERLAY --- */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+            /* Above content, below nav/loader */
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            mix-blend-mode: overlay;
+        }
+
+        /* --- 4. VANTAGE MARQUEE ANIMATION --- */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee-vertical 25s linear infinite;
+            /* Slower for elegance */
+        }
+
+        @keyframes marquee-vertical {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-50%);
+            }
+        }
+
+        /* --- 5. TYPEWRITER UTILS --- */
+        .word-span {
+            display: inline-block;
+            white-space: pre-wrap;
+            will-change: transform, opacity;
+        }
+
+        /* --- 6. GLASSMORPHIC UTILITY --- */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* Custom Scrollbar Hide */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* --- 7. NAV DARK MODE --- */
+        .nav-dark .text-white {
+            color: #18181b !important;
+        }
+
+        .nav-dark .text-white\/70 {
+            color: #52525b !important;
+        }
+
+        .nav-dark .text-white\/60 {
+            color: #71717a !important;
+        }
+
+        .nav-dark button {
+            color: #18181b !important;
+            border-color: rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .nav-dark button:hover {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+        }
+
+        .nav-dark .bg-white\/5 {
+            background-color: rgba(255, 255, 255, 0.8) !important;
+            backdrop-filter: blur(16px);
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-[#FF4D00] selection:text-white">
+
+    <!-- A. ALBA LOADING CURTAIN (Z-INDEX 9999) -->
+    <!-- Updated to match Hero "Cold" State: Deep Slate Background + Jakarta Fonts -->
+    <div
+        class="loader fixed inset-0 z-[100] bg-[linear-gradient(to_bottom,#dbeafe,#020617)] bg-[length:100%_200%] text-white flex flex-col items-center justify-center font-semibold tracking-[0.2em] text-2xl uppercase">
+        <div class="relative overflow-hidden mb-8">
+            <div
+                class="loader-text translate-y-full flex gap-4 items-center font-mono font-medium tracking-wider text-xl uppercase">
+                <div class="w-3 h-3 bg-[#FF4D00] rounded-full animate-pulse"></div>
+                <!-- Hero-matched spans with Premium Gradient -->
+                <span
+                    class="loader-word opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60">Ritvik</span>
+                <span
+                    class="loader-word opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60">Vasundh</span>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-1 bg-[#1e293b]">
+            <div class="loader-bar h-full bg-[#FF4D00] w-0"></div> <!-- Vantage Accent -->
+        </div>
+        <div class="absolute bottom-8 right-8 text-xs tracking-widest text-[#FF4D00] font-mono">
+            <span class="loader-counter">00</span><span class="text-white/50">%</span>
+        </div>
+    </div>
+
+    <!-- B. BACKGROUND LAYERS (Z-INDEX -10/-20) -->
+    <!-- Base Layer: Ensures the light gray background is always behind the hero gradient -->
+    <div id="base-layer"
+        style="position: fixed; inset: 0; background-color: #f4f4f5; z-index: -100; pointer-events: none;"></div>
+    <div id="hero-layer" class="parallax-layer" style="opacity: 1;"></div>
+    <div id="warm-layer" class="parallax-layer" style="opacity: 0;"></div>
+    <div id="cold-return-layer" class="parallax-layer" style="opacity: 0;"></div>
+    <div class="noise-overlay"></div>
+
+    <!-- C. NAVIGATION (Z-INDEX 60) -->
+    <nav class="fixed top-0 w-full z-60 border-b border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300"
+        id="navbar">
+        <div class="w-full flex justify-between items-center h-20 px-6 lg:px-12">
+            <div class="text-sm font-semibold tracking-tighter uppercase text-white flex items-center gap-2">
+                <div class="w-2 h-2 bg-[#FF4D00] rounded-full animate-pulse"></div>
+                Portfolio
+            </div>
+            <div class="hidden md:flex space-x-12 text-xs font-mono uppercase tracking-widest text-white/70">
+                <a href="#work" class="hover:text-[#FF4D00] transition-colors">Work</a>
+                <a href="#about" class="hover:text-[#FF4D00] transition-colors">Philosophy</a>
+                <a href="#contact" class="hover:text-[#FF4D00] transition-colors">Contact</a>
+            </div>
+            <button
+                class="px-8 py-4 border border-white/20 text-white text-sm font-semibold uppercase tracking-widest hover:bg-white/10 transition-all duration-300">
+                Connect
+            </button>
+        </div>
+    </nav>
+
+    <!-- D. MAIN LAYOUT (COMBINED VANTAGE GRID + GLASS SIDEBAR) -->
+    <main class="relative z-10 w-full overflow-hidden">
+
+        <!-- GRID CONTAINER -->
+        <section class="min-h-screen pt-20 grid grid-cols-1 lg:grid-cols-12 relative">
+
+            <!-- LEFT SIDEBAR: "The Engine" (Cols 3) -->
+            <!-- Modified Vantage Sidebar -> Glassmorphic (Growth Style) -->
+            <div
+                class="hidden lg:block lg:col-span-3 border-r border-white/10 glass-panel relative overflow-hidden h-screen sticky top-0">
+                <!-- Vertical Marquee -->
+                <div
+                    class="absolute inset-0 flex flex-col justify-center items-center h-[200%] marquee-content pointer-events-none">
+                    <div
+                        class="flex flex-col gap-12 text-[10px] font-mono text-white/40 w-full px-8 uppercase tracking-widest">
+                        <!-- Data Points Loop -->
+                        <div class="border-b border-white/5 pb-2 flex justify-between"><span
+                                class="typewriter-target">AVAILABILITY</span><span
+                                class="text-[#FF4D00] typewriter-target">OPEN</span></div>
+                        <div class="border-b border-white/5 pb-2 flex justify-between">
+                            <span class="typewriter-target">TIMEZONE</span><span
+                                class="typewriter-target">GMT+5:30</span>
+                        </div>
+                        <div class="border-b border-white/5 pb-2 flex justify-between">
+                            <span class="typewriter-target">STACK</span><span
+                                class="typewriter-target">FULL-CYCLE</span>
+                        </div>
+                        <div class="border-b border-white/5 pb-2 flex justify-between">
+                            <span class="typewriter-target">BUILD_VER</span><span
+                                class="typewriter-target">v2.8.0</span>
+                        </div>
+                        <div class="border-b border-white/5 pb-2 flex justify-between"><span
+                                class="typewriter-target">FOCUS</span><span class="typewriter-target">GROWTH
+                                ENG</span></div>
+
+                        <!-- Duplicate for seamless loop -->
+                        <div class="border-b border-white/5 pb-2 flex justify-between"><span
+                                class="typewriter-target">AVAILABILITY</span><span
+                                class="text-[#FF4D00] typewriter-target">OPEN</span></div>
+                        <div class="border-b border-white/5 pb-2 flex justify-between">
+                            <span class="typewriter-target">TIMEZONE</span><span
+                                class="typewriter-target">GMT+5:30</span>
+                        </div>
+                        <div class="border-b border-white/5 pb-2 flex justify-between">
+                            <span class="typewriter-target">STACK</span><span
+                                class="typewriter-target">FULL-CYCLE</span>
+                        </div>
+                        <div class="border-b border-white/5 pb-2 flex justify-between">
+                            <span class="typewriter-target">BUILD_VER</span><span
+                                class="typewriter-target">v2.8.0</span>
+                        </div>
+                        <div class="border-b border-white/5 pb-2 flex justify-between"><span
+                                class="typewriter-target">FOCUS</span><span class="typewriter-target">GROWTH
+                                ENG</span></div>
+
+                        <!-- Triplicate just to be safe with height -->
+                        <div class="border-b border-white/5 pb-2 flex justify-between"><span
+                                class="typewriter-target">AVAILABILITY</span><span
+                                class="text-[#FF4D00] typewriter-target">OPEN</span></div>
+                        <div class="border-b border-white/5 pb-2 flex justify-between">
+                            <span class="typewriter-target">TIMEZONE</span><span
+                                class="typewriter-target">GMT+5:30</span>
+                        </div>
+                        <div class="border-b border-white/5 pb-2 flex justify-between">
+                            <span class="typewriter-target">STACK</span><span
+                                class="typewriter-target">FULL-CYCLE</span>
+                        </div>
+                        <div class="border-b border-white/5 pb-2 flex justify-between">
+                            <span class="typewriter-target">BUILD_VER</span><span
+                                class="typewriter-target">v2.8.0</span>
+                        </div>
+                        <div class="border-b border-white/5 pb-2 flex justify-between"><span
+                                class="typewriter-target">FOCUS</span><span class="typewriter-target">GROWTH
+                                ENG</span></div>
+                    </div>
+                </div>
+
+                <div
+                    class="absolute bottom-8 left-8 text-[10px] font-mono uppercase tracking-widest text-[#FF4D00] flex items-center gap-2 typewriter-target">
+                    <div class="w-1.5 h-1.5 bg-[#FF4D00] rounded-full animate-pulse"></div>
+                    System Pulse
+                </div>
+            </div>
+
+            <!-- RIGHT CONTENT: "The Stage" (Cols 9) -->
+            <!-- Vantage Structure + Growth Typography Effects -->
+            <div class="col-span-1 lg:col-span-9 flex flex-col justify-center px-6 lg:px-24 py-32 relative">
+
+                <!-- Ambient Glow (Growth Style) behind text -->
+                <div
+                    class="absolute top-1/2 left-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/10 blur-[120px] rounded-full pointer-events-none mix-blend-screen">
+                </div>
+
+                <div class="max-w-7xl mx-auto px-6 text-center z-10 w-full">
+                    <div class="reveal-trigger flex flex-col items-center gap-y-4 mb-12">
+                        <!-- Growth Page Hero Typography & Animation Structure -->
+                        <h1 class="typewriter-target leading-[1.1] md:text-7xl lg:text-7xl text-4xl sm:text-5xl font-medium text-white tracking-tighter font-jakarta whitespace-nowrap"
+                            id="hero-title-1" data-animation-started="false">
+                            <span
+                                class="word-span opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform">Creative</span>
+                            <span
+                                class="word-span opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform">Engineering.</span>
+                        </h1>
+
+                        <div class="typewriter-target leading-[1.1] md:text-7xl lg:text-7xl text-4xl sm:text-5xl font-medium text-white/40 tracking-tighter font-jakarta whitespace-nowrap"
+                            id="hero-title-2" data-animation-started="false">
+                            <span
+                                class="word-span opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform">Architecture.</span>
+                        </div>
+                    </div>
+
+                    <div class="reveal-trigger delay-300 pl-1 border-l-2 border-[#FF4D00] inline-block text-left opacity-0 translate-y-4"
+                        id="hero-para-container">
+                        <p class="text-xl md:text-2xl font-light text-white/70 max-w-2xl ml-8 font-manrope leading-relaxed"
+                            id="hero-para">
+                            Building the digital infrastructure for the next generation of SaaS.
+                            <span class="text-white">Precision over Hype.</span>
+                        </p>
+                    </div>
+
+                    <!-- CTA Button (Growth Style) -->
+                    <div class="mt-16 flex justify-center reveal-trigger delay-500" id="hero-btns">
+                        <a href="#transition"
+                            class="group px-8 py-3.5 rounded-full font-medium text-sm transition-all inline-flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 text-white hover:bg-white/10 hover:border-white/20 hover:scale-105 font-geist opacity-0 translate-y-4 duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform">
+                            How we work
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Transition + Strategic Partner Section (Merged Hot Zone) -->
+        <section class="flex flex-col relative z-10" id="transition">
+            <!-- Extended Background Gradient (Transparent -> White -> Transparent for blending) -->
+            <div class="absolute inset-0 z-0 pointer-events-none"
+                style="background: linear-gradient(180deg, rgba(244,244,245,0) 0%, #f4f4f5 10%, #f4f4f5 80%, rgba(244,244,245,0) 100%);">
+            </div>
+
+            <!-- Transition Text (Spotlight) -->
+            <div class="min-h-screen flex items-center justify-center relative z-10">
+                <div class="max-w-5xl mx-auto px-6 text-center">
+                    <h2 class="typewriter-target leading-[1.4] md:text-5xl lg:text-6xl text-3xl font-light text-zinc-900 tracking-tighter font-geist"
+                        data-animation-started="false">We connect performance Marketing, Funnel architecture, CRM and AI
+                        to
+                        a holistic System that makes growth plannable.</h2>
+                </div>
+            </div>
+
+            <!-- Strategic Partner Content -->
+            <div class="z-10 relative pb-64">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="grid lg:grid-cols-12 gap-12 items-center">
+                        <div class="lg:col-span-7 reveal-on-scroll">
+                            <!-- HEADLINE -->
+                            <h2
+                                class="text-4xl md:text-5xl lg:text-5xl leading-tight mb-8 font-light font-geist tracking-tighter text-zinc-900">
+                                <span class="block text-zinc-400 typewriter-target">No Agency.</span>
+                                <span class="block text-zinc-900 typewriter-target">A strategic Partner.</span>
+                            </h2>
+
+                            <div class="space-y-6 text-lg font-light leading-relaxed text-zinc-600">
+                                <p class="font-geist">
+                                    We have supported growth setups for international brands, premium service
+                                    providers
+                                    and
+                                    complex high-ticket models, working with 9-figure advertising budgets.
+                                </p>
+                                <p class="font-geist">
+                                    We work directly with decision-makers, reduce complexity and develop processes
+                                    that
+                                    work sustainably – from strategy to implementation.
+                                </p>
+                            </div>
+
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mt-12 pt-8 border-t border-zinc-200">
+                                <!-- Strategy -->
+                                <div class="reveal-on-scroll delay-100 flex items-center gap-3 group cursor-default">
+                                    <div
+                                        class="flex items-center justify-center w-8 h-8 rounded-lg bg-white border border-zinc-100 text-zinc-500 transition-colors group-hover:bg-zinc-100 group-hover:text-zinc-700">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <line x1="22" x2="18" y1="12" y2="12"></line>
+                                            <line x1="6" x2="2" y1="12" y2="12"></line>
+                                            <line x1="12" x2="12" y1="6" y2="2"></line>
+                                            <line x1="12" x2="12" y1="22" y2="18"></line>
+                                        </svg>
+                                    </div>
+                                    <span
+                                        class="text-sm font-medium text-zinc-600 group-hover:text-zinc-900 transition-colors font-geist">
+                                        Strategy
+                                    </span>
+                                </div>
+
+                                <!-- Ads & Email -->
+                                <div class="reveal-on-scroll delay-100 flex items-center gap-3 group cursor-default">
+                                    <div
+                                        class="flex items-center justify-center w-8 h-8 rounded-lg bg-white border border-zinc-100 text-zinc-500 transition-colors group-hover:bg-zinc-100 group-hover:text-zinc-700">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                                            <path
+                                                d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z">
+                                            </path>
+                                            <path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14">
+                                            </path>
+                                            <path d="M8 6v8"></path>
+                                        </svg>
+                                    </div>
+                                    <span
+                                        class="text-sm font-medium text-zinc-600 group-hover:text-zinc-900 transition-colors font-geist">
+                                        Ads & Email Outreach
+                                    </span>
+                                </div>
+
+                                <!-- Website & Funnels -->
+                                <div class="reveal-on-scroll delay-200 flex items-center gap-3 group cursor-default">
+                                    <div
+                                        class="flex items-center justify-center w-8 h-8 rounded-lg bg-white border border-zinc-100 text-zinc-500 transition-colors group-hover:bg-zinc-100 group-hover:text-zinc-700">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                                            <rect width="18" height="7" x="3" y="3" rx="1"></rect>
+                                            <rect width="9" height="7" x="3" y="14" rx="1"></rect>
+                                            <rect width="5" height="7" x="16" y="14" rx="1"></rect>
+                                        </svg>
+                                    </div>
+                                    <span
+                                        class="text-sm font-medium text-zinc-600 group-hover:text-zinc-900 transition-colors font-geist">
+                                        Website & Funnels
+                                    </span>
+                                </div>
+
+                                <!-- AI & Automation -->
+                                <div class="reveal-on-scroll delay-200 flex items-center gap-3 group cursor-default">
+                                    <div
+                                        class="flex items-center justify-center w-8 h-8 rounded-lg bg-white border border-zinc-100 text-zinc-500 transition-colors group-hover:bg-zinc-100 group-hover:text-zinc-700">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                                            <path d="M12 8V4H8"></path>
+                                            <rect width="16" height="12" x="4" y="8" rx="2"></rect>
+                                            <path d="M2 14h2"></path>
+                                            <path d="M20 14h2"></path>
+                                            <path d="M15 13v2"></path>
+                                            <path d="M9 13v2"></path>
+                                        </svg>
+                                    </div>
+                                    <span
+                                        class="text-sm font-medium text-zinc-600 group-hover:text-zinc-900 transition-colors font-geist">
+                                        AI & Automation
+                                    </span>
+                                </div>
+
+                                <!-- Tracking & Analytics -->
+                                <div class="reveal-on-scroll delay-300 flex items-center gap-3 group cursor-default">
+                                    <div
+                                        class="flex items-center justify-center w-8 h-8 rounded-lg bg-white border border-zinc-100 text-zinc-500 transition-colors group-hover:bg-zinc-100 group-hover:text-zinc-700">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                                            <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
+                                            <path d="M18 17V9"></path>
+                                            <path d="M13 17V5"></path>
+                                            <path d="M8 17v-3"></path>
+                                        </svg>
+                                    </div>
+                                    <span
+                                        class="text-sm font-medium text-zinc-600 group-hover:text-zinc-900 transition-colors font-geist">
+                                        Tracking & Analytics
+                                    </span>
+                                </div>
+
+                                <!-- CRM -->
+                                <div class="reveal-on-scroll delay-300 flex items-center gap-3 group cursor-default">
+                                    <div
+                                        class="flex items-center justify-center w-8 h-8 rounded-lg bg-white border border-zinc-100 text-zinc-500 transition-colors group-hover:bg-zinc-100 group-hover:text-zinc-700">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                            <path d="M16 3.128a4 4 0 0 1 0 7.744"></path>
+                                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                            <circle cx="9" cy="7" r="4"></circle>
+                                        </svg>
+                                    </div>
+                                    <span
+                                        class="text-sm font-medium text-zinc-600 group-hover:text-zinc-900 transition-colors font-geist">
+                                        CRM
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-4 lg:col-start-9 reveal-on-scroll delay-200">
+                            <div
+                                class="aspect-[3/4] rounded-2xl overflow-hidden relative shadow-xl border border-zinc-200/50">
+                                <div class="absolute inset-0 w-full h-full group">
+                                    <img loading="lazy" src="https://i.postimg.cc/nzSXf6Mj/fabi-foto-neu.jpg"
+                                        alt="Fabian Knecht"
+                                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 will-change-transform">
+
+                                    <div
+                                        class="absolute bottom-5 left-5 right-5 p-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 shadow-lg flex items-center justify-between gap-3 transform transition-all duration-300 hover:bg-white/20">
+                                        <div>
+                                            <div class="text-white font-jakarta font-semibold text-sm leading-tight">
+                                                Fabian Knecht
+                                            </div>
+                                            <div class="text-white/70 font-geist text-xs mt-0.5 font-medium">
+                                                Founder & Growth Lead
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Problem Statement Section -->
+        <section class="z-10 pt-32 pb-32 relative" id="approach">
+            <!-- Extended Background -->
+            <div class="absolute inset-0 z-0 pointer-events-none bg-[#f4f4f5]"></div>
+
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-20">
+                    <div class="reveal-on-scroll self-center">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="h-px w-8 bg-zinc-300"></div>
+                            <span class="text-xs font-medium tracking-widest uppercase text-zinc-400 font-geist">
+                                The Problem
+                            </span>
+                        </div>
+                        <h2 class="typewriter-target leading-[1.15] md:text-5xl text-4xl font-light text-zinc-900 mb-8 min-h-[3ch] font-geist tracking-tighter"
+                            data-animation-started="false">Marketing delivers Leads, but revenue stagnates</h2>
+                        <p class="leading-relaxed text-lg font-light text-zinc-500 max-w-md font-geist">
+                            Often the bottleneck lies in the lack of synchronization between marketing, data and sales
+                            processes.
+                        </p>
+                    </div>
+
+                    <div class="lg:mt-0 mt-8 space-y-6">
+                        <!-- Card 1: Data Silos -->
+                        <div
+                            class="reveal-on-scroll delay-100 p-8 rounded-2xl border transition-colors bg-white border-zinc-200 hover:border-zinc-300 shadow-sm">
+                            <div class="flex items-start gap-4">
+                                <div class="p-2 rounded-lg bg-slate-100 text-slate-700">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" class="w-5 h-5">
+                                        <path
+                                            d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z">
+                                        </path>
+                                        <path
+                                            d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12">
+                                        </path>
+                                        <path
+                                            d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold mb-2 text-zinc-900 font-geist">Data Silos</h3>
+                                    <p class="leading-relaxed text-sm text-zinc-500 font-geist">
+                                        Leads are generated, but not used effectively. Marketing data is not reaching
+                                        sales.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Manual Processes -->
+                        <div
+                            class="reveal-on-scroll delay-200 p-8 rounded-2xl border transition-colors bg-white border-zinc-200 hover:border-zinc-300 shadow-sm">
+                            <div class="flex items-start gap-4">
+                                <div class="p-2 rounded-lg bg-zinc-50 text-zinc-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" class="w-5 h-5">
+                                        <path d="M12 20v2"></path>
+                                        <path d="M12 2v2"></path>
+                                        <path d="M17 20v2"></path>
+                                        <path d="M17 2v2"></path>
+                                        <path d="M2 12h2"></path>
+                                        <path d="M2 17h2"></path>
+                                        <path d="M2 7h2"></path>
+                                        <path d="M20 12h2"></path>
+                                        <path d="M20 17h2"></path>
+                                        <path d="M20 7h2"></path>
+                                        <path d="M7 20v2"></path>
+                                        <path d="M7 2v2"></path>
+                                        <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                                        <rect x="8" y="8" width="8" height="8" rx="1"></rect>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold mb-2 text-zinc-900 font-geist">Manual Processes
+                                    </h3>
+                                    <p class="text-zinc-500 text-sm leading-relaxed font-geist">
+                                        Teams spend hours on tasks that should be automated.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Wrong Target Audience -->
+                        <div
+                            class="reveal-on-scroll delay-300 p-8 rounded-2xl border transition-colors bg-white border-zinc-200 hover:border-zinc-300 shadow-sm">
+                            <div class="flex items-start gap-4">
+                                <div class="p-2 rounded-lg bg-slate-100 text-slate-700">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" class="w-5 h-5">
+                                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                        <path d="M16 3.128a4 4 0 0 1 0 7.744"></path>
+                                        <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold mb-2 text-zinc-900 font-geist">Wrong Target
+                                        Audience</h3>
+                                    <p class="text-zinc-500 text-sm leading-relaxed font-geist">
+                                        Marketing often targets the wrong audience. Result: poor lead quality.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Solution / System Section -->
+        <section class="relative z-10 py-20 overflow-hidden" id="system">
+            <div class="absolute inset-0 z-0 pointer-events-none bg-[#f4f4f5]"></div>
+            <div class="absolute inset-0 pointer-events-none">
+                <div
+                    class="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-blue-200/20 rounded-full blur-[120px] mix-blend-multiply animate-pulse">
+                </div>
+                <div
+                    class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-indigo-200/20 rounded-full blur-[120px] mix-blend-multiply">
+                </div>
+            </div>
+
+            <div class="max-w-[90rem] mx-auto px-4 md:px-6 relative z-10">
+                <div
+                    class="relative rounded-[2.5rem] bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.05)] p-8 md:p-16 overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-transparent opacity-60 pointer-events-none">
+                    </div>
+
+                    <div class="relative z-10">
+                        <div class="reveal-on-scroll text-center mb-16 max-w-full mx-auto">
+                            <div
+                                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/50 border border-white/60 backdrop-blur-md mb-8 shadow-sm">
+                                <div class="w-1.5 h-1.5 rounded-full bg-zinc-400"></div>
+                                <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-zinc-500 font-geist">
+                                    The Solution
+                                </span>
+                            </div>
+
+                            <h2 class="typewriter-target text-4xl md:text-5xl lg:text-6xl text-zinc-900 font-light leading-[1.1] md:whitespace-nowrap min-h-[1.2em] font-geist tracking-tighter"
+                                data-animation-started="false">An integrated Growth System</h2>
+                            <p class="md:text-xl text-lg font-light text-zinc-600 font-geist mt-5">
+                                From foundations to AI automation.
+                            </p>
+                        </div>
+
+                        <!-- 4 Steps Grid -->
+                        <div class="grid md:grid-cols-4 gap-12 md:gap-8">
+                            <!-- Step 1 -->
+                            <div class="reveal-on-scroll group relative">
+                                <div
+                                    class="absolute -left-4 -top-4 w-24 h-24 bg-gradient-to-br from-zinc-200/20 to-transparent rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                </div>
+                                <span
+                                    class="block md:text-7xl group-hover:text-zinc-900/60 transition-colors duration-500 select-none text-6xl font-medium text-zinc-900/40 font-jakarta mb-4 relative">01</span>
+                                <div
+                                    class="relative pl-1 border-l border-transparent group-hover:border-zinc-300/50 transition-colors duration-300">
+                                    <h3 class="text-lg font-semibold mb-2 text-zinc-900 tracking-tight font-geist">
+                                        Strategy & Audit</h3>
+                                    <p class="text-zinc-500 text-sm leading-relaxed font-light font-geist">
+                                        In-depth analysis of the status quo. Identification of bottlenecks and
+                                        development of a clear roadmap.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="reveal-on-scroll delay-100 group relative">
+                                <div
+                                    class="absolute -left-4 -top-4 w-24 h-24 bg-gradient-to-br from-zinc-200/20 to-transparent rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                </div>
+                                <span
+                                    class="relative block text-6xl md:text-7xl text-zinc-900/40 mb-4 group-hover:text-zinc-900/60 transition-colors duration-500 select-none font-medium font-jakarta">02</span>
+                                <div
+                                    class="relative pl-1 border-l border-transparent group-hover:border-zinc-300/50 transition-colors duration-300">
+                                    <h3 class="text-lg font-semibold mb-2 text-zinc-900 tracking-tight font-geist">
+                                        Performance Traffic</h3>
+                                    <p class="text-zinc-500 text-sm leading-relaxed font-light font-geist">
+                                        Scalable campaigns on Meta & Google. Data-driven creative testing instead of gut
+                                        feeling.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="reveal-on-scroll delay-200 group relative">
+                                <div
+                                    class="absolute -left-4 -top-4 w-24 h-24 bg-gradient-to-br from-zinc-200/20 to-transparent rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                </div>
+                                <span
+                                    class="relative block text-6xl md:text-7xl text-zinc-900/40 mb-4 group-hover:text-zinc-900/60 transition-colors duration-500 select-none font-medium font-jakarta">03</span>
+                                <div
+                                    class="relative pl-1 border-l border-transparent group-hover:border-zinc-300/50 transition-colors duration-300">
+                                    <h3 class="text-lg font-semibold mb-2 text-zinc-900 tracking-tight font-geist">
+                                        Funnel Architecture</h3>
+                                    <p class="text-zinc-500 text-sm leading-relaxed font-light font-geist">
+                                        High-performance funnels and AI chatbots. Qualification and filtering for
+                                        maximum lead quality.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 4 -->
+                            <div class="reveal-on-scroll delay-300 group relative">
+                                <div
+                                    class="absolute -left-4 -top-4 w-24 h-24 bg-gradient-to-br from-zinc-200/20 to-transparent rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                </div>
+                                <span
+                                    class="relative block text-6xl md:text-7xl text-zinc-900/40 mb-4 group-hover:text-zinc-900/60 transition-colors duration-500 select-none font-medium font-jakarta">04</span>
+                                <div
+                                    class="relative pl-1 border-l border-transparent group-hover:border-zinc-300/50 transition-colors duration-300">
+                                    <h3 class="text-lg font-semibold mb-2 text-zinc-900 tracking-tight font-geist">Sales
+                                        Operations</h3>
+                                    <p class="text-zinc-500 text-sm leading-relaxed font-light font-geist">
+                                        CRM integration and nurturing. No lead is left behind, every touchpoint is
+                                        captured.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-32 z-10 relative">
+            <div class="absolute inset-0 z-0 pointer-events-none bg-[#f4f4f5]"></div>
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-8">
+                    <div class="reveal-on-scroll">
+                        <h2 class="typewriter-target text-4xl md:text-5xl mb-2 text-zinc-900 font-light min-h-[1.2em] font-geist tracking-tighter"
+                            data-animation-started="false">Our Services</h2>
+                        <p class="text-zinc-500 font-light text-lg font-geist">
+                            Tailor-made solutions for your growth.
+                        </p>
+                    </div>
+                    <a href="#contact"
+                        class="reveal-on-scroll text-sm transition-colors flex items-center gap-2 border-b pb-1 text-zinc-900 hover:text-zinc-600 border-zinc-300 font-geist">
+                        Collaborate
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                            class="w-4 h-4">
+                            <path d="M7 7h10v10"></path>
+                            <path d="M7 17 17 7"></path>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- Service 1: System Audit -->
+                    <a href="#contact"
+                        class="block reveal-on-scroll group relative border-t transition-colors border-zinc-200 hover:border-zinc-400">
+                        <div
+                            class="flex flex-col md:flex-row md:items-center gap-6 cursor-pointer pt-10 pb-10 justify-between">
+                            <h3
+                                class="md:w-1/3 text-2xl group-hover:text-slate-600 transition-colors text-zinc-800 font-medium font-jakarta">
+                                System Audit</h3>
+                            <p class="md:w-1/2 text-zinc-500 text-base font-light font-geist">
+                                Status Quo Check: Identifying blockers and leverages in Marketing & Sales.
+                            </p>
+                            <div
+                                class="md:w-auto opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" class="w-5 h-5 text-slate-600">
+                                    <path d="M5 12h14"></path>
+                                    <path d="m12 5 7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Service 2: Setup -->
+                    <a href="#contact"
+                        class="block reveal-on-scroll delay-100 group relative border-t transition-colors border-zinc-200 hover:border-zinc-400">
+                        <div
+                            class="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 cursor-pointer">
+                            <h3
+                                class="md:w-1/3 text-2xl group-hover:text-slate-600 transition-colors text-zinc-800 font-medium font-jakarta">
+                                Setup</h3>
+                            <p class="md:w-1/2 text-zinc-500 text-base font-light font-geist">
+                                Building the complete infrastructure of ads, funnels, automations & CRM.
+                            </p>
+                            <div
+                                class="md:w-auto opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" class="w-5 h-5 text-slate-600">
+                                    <path d="M5 12h14"></path>
+                                    <path d="m12 5 7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Service 3: Accompanying Partner -->
+                    <a href="#contact"
+                        class="block reveal-on-scroll delay-200 group relative border-t transition-colors border-zinc-200 hover:border-zinc-400">
+                        <div
+                            class="py-10 flex flex-col md:flex-row md:items-center justify-between gap-6 cursor-pointer">
+                            <h3
+                                class="md:w-1/3 text-2xl group-hover:text-slate-600 transition-colors text-zinc-800 font-medium font-jakarta">
+                                Accompanying Partner</h3>
+                            <p class="md:w-1/2 text-zinc-500 text-base font-light font-geist">
+                                Strategic & operational support as your external growth partner.
+                            </p>
+                            <div
+                                class="md:w-auto opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" class="w-5 h-5 text-slate-600">
+                                    <path d="M5 12h14"></path>
+                                    <path d="m12 5 7 7-7 7"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="z-10 border-zinc-200/60 border-t pt-32 pb-32 relative" id="testimonials">
+            <div class="absolute inset-0 z-0 pointer-events-none bg-[#f4f4f5]"></div>
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="reveal-on-scroll">
+                    <div class="text-center max-w-3xl mr-auto mb-16 ml-auto space-y-6">
+                        <div
+                            class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/40 border border-white/60 backdrop-blur-md shadow-sm">
+                            <span class="relative flex h-2 w-2">
+                                <span
+                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-zinc-400"></span>
+                            </span>
+                            <span
+                                class="text-xs font-semibold uppercase tracking-widest text-zinc-600 font-geist">Testimonials</span>
+                        </div>
+
+                        <div class="space-y-2">
+                            <h2 class="typewriter-target text-4xl md:text-5xl lg:text-6xl font-light text-zinc-900 leading-[1.1] font-geist tracking-tighter"
+                                data-animation-started="false">Results that count</h2>
+                            <p class="md:text-3xl text-2xl font-medium text-zinc-400 tracking-tight font-jakarta">
+                                Success Stories</p>
+                        </div>
+                    </div>
+
+                    <!-- Bento Grid Layout -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                        <!-- Left Tall Card -->
+                        <div
+                            class="lg:col-span-5 overflow-hidden flex flex-col hover:shadow-xl transition-shadow duration-300 bg-white h-full border-zinc-200/50 border rounded-[2.5rem] p-8 md:p-10 relative shadow-sm justify-between">
+                            <div class="space-y-6">
+                                <div>
+                                    <div class="text-7xl font-medium tracking-tighter text-zinc-900 font-jakarta">10x
+                                    </div>
+                                    <div class="text-lg font-medium text-zinc-500 font-geist mt-2">Revenue in one year
+                                    </div>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" class="text-red-500 w-8 h-8 opacity-90 fill-current">
+                                    <path
+                                        d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z">
+                                    </path>
+                                    <path
+                                        d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z">
+                                    </path>
+                                </svg>
+                                <p class="leading-relaxed font-light text-zinc-600 font-geist text-base md:text-lg">
+                                    Fabian not only strategically conceived our expansion into new markets, but also
+                                    consistently implemented it operationally.
+                                </p>
+                                <p class="leading-relaxed font-light text-zinc-600 font-geist text-base md:text-lg">
+                                    His ability to quickly grasp complex go-to-market setups, set up scalable growth
+                                    systems, and further develop them in a data-driven manner was particularly valuable.
+                                </p>
+                                <p class="leading-relaxed font-light text-zinc-600 font-geist text-base md:text-lg">
+                                    The combination of analytical depth, clear structure and high implementation speed
+                                    enabled us to scale new markets significantly faster and more efficiently than would
+                                    have been possible without him.
+                                </p>
+                            </div>
+                            <div class="mt-8 pt-8 border-t border-zinc-100 flex items-center gap-4">
+                                <img src="https://i.postimg.cc/Rhw1z7NX/1738346938037.jpg" alt="Christian Benzel"
+                                    class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm">
+                                <div>
+                                    <div class="text-base font-semibold text-zinc-900 font-geist">Christian Benzel</div>
+                                    <div class="text-sm text-zinc-500 font-geist">Principal Digital Growth, DERTOUR
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="lg:col-span-7 flex flex-col gap-6 h-full">
+                            <!-- Top Wide Card -->
+                            <div
+                                class="overflow-hidden hover:shadow-xl transition-shadow duration-300 bg-white border-zinc-200/50 border rounded-[2.5rem] p-8 md:p-10 relative shadow-sm h-full">
+                                <div class="flex flex-col h-full justify-between">
+                                    <div class="space-y-6">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="text-red-500 w-8 h-8 opacity-90 fill-current">
+                                            <path
+                                                d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z">
+                                            </path>
+                                            <path
+                                                d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z">
+                                            </path>
+                                        </svg>
+                                        <p
+                                            class="text-zinc-600 font-light leading-relaxed font-geist text-base md:text-lg">
+                                            Our strategic approach, combined with strong operational implementation
+                                            capabilities, significantly improved our performance. Excellent analytical
+                                            skills and a quick grasp of our specific products and application processes
+                                            further contributed to this success.
+                                        </p>
+                                    </div>
+                                    <div class="mt-8 pt-8 border-t border-zinc-100 flex items-center gap-4">
+                                        <img src="https://cdn.businessinsider.de/wp-content/uploads/2017/07/steffen-harting_hires_2000.jpg"
+                                            alt="Steffen Harting"
+                                            class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm">
+                                        <div>
+                                            <div class="text-base font-semibold text-zinc-900 font-geist">Steffen
+                                                Harting</div>
+                                            <div class="text-sm text-zinc-500 font-geist">Managing Director, Getsurance
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bottom Row Grid -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1">
+                                <!-- Bottom Left (White) -->
+                                <div
+                                    class="relative overflow-hidden rounded-[2.5rem] bg-white border border-zinc-200/50 p-8 md:p-10 shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between h-full">
+                                    <div class="space-y-6">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="text-red-500 w-8 h-8 opacity-90 fill-current">
+                                            <path
+                                                d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z">
+                                            </path>
+                                            <path
+                                                d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z">
+                                            </path>
+                                        </svg>
+                                        <p
+                                            class="leading-relaxed font-light text-zinc-600 font-geist text-base md:text-lg">
+                                            Cold email outreach and lead generation were completely automated. We were
+                                            able to invest the time saved directly into closing deals and growth.
+                                        </p>
+                                    </div>
+                                    <div class="mt-8 pt-8 border-t border-zinc-100 flex items-center gap-4">
+                                        <img src="https://i.postimg.cc/gkC7bsrm/Portraitfotograf-Berlin-Format-Internet-02.jpg"
+                                            alt="Timo Kretschmer"
+                                            class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-sm">
+                                        <div>
+                                            <div class="text-base font-semibold text-zinc-900 font-geist">Timo
+                                                Kretschmer</div>
+                                            <div class="text-sm text-zinc-500 font-geist">Founder & CEO, Online Vision
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Bottom Right (Dark) -->
+                                <div
+                                    class="relative overflow-hidden rounded-[2.5rem] bg-zinc-950 border border-zinc-800 p-8 md:p-10 shadow-xl shadow-zinc-900/20 flex flex-col justify-between h-full group hover:border-zinc-700 transition-colors">
+                                    <div
+                                        class="absolute top-0 right-0 w-32 h-32 bg-zinc-800/30 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2">
+                                    </div>
+                                    <div class="relative z-10 space-y-6">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round"
+                                            class="text-red-500 w-8 h-8 opacity-80 fill-current">
+                                            <path
+                                                d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z">
+                                            </path>
+                                            <path
+                                                d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z">
+                                            </path>
+                                        </svg>
+                                        <p
+                                            class="text-zinc-300 font-light leading-relaxed font-geist text-base md:text-lg">
+                                            Optimizing target group-based ad sets for our performance marketing has
+                                            visibly increased conversion rates.
+                                        </p>
+                                    </div>
+                                    <div
+                                        class="relative z-10 flex items-center gap-4 mt-8 pt-8 border-t border-zinc-800">
+                                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/917d6f93-fb36-439a-8c48-884b67b35381_1600w.jpg"
+                                            alt="Malte Häusler"
+                                            class="w-12 h-12 rounded-full object-cover border-2 border-zinc-800 shadow-sm">
+                                        <div>
+                                            <div class="text-base font-semibold text-white font-geist">Malte Häusler
+                                            </div>
+                                            <div class="text-sm text-zinc-500 font-geist">Co-Founder & CEO, Timeless
+                                                Investments</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA / Contact Section -->
+        <section id="contact" class="pt-32 pb-12 relative z-10">
+            <div class="absolute inset-0 z-0 pointer-events-none"
+                style="background: linear-gradient(180deg, #f4f4f5 0%, #f4f4f5 40%, transparent 100%);"></div>
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div
+                    class="reveal-on-scroll md:p-24 overflow-hidden group text-center bg-transparent border-white/20 border rounded-[2.5rem] mb-20 pt-12 pr-12 pb-12 pl-12 relative shadow-[0_20px_50px_-15px_rgba(255,255,255,0.3)]">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-transparent opacity-60 pointer-events-none">
+                    </div>
+
+                    <div class="z-10 relative">
+                        <h2 class="typewriter-target text-4xl md:text-6xl mb-6 text-zinc-900 font-light min-h-[1.2em] font-geist tracking-tighter"
+                            data-animation-started="false">Ready for Growth?</h2>
+                        <p class="max-w-xl mx-auto mb-10 text-lg font-light text-zinc-600 leading-relaxed font-geist">
+                            Then let's work together.
+                        </p>
+                        <div class="flex flex-col items-center gap-6">
+                            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+                                <a href="https://wa.me/message/RD6K2YC3MZG5H1" target="_blank" rel="noopener noreferrer"
+                                    class="group min-w-[240px] py-4 px-8 rounded-full font-medium transition-all duration-300 hover:scale-[1.02] bg-slate-900 text-white shadow-xl shadow-slate-900/10 flex items-center justify-center gap-2.5 hover:bg-slate-800 font-geist">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true"
+                                        class="w-5 h-5 fill-current transition-transform group-hover:-translate-y-0.5">
+                                        <path
+                                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.008-.57-.008-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z">
+                                        </path>
+                                    </svg>
+                                    Contact us on WhatsApp
+                                </a>
+                                <a href="mailto:kontakt@systematio.com"
+                                    class="group min-w-[240px] py-4 px-8 rounded-full border border-white/80 font-medium transition-all duration-300 bg-white/50 hover:bg-white text-zinc-900 shadow-sm hover:shadow-md flex items-center justify-center gap-2.5 backdrop-blur-sm font-geist">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="w-5 h-5 transition-transform group-hover:-translate-y-0.5">
+                                        <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path>
+                                        <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                                    </svg>
+                                    Write via email
+                                </a>
+                            </div>
+                            <a href="https://www.linkedin.com/in/fabian-knecht-617003187/" target="_blank"
+                                rel="noopener noreferrer"
+                                class="group flex items-center gap-2 text-sm text-zinc-500 hover:text-zinc-900 font-medium transition-colors font-geist">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    class="w-4 h-4 transition-transform group-hover:-translate-y-0.5">
+                                    <path
+                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                    </path>
+                                    <rect width="4" height="12" x="2" y="9"></rect>
+                                    <circle cx="4" cy="4" r="2"></circle>
+                                </svg>
+                                <span
+                                    class="border-b border-transparent group-hover:border-zinc-900 transition-colors">Connect
+                                    on LinkedIn</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER: Vantage Structure + Growth Glassmorphism -->
+        <footer class="mt-32 border-t border-white/10 bg-white/5 backdrop-blur-md relative overflow-hidden">
+            <!-- Footer Content -->
+            <div class="px-6 py-16 lg:px-12 relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 text-sm">
+                    <!-- Column 1: Brand -->
+                    <div class="md:col-span-1">
+                        <span
+                            class="font-semibold tracking-tighter uppercase text-lg block mb-6 text-white/90 font-jakarta typewriter-target">Vantage
+                            Point</span>
+                        <span class="font-mono text-xs opacity-50 block text-white/60 typewriter-target">© 2024 VANTAGE
+                            POINT INC.</span>
+                    </div>
+
+                    <!-- Column 2: Sitemap -->
+                    <div>
+                        <h5
+                            class="font-mono text-xs uppercase tracking-widest opacity-50 mb-6 text-white/60 typewriter-target">
+                            Sitemap</h5>
+                        <ul class="space-y-3 opacity-80 text-white/80 font-manrope">
+                            <li><a href="#" class="hover:text-[#FF4D00] transition-colors">Manifesto</a></li>
+                            <li><a href="#" class="hover:text-[#FF4D00] transition-colors">Artifacts</a></li>
+                            <li><a href="#" class="hover:text-[#FF4D00] transition-colors">Methodology</a></li>
+                            <li><a href="#" class="hover:text-[#FF4D00] transition-colors">Ledger</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 3: Social -->
+                    <div>
+                        <h5
+                            class="font-mono text-xs uppercase tracking-widest opacity-50 mb-6 text-white/60 typewriter-target">
+                            Social</h5>
+                        <ul class="space-y-3 opacity-80 text-white/80 font-manrope">
+                            <li><a href="#" class="hover:text-[#FF4D00] transition-colors">Twitter / X</a></li>
+                            <li><a href="#" class="hover:text-[#FF4D00] transition-colors">LinkedIn</a></li>
+                            <li><a href="#" class="hover:text-[#FF4D00] transition-colors">GitHub</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 4: Status (Vantage Signature) -->
+                    <div class="md:col-span-1 flex flex-col justify-end items-start md:items-end">
+                        <span
+                            class="font-mono text-xs text-[#FF4D00] block mb-2 tracking-widest typewriter-target">SYSTEM_STATUS:
+                            NOMINAL</span>
+                        <div class="flex gap-1">
+                            <div class="w-1 h-4 bg-[#FF4D00]"></div>
+                            <div class="w-1 h-4 bg-[#FF4D00]/50"></div>
+                            <div class="w-1 h-4 bg-[#FF4D00]/30"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decor: Bottom Noise/Gradient hint -->
+            <div
+                class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-[#FF4D00]/5 to-transparent pointer-events-none">
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- SCRIPTS -->
+    <script>
+        // 0. AMBIENT LOADER BACKGROUND
+        // Independent tween to ensure gradient keeps moving even when curtain lifts
+        gsap.to('.loader', {
+            backgroundPosition: "0% 100%",
+            duration: 3,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut"
+        });
+
+        // 1. ALBA LOADER SEQUENCE
+        const tl = gsap.timeline();
+
+        tl.to('.loader-text', { y: 0, duration: 1, ease: "power3.out" })
+            // Animate Curtain Words immediately after container reveals
+            .call(() => {
+                document.querySelectorAll('.loader-word').forEach((word, i) => {
+                    // 1. Reveal (No Blink added)
+                    setTimeout(() => word.classList.remove('opacity-0', 'translate-y-4'), 100 + (i * 100));
+                });
+            }, null, "<+0.2")
+            .to('.loader-bar', { width: '100%', duration: 1.5, ease: "power2.inOut" }, "-=0.5")
+            .to('.loader-counter', {
+                innerText: 100,
+                duration: 1.5,
+                snap: { innerText: 1 },
+                ease: "power2.inOut",
+                onUpdate: function () {
+                    this.targets()[0].innerHTML = Math.ceil(this.targets()[0].innerText).toString().padStart(2, '0');
+                }
+            }, "<")
+            .to('.loader', {
+                yPercent: -100,
+                duration: 1.2,
+                ease: "power4.inOut",
+            })
+            // Trigger Home Text Animations after loader
+            .to('#hero-title-1, #hero-title-2', {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                stagger: 0.1, // Faster stagger for containers
+                ease: "power2.out",
+                onStart: () => {
+                    document.querySelectorAll('#hero-title-1, #hero-title-2').forEach(el => {
+                        el.classList.add('active');
+                    });
+
+                    // Specific fix for Growth Hero Spans (remove opacity-0/translate-y-4)
+                    document.querySelectorAll('.word-span').forEach((span, index) => {
+                        setTimeout(() => {
+                            span.classList.remove('opacity-0', 'translate-y-4');
+                        }, index * 50); // Balanced cascade
+                    });
+                }
+            }, "-=1.2") // Start animation EXACTLY when curtain starts lifting
+
+            // 3. Hero Paragraph Animation (Replicating "Typewriter Engine" Logic)
+            .to('#hero-para-container', {
+                opacity: 1,
+                y: 0,
+                duration: 0.1,
+                onStart: () => {
+                    const para = document.getElementById('hero-para');
+                    if (para) {
+                        // Cleanest Strategy that matches "Typewriter Engine":
+                        // 1. Clear content.
+                        // 2. Re-append split words as spans.
+
+                        para.innerHTML = '';
+
+                        const part1 = "Building the digital infrastructure for the next generation of SaaS.";
+                        const part2 = "Precision over Hype."; // This needs to be white
+
+                        const createSpan = (text, className = "") => {
+                            const s = document.createElement('span');
+                            s.textContent = text;
+                            // EXACT classes from Typewriter Engine
+                            s.className = `word-span opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform ${className}`;
+                            return s;
+                        };
+
+                        // Helper to append space (not animated)
+                        const appendSpace = () => para.appendChild(document.createTextNode(' '));
+
+                        // Append Part 1 Words
+                        const part1Words = part1.split(' ');
+                        part1Words.forEach((w, i) => {
+                            const s = createSpan(w);
+                            para.appendChild(s);
+                            if (i < part1Words.length - 1) appendSpace();
+
+                            // Force reflow and animate
+                            void s.offsetWidth;
+                            setTimeout(() => s.classList.remove('opacity-0', 'translate-y-4'), i * 50);
+                        });
+
+                        // Space between parts
+                        appendSpace();
+
+                        // Append Part 2 Words (White)
+                        const part2Words = part2.split(' ');
+                        const part1Len = part1Words.length;
+
+                        part2Words.forEach((w, i) => {
+                            const s = createSpan(w, "text-white");
+                            para.appendChild(s);
+                            if (i < part2Words.length - 1) appendSpace();
+
+                            void s.offsetWidth;
+                            // Animate (offset by part 1 length)
+                            setTimeout(() => s.classList.remove('opacity-0', 'translate-y-4'), (part1Len + i) * 50);
+                        });
+                    }
+                }
+            }, "-=0.45") // Reduced delay by 0.2s (starts earlier)
+
+            .call(() => {
+                const btns = document.querySelectorAll('#hero-btns a');
+                btns.forEach((btn, i) => {
+                    // Match text physics: 200ms stagger, CSS handles ease/duration
+                    setTimeout(() => btn.classList.remove('opacity-0', 'translate-y-4'), i * 200);
+                });
+            }, null, "<+0.6"); // Sync buttons mid-way
+
+        // 2. PARALLAX BACKGROUND LOGIC (From Growth)
+        const heroLayer = document.getElementById('hero-layer');
+        const warmLayer = document.getElementById('warm-layer');
+        const coldReturnLayer = document.getElementById('cold-return-layer');
+
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const docHeight = document.documentElement.scrollHeight;
+
+            const scrollVh = scrollY / windowHeight;
+            const scrollPercent = scrollY / (docHeight - windowHeight);
+
+            // 1. Hero State (Top): Fade out Dark
+            if (heroLayer) heroLayer.style.opacity = Math.max(0, 1 - scrollVh * 1.2);
+
+            // 2. Middle State: Fade in Warm
+            if (warmLayer) {
+                let warmOpacity = 0;
+                // Fade in starting at 0.3vh, peak in middle, fade out at end
+                if (scrollVh > 0.3) warmOpacity = (scrollVh - 0.3) * 1.5;
+                // Start fading out warm layer as we approach bottom (last 5%)
+                if (scrollPercent > 0.95) warmOpacity = Math.max(0, 1 - (scrollPercent - 0.95) * 20);
+
+                warmLayer.style.opacity = Math.min(1, warmOpacity);
+            }
+
+            // 3. Footer State (Bottom): Fade in Cold Loop
+            if (coldReturnLayer) {
+                let coldOpacity = 0;
+                // Start fading in during last 7% of page
+                if (scrollPercent > 0.93) {
+                    coldOpacity = (scrollPercent - 0.93) * 14;
+                }
+                coldReturnLayer.style.opacity = Math.min(1, coldOpacity);
+            }
+
+            // 4. Navbar Theme Logic
+            const navbar = document.getElementById('navbar');
+            if (navbar) {
+                // Switch to dark nav when we are past the hero (e.g., > 80vh) and before the footer (approx < 95% total scroll)
+                // Extended to 0.95 to align with new content length and padding
+                if (scrollVh > 0.8 && scrollPercent < 0.95) {
+                    navbar.classList.add('nav-dark');
+                } else {
+                    navbar.classList.remove('nav-dark');
+                }
+            }
+        });
+
+
+
+        // 3. ROBUST TYPEWRITER ENGINE (From Growth Page)
+        const typewriterTargets = document.querySelectorAll('.typewriter-target');
+
+        // Initial setup only for targets not already animated by GSAP loader
+        // (The hero title is handled by GSAP, but others will use this observer)
+
+        const typewriterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.target.dataset.animationStarted !== 'true') {
+                    entry.target.dataset.animationStarted = 'true';
+                    const el = entry.target;
+                    const rawText = el.textContent.trim();
+
+                    // Don't split if it's already split (handled by GSAP or previous run)
+                    if (el.querySelector('.word-span')) return;
+
+                    el.innerHTML = ''; // Clear content
+                    const words = rawText.split(/\s+/);
+
+                    words.forEach((word, index) => {
+                        const span = document.createElement('span');
+                        span.textContent = word;
+                        span.className = 'word-span opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform';
+                        el.appendChild(span);
+
+                        if (index < words.length - 1) el.appendChild(document.createTextNode(' '));
+
+                        // Stagger fade-in
+                        setTimeout(() => {
+                            span.classList.remove('opacity-0', 'translate-y-4');
+                        }, index * 50); // 50ms per word
+                    });
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Observe footer and other text elements
+        typewriterTargets.forEach(el => typewriterObserver.observe(el));
+
+    </script>
+</body>
+
+</html>
