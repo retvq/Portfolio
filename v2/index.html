@@ -216,6 +216,8 @@
         .pill i { width: .375rem; height: .375rem; border-radius: 9999px; background: currentColor; }
         .pill--dark { color: rgba(255, 255, 255, .78); background: rgba(255, 255, 255, .07); border: 1px solid rgba(255, 255, 255, .14); }
         .pill--light { color: #52525b; background: #f4f4f5; border: 1px solid #e4e4e7; }
+        .wcard__more { white-space: nowrap; flex-shrink: 0; }
+        .pill--plain i { background: #FF4D00; }
         .pill--live i { background: #34d399; box-shadow: 0 0 0 4px rgba(52, 211, 153, .18); }
         .pill--progress i { background: #fbbf24; box-shadow: 0 0 0 4px rgba(251, 191, 36, .18); }
 
@@ -352,6 +354,10 @@
         .is-playing .t-ok rect { animation: c-tier-ok 1.2s ease both; animation-delay: var(--d, 0s); }
         .is-playing .n-ok { animation: c-row-ok .7s ease both; animation-delay: var(--d, 0s); }
         .is-playing .n-near { animation: c-row-near .7s ease both; animation-delay: var(--d, 0s); }
+
+        .cover-svg .a-scale { transform-box: fill-box; transform-origin: 50% 50%; }
+        .is-playing .a-scale { animation: c-scale .55s cubic-bezier(.34, 1.56, .64, 1) both; animation-delay: var(--d, 0s); }
+        @keyframes c-scale { from { opacity: 0; transform: scale(0); } }
 
         .a-draw { stroke-dasharray: 1; stroke-dashoffset: 0; }
 
@@ -546,7 +552,12 @@
 
         .story__part ul li { padding-left: 1.1rem; position: relative; }
         .story__part ul li::before { content: ""; position: absolute; left: 0; top: .75rem; width: .35rem; height: .35rem; border-radius: 9999px; background: #a1a1aa; }
+        .story__sign { margin-top: 2rem; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 500; font-size: 1.15rem; letter-spacing: -.02em; color: #18181b; }
         .story__end { height: 1.5rem; }
+
+        /* ---------- HOW I WORK ---------- */
+        .belief h3 { font-family: 'Geist', sans-serif; font-weight: 400; font-size: 1.5rem; line-height: 1.2; letter-spacing: -.035em; color: #18181b; }
+        .belief p { margin-top: .75rem; font-family: 'Geist', sans-serif; font-weight: 300; font-size: 1rem; line-height: 1.65; color: #71717a; max-width: 30rem; }
 
         @media (prefers-reduced-motion: reduce) {
             .wcard__sheen, .marquee-content { animation: none; }
@@ -597,6 +608,7 @@
             </a>
             <div class="hidden md:flex space-x-12 text-xs font-mono uppercase tracking-widest text-white/70">
                 <a href="#work" class="hover:text-[#FF4D00] transition-colors">Work</a>
+                <a href="#approach" class="hover:text-[#FF4D00] transition-colors">Approach</a>
                 <a href="#contact" class="hover:text-[#FF4D00] transition-colors">Contact</a>
             </div>
             <a href="https://linkedin.com/in/ritvikvasundh" target="_blank" rel="noopener"
@@ -763,6 +775,155 @@
                         </div>
                     </article>
 
+
+                    <!-- Real estate CRM -->
+                    <article class="wcard wcard--dark">
+                        <span class="wcard__sheen" aria-hidden="true"></span>
+                        <div class="wcard__top">
+                            <span class="wcard__name"><i></i>Real estate CRM</span>
+                            <span class="pill pill--dark pill--plain"><i></i>Client project</span>
+                        </div>
+                        <div class="wcard__big"><span>The client</span><span class="dim">chose Frappe.</span></div>
+                        <div class="cover cover--glass" data-cover="realestate"></div>
+                        <p class="wcard__sum">Could Frappe replace Salesforce for a real estate company? I built the
+                            answer side by side.</p>
+                        <div class="wcard__foot">
+                            <span>Client build</span>
+                            <button type="button" class="wcard__more" data-story="realestate"
+                                aria-haspopup="dialog">Read the story
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M7 7h10v10"></path>
+                                    <path d="M7 17 17 7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- UtilDraw -->
+                    <article class="wcard wcard--light">
+                        <div class="cover cover--tile" data-cover="utildraw"></div>
+                        <div class="wcard__top" style="margin-top:1.75rem">
+                            <span class="wcard__name" style="color:#18181b"><i></i>UtilDraw</span>
+                            <span class="pill pill--light pill--plain"><i></i>Solo build</span>
+                        </div>
+                        <h3 class="wcard__title">Describe a flowchart, pick from three</h3>
+                        <p class="wcard__sum">Text, image or voice in. Three versions out, each with a confidence
+                            score. My first project.</p>
+                        <div class="wcard__foot">
+                            <span>AI diagramming</span>
+                            <button type="button" class="wcard__more" data-story="utildraw"
+                                aria-haspopup="dialog">Read the story
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M7 7h10v10"></path>
+                                    <path d="M7 17 17 7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- DevHack -->
+                    <article class="wcard wcard--dark">
+                        <span class="wcard__sheen" aria-hidden="true"></span>
+                        <div class="wcard__top">
+                            <span class="wcard__name"><i></i>DevHack</span>
+                            <span class="pill pill--dark pill--plain"><i></i>Co-founder</span>
+                        </div>
+                        <div class="wcard__big"><span>60+</span><span class="dim">signed.</span></div>
+                        <div class="cover cover--glass" data-cover="devhack"></div>
+                        <p class="wcard__sum">Started our college's first 36-hour hackathon from zero. 60+ sponsors
+                            and partners, most of them closed by me.</p>
+                        <div class="wcard__foot">
+                            <span>2024 and 2025</span>
+                            <button type="button" class="wcard__more" data-story="devhack"
+                                aria-haspopup="dialog">Read the story
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M7 7h10v10"></path>
+                                    <path d="M7 17 17 7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Smart India Hackathon -->
+                    <article class="wcard wcard--light">
+                        <div class="cover cover--tile" data-cover="sih"></div>
+                        <div class="wcard__top" style="margin-top:1.75rem">
+                            <span class="wcard__name" style="color:#18181b"><i></i>Smart India Hackathon</span>
+                            <span class="pill pill--light pill--plain"><i></i>Winner</span>
+                        </div>
+                        <h3 class="wcard__title">Won the Grand Finale out of 500+ proposals</h3>
+                        <p class="wcard__sum">Joined as a last-minute substitute, then led the AI work.</p>
+                        <div class="wcard__foot">
+                            <span>KAVACH, 2024</span>
+                            <button type="button" class="wcard__more" data-story="sih"
+                                aria-haspopup="dialog">Read the story
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M7 7h10v10"></path>
+                                    <path d="M7 17 17 7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- HOW I WORK -->
+        <section class="relative z-10 py-20 overflow-hidden" id="approach">
+            <div class="absolute inset-0 z-0 pointer-events-none bg-[#f4f4f5]"></div>
+            <div class="absolute inset-0 pointer-events-none">
+                <div
+                    class="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-blue-200/20 rounded-full blur-[120px] mix-blend-multiply">
+                </div>
+                <div
+                    class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-indigo-200/20 rounded-full blur-[120px] mix-blend-multiply">
+                </div>
+            </div>
+            <div class="max-w-[90rem] mx-auto px-4 md:px-6 relative z-10">
+                <div
+                    class="relative rounded-[2.5rem] bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.05)] p-8 md:p-16 overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-transparent opacity-60 pointer-events-none">
+                    </div>
+                    <div class="relative z-10">
+                        <div class="text-center mb-16 max-w-full mx-auto">
+                            <div
+                                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/50 border border-white/60 backdrop-blur-md mb-8 shadow-sm">
+                                <div class="w-1.5 h-1.5 rounded-full bg-zinc-400"></div>
+                                <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-zinc-500 font-geist">How
+                                    I work</span>
+                            </div>
+                            <h2 class="typewriter-target text-4xl md:text-5xl lg:text-6xl text-zinc-900 font-light leading-[1.1] min-h-[1.2em] font-geist tracking-tighter"
+                                data-animation-started="false">Four things I learned the hard way</h2>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-x-16 gap-y-14 max-w-5xl mx-auto">
+                            <div class="belief">
+                                <h3>The requirement call is the first commit.</h3>
+                                <p>I'd rather spend an hour with the client than a week building the wrong thing. The
+                                    real estate CRM took its shape from two sessions with the people who'd use it.</p>
+                            </div>
+                            <div class="belief">
+                                <h3>Prove the hardest part before you promise anything.</h3>
+                                <p>Before committing to UtilPulse, we streamed one laptop's screen to another over a
+                                    local tunnel. No cloud, no servers. Once that worked, we said yes.</p>
+                            </div>
+                            <div class="belief">
+                                <h3>Every backup exists because something once broke.</h3>
+                                <p>MeetingIQ has four transcription layers and two ways to send email. Each one is
+                                    there so a meeting never loses its minutes.</p>
+                            </div>
+                            <div class="belief">
+                                <h3>I build with AI coding agents.</h3>
+                                <p>They write the first draft. I own the problem, the architecture and what ships.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -840,6 +1001,7 @@
                         </h5>
                         <ul class="space-y-3 opacity-80 text-white/80 font-manrope">
                             <li><a href="#work" class="hover:text-[#FF4D00] transition-colors">Work</a></li>
+                            <li><a href="#approach" class="hover:text-[#FF4D00] transition-colors">Approach</a></li>
                             <li><a href="#contact" class="hover:text-[#FF4D00] transition-colors">Contact</a></li>
                         </ul>
                     </div>
@@ -1020,6 +1182,118 @@
         </svg>
     </template>
 
+
+    <template id="cover-realestate">
+        <svg class="cover-svg" viewBox="0 0 360 206" role="img"
+            aria-label="Illustration of the inventory view: a building where floor 14 is selected, showing four units marked sold, available or held, and a cost sheet total.">
+            <g class="a-pop" style="--d:0.63s"><rect x="18" y="14" width="96" height="17" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.12)" /><text x="26" y="26" font-size="7.5" fill="rgba(255,255,255,.45)">16</text><rect x="46" y="19" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="59" y="19" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="72" y="19" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="85" y="19" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="98" y="19" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /></g><g class="a-pop" style="--d:0.54s"><rect x="18" y="36" width="96" height="17" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.12)" /><text x="26" y="48" font-size="7.5" fill="rgba(255,255,255,.45)">15</text><rect x="46" y="41" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="59" y="41" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="72" y="41" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="85" y="41" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="98" y="41" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /></g><g class="a-pop" style="--d:0.45s"><rect x="18" y="58" width="96" height="17" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.12)" /><text x="26" y="70" font-size="7.5" fill="rgba(255,255,255,.45)">14</text><rect x="46" y="63" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="59" y="63" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="72" y="63" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="85" y="63" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="98" y="63" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /></g><g class="a-pop" style="--d:0.36s"><rect x="18" y="80" width="96" height="17" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.12)" /><text x="26" y="92" font-size="7.5" fill="rgba(255,255,255,.45)">13</text><rect x="46" y="85" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="59" y="85" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="72" y="85" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="85" y="85" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="98" y="85" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /></g><g class="a-pop" style="--d:0.27s"><rect x="18" y="102" width="96" height="17" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.12)" /><text x="26" y="114" font-size="7.5" fill="rgba(255,255,255,.45)">12</text><rect x="46" y="107" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="59" y="107" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="72" y="107" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="85" y="107" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="98" y="107" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /></g><g class="a-pop" style="--d:0.18s"><rect x="18" y="124" width="96" height="17" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.12)" /><text x="26" y="136" font-size="7.5" fill="rgba(255,255,255,.45)">11</text><rect x="46" y="129" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="59" y="129" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="72" y="129" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="85" y="129" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="98" y="129" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /></g><g class="a-pop" style="--d:0.09s"><rect x="18" y="146" width="96" height="17" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.12)" /><text x="26" y="158" font-size="7.5" fill="rgba(255,255,255,.45)">10</text><rect x="46" y="151" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="59" y="151" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="72" y="151" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="85" y="151" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="98" y="151" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /></g><g class="a-pop" style="--d:0.00s"><rect x="18" y="168" width="96" height="17" rx="4" fill="rgba(255,255,255,.05)" stroke="rgba(255,255,255,.12)" /><text x="26" y="180" font-size="7.5" fill="rgba(255,255,255,.45)">9</text><rect x="46" y="173" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="59" y="173" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="72" y="173" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="85" y="173" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /><rect x="98" y="173" width="8" height="7" rx="1.5" fill="rgba(255,255,255,.14)" /></g>
+            <path d="M10 192H122" stroke="rgba(255,255,255,.2)" />
+            <rect class="a-fade" style="--d:1.4s" x="18" y="58" width="96" height="17" rx="4" fill="rgba(255,106,43,.22)" stroke="#FF6A2B" stroke-width="1.25" />
+            <path class="a-draw" pathLength="1" style="--d:1.7s" d="M114 66C134 66 130 48 150 48" fill="none" stroke="#FF6A2B" stroke-width="1.25" />
+            <text class="a-fade" style="--d:1.9s" x="150" y="17" font-size="9" fill="rgba(255,255,255,.55)">Floor 14</text>
+            <g class="a-fly" style="--d:2.00s;--fx:-30px;--fy:0px">
+                <rect x="150" y="26" width="94" height="44" rx="11" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.12)" />
+                <text x="161" y="45" font-size="11" font-weight="500" fill="#fff">1401</text>
+                <text x="161" y="60" font-size="8.5" fill="rgba(255,255,255,.5)">3 BHK</text>
+                <circle cx="232" cy="41" r="3.5" fill="#F87171" />
+                <text x="236" y="60" font-size="7.5" text-anchor="end" fill="#F87171">Sold</text>
+            </g><g class="a-fly" style="--d:2.15s;--fx:-30px;--fy:0px">
+                <rect x="252" y="26" width="94" height="44" rx="11" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.12)" />
+                <text x="263" y="45" font-size="11" font-weight="500" fill="#fff">1402</text>
+                <text x="263" y="60" font-size="8.5" fill="rgba(255,255,255,.5)">2 BHK</text>
+                <circle cx="334" cy="41" r="3.5" fill="#6EE7A0" />
+                <text x="338" y="60" font-size="7.5" text-anchor="end" fill="#6EE7A0">Available</text>
+            </g><g class="a-fly" style="--d:2.30s;--fx:-30px;--fy:0px">
+                <rect x="150" y="80" width="94" height="44" rx="11" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.12)" />
+                <text x="161" y="99" font-size="11" font-weight="500" fill="#fff">1403</text>
+                <text x="161" y="114" font-size="8.5" fill="rgba(255,255,255,.5)">3 BHK</text>
+                <circle cx="232" cy="95" r="3.5" fill="#FBBF24" />
+                <text x="236" y="114" font-size="7.5" text-anchor="end" fill="#FBBF24">Held</text>
+            </g><g class="a-fly" style="--d:2.45s;--fx:-30px;--fy:0px">
+                <rect x="252" y="80" width="94" height="44" rx="11" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.12)" />
+                <text x="263" y="99" font-size="11" font-weight="500" fill="#fff">1404</text>
+                <text x="263" y="114" font-size="8.5" fill="rgba(255,255,255,.5)">2 BHK</text>
+                <circle cx="334" cy="95" r="3.5" fill="#6EE7A0" />
+                <text x="338" y="114" font-size="7.5" text-anchor="end" fill="#6EE7A0">Available</text>
+            </g>
+            <g class="a-pop" style="--d:3s">
+                <rect x="150" y="140" width="196" height="52" rx="13" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.12)" />
+                <text x="163" y="162" font-size="11" font-weight="500" fill="#fff">Cost sheet</text>
+                <text x="163" y="178" font-size="8" fill="rgba(255,255,255,.5)">Base + taxes + parking</text>
+                <rect x="264" y="153" width="72" height="26" rx="13" fill="rgba(255,106,43,.16)" stroke="rgba(255,106,43,.55)" />
+                <text x="300" y="170" font-size="9" text-anchor="middle" fill="#FFB38F">INR 1.42 Cr</text>
+            </g>
+        </svg>
+        <span class="cover__note" aria-hidden="true">Sample data</span>
+    </template>
+
+    <template id="cover-utildraw">
+        <svg class="cover-svg" viewBox="0 0 360 226" role="img"
+            aria-label="Illustration of UtilDraw: a typed prompt produces three flowchart versions with confidence scores. One is picked and placed on the canvas.">
+            <g class="a-pop" style="--d:.05s">
+                <rect x="10" y="8" width="340" height="34" rx="17" fill="#fff" stroke="#e4e4e7" />
+                <text x="26" y="29.5" font-size="10.5" fill="#52525b">Lead to opportunity flow, with an approval step</text>
+                <circle cx="330" cy="25" r="10" fill="#18181b" /><path d="M326 25h8m-3-3 3 3-3 3" fill="none" stroke="#fff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+            </g>
+            <g class="a-pop" style="--d:0.90s">
+                <rect x="10" y="56" width="104" height="104" rx="13" fill="#fff" stroke="#18181b" stroke-width="1.5" />
+                <rect x="47.0" y="67.5" width="30" height="13" rx="4" fill="#fff" stroke="#52525b" /><path d="M62 81V92" fill="none" stroke="#52525b" stroke-width="1" /><path d="M62 92l11 9-11 9-11-9z" fill="#fff" stroke="#52525b" /><path d="M51 101H36V118M73 101H88V118" fill="none" stroke="#52525b" stroke-width="1" /><rect x="22.0" y="118.5" width="28" height="13" rx="4" fill="#fff" stroke="#52525b" /><rect x="74.0" y="118.5" width="28" height="13" rx="4" fill="#fff" stroke="#52525b" />
+                <text x="22" y="151" font-size="9" fill="#18181b" font-weight="500">92%</text>
+                <g class="a-scale" style="--d:2.3s"><rect x="66" y="140" width="40" height="15" rx="7.5" fill="#18181b" /><text x="86" y="150.5" font-size="7.5" text-anchor="middle" fill="#fff">Picked</text></g>
+            </g><g class="a-pop" style="--d:1.08s;opacity:.55">
+                <rect x="128" y="56" width="104" height="104" rx="13" fill="rgba(255,255,255,.6)" stroke="#e4e4e7" stroke-width="1" />
+                <rect x="165.0" y="65.5" width="30" height="13" rx="4" fill="#fff" stroke="#a1a1aa" /><path d="M180 79V90" fill="none" stroke="#a1a1aa" stroke-width="1" /><rect x="165.0" y="90.5" width="30" height="13" rx="4" fill="#fff" stroke="#a1a1aa" /><path d="M180 104V115" fill="none" stroke="#a1a1aa" stroke-width="1" /><rect x="165.0" y="115.5" width="30" height="13" rx="4" fill="#fff" stroke="#a1a1aa" />
+                <text x="140" y="151" font-size="9" fill="#a1a1aa" font-weight="500">81%</text>
+                
+            </g><g class="a-pop" style="--d:1.26s;opacity:.55">
+                <rect x="246" y="56" width="104" height="104" rx="13" fill="rgba(255,255,255,.6)" stroke="#e4e4e7" stroke-width="1" />
+                <rect x="256.0" y="69.5" width="28" height="13" rx="4" fill="#fff" stroke="#a1a1aa" /><path d="M284 76H310" fill="none" stroke="#a1a1aa" stroke-width="1" /><rect x="310.0" y="69.5" width="28" height="13" rx="4" fill="#fff" stroke="#a1a1aa" /><path d="M324 83V96" fill="none" stroke="#a1a1aa" stroke-width="1" /><rect x="310.0" y="96.5" width="28" height="13" rx="4" fill="#fff" stroke="#a1a1aa" /><path d="M310 103H284" fill="none" stroke="#a1a1aa" stroke-width="1" /><rect x="256.0" y="96.5" width="28" height="13" rx="4" fill="#fff" stroke="#a1a1aa" /><path d="M270 110V118" fill="none" stroke="#a1a1aa" stroke-width="1" /><rect x="256.0" y="118.5" width="28" height="13" rx="4" fill="#fff" stroke="#a1a1aa" />
+                <text x="258" y="151" font-size="9" fill="#a1a1aa" font-weight="500">74%</text>
+                
+            </g>
+            <rect class="a-fade" style="--d:2.6s" x="10" y="172" width="340" height="48" rx="13" fill="rgba(255,255,255,.75)" stroke="#e4e4e7" stroke-dasharray="3 4" />
+            <g class="a-fly" style="--d:2.90s;--fx:0px;--fy:-46px"><rect x="24" y="184" width="62" height="24" rx="7" fill="#fff" stroke="#d4d4d8" /><text x="55" y="199.5" font-size="9.5" text-anchor="middle" fill="#27272a">Lead</text></g><path class="a-fade" style="--d:3.30s" d="M88 196h14m-4-3.5 4 3.5-4 3.5" fill="none" stroke="#a1a1aa" stroke-linecap="round" stroke-linejoin="round" /><g class="a-fly" style="--d:3.04s;--fx:0px;--fy:-46px"><rect x="106" y="184" width="62" height="24" rx="7" fill="#fff" stroke="#d4d4d8" /><text x="137" y="199.5" font-size="9.5" text-anchor="middle" fill="#27272a">Qualify</text></g><path class="a-fade" style="--d:3.42s" d="M170 196h14m-4-3.5 4 3.5-4 3.5" fill="none" stroke="#a1a1aa" stroke-linecap="round" stroke-linejoin="round" /><g class="a-fly" style="--d:3.18s;--fx:0px;--fy:-46px"><rect x="188" y="184" width="62" height="24" rx="7" fill="rgba(255,77,0,.08)" stroke="#FF4D00" /><text x="219" y="199.5" font-size="9.5" text-anchor="middle" fill="#27272a">Approve</text></g><path class="a-fade" style="--d:3.54s" d="M252 196h14m-4-3.5 4 3.5-4 3.5" fill="none" stroke="#a1a1aa" stroke-linecap="round" stroke-linejoin="round" /><g class="a-fly" style="--d:3.32s;--fx:0px;--fy:-46px"><rect x="270" y="184" width="62" height="24" rx="7" fill="#fff" stroke="#d4d4d8" /><text x="301" y="199.5" font-size="9.5" text-anchor="middle" fill="#27272a">Won</text></g>
+        </svg>
+    </template>
+
+    <template id="cover-devhack">
+        <svg class="cover-svg" viewBox="0 0 360 200" role="img"
+            aria-label="Illustration of DevHack sponsor outreach: a field of companies approached, with signed sponsors lighting up and connecting outward from the first partner.">
+            <g class="a-fade" style="--d:.05s"><circle cx="12.0" cy="12" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="29.7" cy="12" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="47.4" cy="12" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="65.0" cy="12" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="82.7" cy="12" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="100.4" cy="12" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="118.1" cy="12" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="135.8" cy="12" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="153.4" cy="12" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="171.1" cy="12" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="188.8" cy="12" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="206.5" cy="12" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="224.2" cy="12" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="241.8" cy="12" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="259.5" cy="12" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="277.2" cy="12" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="294.9" cy="12" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="312.6" cy="12" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="330.2" cy="12" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="347.9" cy="12" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="12.0" cy="32" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="29.7" cy="32" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="47.4" cy="32" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="65.0" cy="32" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="82.7" cy="32" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="100.4" cy="32" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="118.1" cy="32" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="135.8" cy="32" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="153.4" cy="32" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="171.1" cy="32" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="188.8" cy="32" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="206.5" cy="32" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="224.2" cy="32" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="241.8" cy="32" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="259.5" cy="32" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="277.2" cy="32" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="294.9" cy="32" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="312.6" cy="32" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="330.2" cy="32" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="347.9" cy="32" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="12.0" cy="52" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="29.7" cy="52" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="47.4" cy="52" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="65.0" cy="52" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="82.7" cy="52" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="100.4" cy="52" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="118.1" cy="52" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="135.8" cy="52" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="153.4" cy="52" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="171.1" cy="52" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="188.8" cy="52" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="206.5" cy="52" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="224.2" cy="52" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="241.8" cy="52" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="259.5" cy="52" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="277.2" cy="52" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="294.9" cy="52" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="312.6" cy="52" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="330.2" cy="52" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="347.9" cy="52" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="12.0" cy="72" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="29.7" cy="72" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="47.4" cy="72" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="65.0" cy="72" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="82.7" cy="72" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="100.4" cy="72" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="118.1" cy="72" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="135.8" cy="72" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="153.4" cy="72" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="171.1" cy="72" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="188.8" cy="72" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="206.5" cy="72" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="224.2" cy="72" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="241.8" cy="72" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="259.5" cy="72" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="277.2" cy="72" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="294.9" cy="72" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="312.6" cy="72" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="330.2" cy="72" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="347.9" cy="72" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="12.0" cy="92" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="29.7" cy="92" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="47.4" cy="92" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="65.0" cy="92" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="82.7" cy="92" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="100.4" cy="92" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="118.1" cy="92" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="135.8" cy="92" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="153.4" cy="92" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="171.1" cy="92" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="188.8" cy="92" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="206.5" cy="92" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="224.2" cy="92" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="241.8" cy="92" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="259.5" cy="92" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="277.2" cy="92" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="294.9" cy="92" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="312.6" cy="92" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="330.2" cy="92" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="347.9" cy="92" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="12.0" cy="112" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="29.7" cy="112" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="47.4" cy="112" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="65.0" cy="112" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="82.7" cy="112" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="100.4" cy="112" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="118.1" cy="112" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="135.8" cy="112" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="153.4" cy="112" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="171.1" cy="112" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="188.8" cy="112" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="206.5" cy="112" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="224.2" cy="112" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="241.8" cy="112" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="259.5" cy="112" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="277.2" cy="112" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="294.9" cy="112" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="312.6" cy="112" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="330.2" cy="112" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="347.9" cy="112" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="12.0" cy="132" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="29.7" cy="132" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="47.4" cy="132" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="65.0" cy="132" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="82.7" cy="132" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="100.4" cy="132" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="118.1" cy="132" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="135.8" cy="132" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="153.4" cy="132" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="171.1" cy="132" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="188.8" cy="132" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="206.5" cy="132" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="224.2" cy="132" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="241.8" cy="132" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="259.5" cy="132" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="277.2" cy="132" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="294.9" cy="132" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="312.6" cy="132" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="330.2" cy="132" r="2.6" fill="rgba(255,255,255,.16)" /><circle cx="347.9" cy="132" r="2.6" fill="rgba(255,255,255,.16)" /></g>
+            <path class="a-draw" pathLength="1" style="--d:1.20s" d="M171.1 72L82.7 32" stroke="rgba(255,106,43,.4)" stroke-width="1" /><path class="a-draw" pathLength="1" style="--d:1.36s" d="M171.1 72L241.8 32" stroke="rgba(255,106,43,.4)" stroke-width="1" /><path class="a-draw" pathLength="1" style="--d:1.52s" d="M171.1 72L118.1 112" stroke="rgba(255,106,43,.4)" stroke-width="1" /><path class="a-draw" pathLength="1" style="--d:1.68s" d="M171.1 72L277.2 92" stroke="rgba(255,106,43,.4)" stroke-width="1" /><path class="a-draw" pathLength="1" style="--d:1.84s" d="M171.1 72L47.4 72" stroke="rgba(255,106,43,.4)" stroke-width="1" /><path class="a-draw" pathLength="1" style="--d:2.00s" d="M171.1 72L312.6 52" stroke="rgba(255,106,43,.4)" stroke-width="1" /><path class="a-draw" pathLength="1" style="--d:2.16s" d="M171.1 72L206.5 112" stroke="rgba(255,106,43,.4)" stroke-width="1" /><path class="a-draw" pathLength="1" style="--d:2.32s" d="M171.1 72L135.8 52" stroke="rgba(255,106,43,.4)" stroke-width="1" />
+            <circle class="a-scale" style="--d:1.25s" cx="82.7" cy="32" r="4.2" fill="#FF6A2B" /><circle class="a-scale" style="--d:1.39s" cx="241.8" cy="32" r="4.2" fill="#FF6A2B" /><circle class="a-scale" style="--d:1.53s" cx="118.1" cy="112" r="4.2" fill="#FF6A2B" /><circle class="a-scale" style="--d:1.67s" cx="277.2" cy="92" r="4.2" fill="#FF6A2B" /><circle class="a-scale" style="--d:1.81s" cx="47.4" cy="72" r="4.2" fill="#FF6A2B" /><circle class="a-scale" style="--d:1.95s" cx="312.6" cy="52" r="4.2" fill="#FF6A2B" /><circle class="a-scale" style="--d:2.09s" cx="206.5" cy="112" r="4.2" fill="#FF6A2B" /><circle class="a-scale" style="--d:2.23s" cx="135.8" cy="52" r="4.2" fill="#FF6A2B" /><circle class="a-scale" style="--d:2.37s" cx="224.2" cy="72" r="4.2" fill="#FF6A2B" /><circle class="a-scale" style="--d:2.51s" cx="29.7" cy="112" r="4.2" fill="#FF6A2B" /><circle class="a-scale" style="--d:2.65s" cx="330.2" cy="112" r="4.2" fill="#FF6A2B" /><circle class="a-scale" style="--d:2.79s" cx="100.4" cy="72" r="4.2" fill="#FF6A2B" /><circle class="a-scale" style="--d:2.93s" cx="259.5" cy="132" r="4.2" fill="#FF6A2B" /><circle class="a-scale" style="--d:3.07s" cx="188.8" cy="12" r="4.2" fill="#FF6A2B" /><circle class="a-scale" style="--d:3.21s" cx="65.0" cy="132" r="4.2" fill="#FF6A2B" /><circle class="a-scale" style="--d:3.35s" cx="294.9" cy="12" r="4.2" fill="#FF6A2B" />
+            <g class="a-scale" style="--d:.8s"><circle cx="171.1" cy="72" r="11" fill="#FF4D00" /><text x="171.1" y="74.6" font-size="6.5" font-weight="700" text-anchor="middle" fill="#fff">MLH</text></g>
+            <g class="a-pop" style="--d:3.4s">
+                <rect x="6" y="156" width="150" height="34" rx="17" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.14)" />
+                <text x="81" y="177" font-size="10.5" text-anchor="middle" fill="rgba(255,255,255,.8)">500+ approached</text>
+            </g>
+            <path class="a-fade" style="--d:3.8s" d="M164 173h28m-5-4.5 5 4.5-5 4.5" fill="none" stroke="rgba(255,255,255,.4)" stroke-linecap="round" stroke-linejoin="round" />
+            <g class="a-pop" style="--d:4s">
+                <rect x="204" y="156" width="150" height="34" rx="17" fill="rgba(255,106,43,.16)" stroke="rgba(255,106,43,.6)" />
+                <text x="279" y="177" font-size="10.5" text-anchor="middle" fill="#FFB38F" font-weight="500">60+ signed</text>
+            </g>
+        </svg>
+    </template>
+
+    <template id="cover-sih">
+        <svg class="cover-svg" viewBox="0 0 360 214" role="img"
+            aria-label="Illustration of the Smart India Hackathon result: over 500 proposals narrow to 5 finalists and then to one winner.">
+            <g class="a-fade" style="--d:.05s"><circle cx="124.0" cy="16" r="2.4" fill="#c4c4cc" /><circle cx="139.3" cy="16" r="2.4" fill="#c4c4cc" /><circle cx="154.6" cy="16" r="2.4" fill="#c4c4cc" /><circle cx="169.9" cy="16" r="2.4" fill="#c4c4cc" /><circle cx="185.2" cy="16" r="2.4" fill="#c4c4cc" /><circle cx="200.5" cy="16" r="2.4" fill="#c4c4cc" /><circle cx="215.8" cy="16" r="2.4" fill="#c4c4cc" /><circle cx="231.1" cy="16" r="2.4" fill="#c4c4cc" /><circle cx="246.4" cy="16" r="2.4" fill="#c4c4cc" /><circle cx="261.7" cy="16" r="2.4" fill="#c4c4cc" /><circle cx="277.0" cy="16" r="2.4" fill="#c4c4cc" /><circle cx="292.3" cy="16" r="2.4" fill="#c4c4cc" /><circle cx="307.6" cy="16" r="2.4" fill="#c4c4cc" /><circle cx="322.9" cy="16" r="2.4" fill="#c4c4cc" /><circle cx="338.2" cy="16" r="2.4" fill="#c4c4cc" /><circle cx="124.0" cy="29" r="2.4" fill="#c4c4cc" /><circle cx="139.3" cy="29" r="2.4" fill="#c4c4cc" /><circle cx="154.6" cy="29" r="2.4" fill="#c4c4cc" /><circle cx="169.9" cy="29" r="2.4" fill="#c4c4cc" /><circle cx="185.2" cy="29" r="2.4" fill="#c4c4cc" /><circle cx="200.5" cy="29" r="2.4" fill="#c4c4cc" /><circle cx="215.8" cy="29" r="2.4" fill="#c4c4cc" /><circle cx="231.1" cy="29" r="2.4" fill="#c4c4cc" /><circle cx="246.4" cy="29" r="2.4" fill="#c4c4cc" /><circle cx="261.7" cy="29" r="2.4" fill="#c4c4cc" /><circle cx="277.0" cy="29" r="2.4" fill="#c4c4cc" /><circle cx="292.3" cy="29" r="2.4" fill="#c4c4cc" /><circle cx="307.6" cy="29" r="2.4" fill="#c4c4cc" /><circle cx="322.9" cy="29" r="2.4" fill="#c4c4cc" /><circle cx="338.2" cy="29" r="2.4" fill="#c4c4cc" /><circle cx="124.0" cy="42" r="2.4" fill="#c4c4cc" /><circle cx="139.3" cy="42" r="2.4" fill="#c4c4cc" /><circle cx="154.6" cy="42" r="2.4" fill="#c4c4cc" /><circle cx="169.9" cy="42" r="2.4" fill="#c4c4cc" /><circle cx="185.2" cy="42" r="2.4" fill="#c4c4cc" /><circle cx="200.5" cy="42" r="2.4" fill="#c4c4cc" /><circle cx="215.8" cy="42" r="2.4" fill="#c4c4cc" /><circle cx="231.1" cy="42" r="2.4" fill="#c4c4cc" /><circle cx="246.4" cy="42" r="2.4" fill="#c4c4cc" /><circle cx="261.7" cy="42" r="2.4" fill="#c4c4cc" /><circle cx="277.0" cy="42" r="2.4" fill="#c4c4cc" /><circle cx="292.3" cy="42" r="2.4" fill="#c4c4cc" /><circle cx="307.6" cy="42" r="2.4" fill="#c4c4cc" /><circle cx="322.9" cy="42" r="2.4" fill="#c4c4cc" /><circle cx="338.2" cy="42" r="2.4" fill="#c4c4cc" /><circle cx="124.0" cy="55" r="2.4" fill="#c4c4cc" /><circle cx="139.3" cy="55" r="2.4" fill="#c4c4cc" /><circle cx="154.6" cy="55" r="2.4" fill="#c4c4cc" /><circle cx="169.9" cy="55" r="2.4" fill="#c4c4cc" /><circle cx="185.2" cy="55" r="2.4" fill="#c4c4cc" /><circle cx="200.5" cy="55" r="2.4" fill="#c4c4cc" /><circle cx="215.8" cy="55" r="2.4" fill="#c4c4cc" /><circle cx="231.1" cy="55" r="2.4" fill="#c4c4cc" /><circle cx="246.4" cy="55" r="2.4" fill="#c4c4cc" /><circle cx="261.7" cy="55" r="2.4" fill="#c4c4cc" /><circle cx="277.0" cy="55" r="2.4" fill="#c4c4cc" /><circle cx="292.3" cy="55" r="2.4" fill="#c4c4cc" /><circle cx="307.6" cy="55" r="2.4" fill="#c4c4cc" /><circle cx="322.9" cy="55" r="2.4" fill="#c4c4cc" /><circle cx="338.2" cy="55" r="2.4" fill="#c4c4cc" /></g>
+            <path class="a-draw" pathLength="1" style="--d:1.00s" d="M154 62V96" stroke="#d4d4d8" stroke-width="1" /><circle class="a-scale" style="--d:1.30s" cx="154" cy="106" r="8" fill="#3f3f46" /><path class="a-draw" pathLength="1" style="--d:1.12s" d="M192 62V96" stroke="#d4d4d8" stroke-width="1" /><circle class="a-scale" style="--d:1.42s" cx="192" cy="106" r="8" fill="#3f3f46" /><path class="a-draw" pathLength="1" style="--d:1.24s" d="M231 62V96" stroke="#d4d4d8" stroke-width="1" /><circle class="a-scale" style="--d:1.54s" cx="231" cy="106" r="8" fill="#3f3f46" /><path class="a-draw" pathLength="1" style="--d:1.36s" d="M269 62V96" stroke="#d4d4d8" stroke-width="1" /><circle class="a-scale" style="--d:1.66s" cx="269" cy="106" r="8" fill="#3f3f46" /><path class="a-draw" pathLength="1" style="--d:1.48s" d="M308 62V96" stroke="#d4d4d8" stroke-width="1" /><circle class="a-scale" style="--d:1.78s" cx="308" cy="106" r="8" fill="#3f3f46" />
+            <path class="a-draw" pathLength="1" style="--d:2.50s" d="M154 114C154 140 231 132 231 156" fill="none" stroke="#d4d4d8" stroke-width="1" /><path class="a-draw" pathLength="1" style="--d:2.58s" d="M192 114C192 140 231 132 231 156" fill="none" stroke="#d4d4d8" stroke-width="1" /><path class="a-draw" pathLength="1" style="--d:2.66s" d="M231 114C231 140 231 132 231 156" fill="none" stroke="#FF4D00" stroke-width="1" /><path class="a-draw" pathLength="1" style="--d:2.74s" d="M269 114C269 140 231 132 231 156" fill="none" stroke="#d4d4d8" stroke-width="1" /><path class="a-draw" pathLength="1" style="--d:2.82s" d="M308 114C308 140 231 132 231 156" fill="none" stroke="#d4d4d8" stroke-width="1" />
+            <g class="a-scale" style="--d:3.2s">
+                <circle cx="231" cy="178" r="22" fill="rgba(255,77,0,.14)" />
+                <circle cx="231" cy="178" r="15" fill="#FF4D00" />
+                <path d="M231 169.5l2.6 5.4 5.9.8-4.3 4.1 1.1 5.8-5.3-2.8-5.3 2.8 1.1-5.8-4.3-4.1 5.9-.8z" fill="#fff" />
+            </g>
+            <g font-size="10.5">
+                <text class="a-fade" style="--d:.3s" x="8" y="40" fill="#52525b"><tspan font-weight="600" fill="#18181b">500+</tspan> proposals</text>
+                <text class="a-fade" style="--d:1.6s" x="8" y="110" fill="#52525b"><tspan font-weight="600" fill="#18181b">5</tspan> finalists</text>
+                <text class="a-fade" style="--d:3.4s" x="8" y="182" fill="#52525b"><tspan font-weight="600" fill="#FF4D00">1</tspan> winner</text>
+            </g>
+        </svg>
+    </template>
+
     <!-- ============ STORIES ============ -->
 
     <template id="story-utilpulse" data-tone="night">
@@ -1116,6 +1390,135 @@
             <h3>Today</h3>
             <p>Every backup exists because something once broke. That's why the minutes arrive now.</p>
         </section>
+        <div class="story__end"></div>
+    </template>
+
+
+    <template id="story-realestate" data-tone="night">
+        <header class="story__head">
+            <span class="pill pill--light pill--plain"><i></i>Client project</span>
+            <h2 class="story__title" id="story-title">Real estate CRM</h2>
+            <p class="story__role">Client project, name withheld</p>
+        </header>
+        <div data-slot="cover"></div>
+        <ul class="story__chips">
+            <li><b>2</b> requirement sessions</li><li>inventory and <b>cost sheet</b></li><li>the client <b>chose Frappe</b></li>
+        </ul>
+        <section class="story__part">
+            <h3>The question</h3>
+            <p>A real estate client was paying heavy Salesforce licence fees and wanted to know whether Frappe could do the same job.</p>
+        </section>
+        <section class="story__part">
+            <h3>How I answered it</h3>
+            <p>I sat with their team to understand how their consultants actually pitch homes to buyers, then rebuilt that screen in Frappe as a side-by-side test against Salesforce.</p><ul><li><strong>Inventory view.</strong> Click a building, pick a floor, and see every unit: BHK, price (which changes floor by floor), rent, and whether it's sold, available, held by management or unavailable.</li><li><strong>Cost sheet.</strong> The base every price is built on: taxes, loan type, cash and digital payments, extra charges, platform and convenience fees, worked out per transaction.</li></ul>
+        </section>
+        <section class="story__part story__part--now">
+            <h3>The result</h3>
+            <p>It matched the Salesforce screens and went further: cleaner and more interactive. The cost sheet reached pre-production. <strong>The client went ahead with Frappe.</strong></p>
+        </section>
+        <section class="story__part">
+            <h3>Then</h3>
+            <p>I handed the project over to a teammate as it moved forward.</p>
+        </section>
+
+        <div class="story__end"></div>
+    </template>
+
+    <template id="story-utildraw" data-tone="tile">
+        <header class="story__head">
+            <span class="pill pill--light pill--plain"><i></i>Solo build</span>
+            <h2 class="story__title" id="story-title">UtilDraw</h2>
+            <p class="story__role">AI flowchart tool, where it started</p>
+        </header>
+        <div data-slot="cover"></div>
+        <ul class="story__chips">
+            <li><b>3</b> versions per prompt</li><li>text, image or <b>voice</b></li><li><b>4+ years</b> of real flowcharts as reference</li>
+        </ul>
+        <section class="story__part">
+            <h3>The problem</h3>
+            <p>The team had 4+ years of flowcharts in Lucidchart. Making new ones by hand was slow, and Lucid's own AI produced shallow, generic charts.</p>
+        </section>
+        <section class="story__part">
+            <h3>What I built</h3>
+            <p>An AI-native flowchart tool on React Flow. Describe a chart by text, image or voice and get three versions, each with a confidence score. Hover to preview one, pick it, then ask the AI to change a single block or the whole chart.</p><p>Templates come from the team's own Lucid history, sorted by use case and client type. Users switch between OpenAI, Gemini and Claude to control cost.</p>
+        </section>
+        <section class="story__part story__part--broke">
+            <h3>What broke</h3>
+            <p>The old Lucid data was in Lucid's own JSON format, so all of it had to be cleaned before the AI could use it as a reference. Then big diagrams got slow, because I hadn't planned for heavy charts from day one.</p>
+        </section>
+        <section class="story__part">
+            <h3>The fix</h3>
+            <p>Stop redrawing the whole canvas. Only the part of the diagram on screen stays active, and only the blocks someone is moving or editing get redrawn. That made dense charts feel as smooth as Lucidchart.</p>
+        </section>
+        <p class="story__sign">Team of one. Just me and Claude.</p>
+        <div class="story__end"></div>
+    </template>
+
+    <template id="story-devhack" data-tone="night">
+        <header class="story__head">
+            <span class="pill pill--light pill--plain"><i></i>Co-founder</span>
+            <h2 class="story__title" id="story-title">DevHack</h2>
+            <p class="story__role">Co-founder, lead host of DevHack 2.0</p>
+        </header>
+        <div data-slot="cover"></div>
+        <ul class="story__chips">
+            <li><b>500+</b> companies approached</li><li><b>60+</b> signed, most by me</li><li><b>3,500+</b> registrations in 2025</li><li><b>INR 50L+</b> in prizes and credits</li>
+        </ul>
+        <section class="story__part">
+            <h3>The gap</h3>
+            <p>Our college had ideathons and half-day events, but no real hackathon. So three of us built one: the college's first 36-hour hackathon.</p>
+        </section>
+        <section class="story__part">
+            <h3>Starting from zero</h3>
+            <p>No templates, no contacts, no idea what a sponsor deck even looked like. We learned sponsor tiers from Major League Hacking's public templates on GitHub, then went hunting: company support inboxes, LinkedIn, and Bengaluru tech events to see who sponsors what. Every email was written for that one company.</p>
+        </section>
+        <section class="story__part story__part--now">
+            <h3>What worked</h3>
+            <p>Each yes became the pitch for the next. Edition 1's registrations brought Major League Hacking on board for 2.0. Their name brought in a title sponsor, and the title sponsor brought in the rest.</p>
+        </section>
+        <section class="story__part">
+            <h3>Kept it fair</h3>
+            <p>About 95% of teams came from outside our college, and so did two of our three winners.</p>
+        </section>
+        <section class="story__part">
+            <h3>On the day</h3>
+            <p>200+ participants on-site each edition, with Red Bull and Monster keeping the night running.</p>
+        </section>
+
+        <div class="story__end"></div>
+    </template>
+
+    <template id="story-sih" data-tone="tile">
+        <header class="story__head">
+            <span class="pill pill--light pill--plain"><i></i>Winner</span>
+            <h2 class="story__title" id="story-title">Smart India Hackathon 2024</h2>
+            <p class="story__role">Grand Finale winner, I led the AI work</p>
+        </header>
+        <div data-slot="cover"></div>
+        <ul class="story__chips">
+            <li><b>500+</b> proposals nationwide</li><li><b>36-hour</b> finale</li><li><b>22</b> disease categories</li><li><b>10</b> new policies proposed</li>
+        </ul>
+        <section class="story__part">
+            <h3>I wasn't supposed to be there</h3>
+            <p>A teammate fell ill and I got pulled in. Two months of late nights in the college labs later, we were one of 5 teams picked for our problem statement, headed to the national finale at SKCET Coimbatore.</p>
+        </section>
+        <section class="story__part">
+            <h3>The brief</h3>
+            <p>Hospitals counted diseases by hand, and the numbers crawled up from hospital to state to national level. Make it faster.</p>
+        </section>
+        <section class="story__part">
+            <h3>What we built</h3>
+            <p>OCR that turns paper registers into data in one scan, disease tracking across 22 categories, and my part: a RAG model over government health policies. It didn't just say which schemes were working. It found the gaps and proposed 10 new policies, each with a budget and an expected impact.</p><p>We also built an emergency request network between hospitals, for anything from blood to equipment, and photo-based sanitation checks.</p>
+        </section>
+        <section class="story__part story__part--broke">
+            <h3>The moment</h3>
+            <p>A judge suggested a medical-specific model. I didn't swap it in or argue. I said we'd check and come back. It turned out the model was trained for research, not disease classification, and we showed him the token costs to back that up.</p>
+        </section>
+        <section class="story__part story__part--now">
+            <h3>The ending</h3>
+            <p>We won. Midway through judging, one judge joked that we could relax, because we'd already built everything.</p>
+        </section>
+
         <div class="story__end"></div>
     </template>
 
