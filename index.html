@@ -111,7 +111,11 @@
             border-color: rgba(0, 0, 0, 0.2) !important;
         }
 
-        #navbar .nav-cta:hover, #navbar .nav-cta:focus-visible { background-color: rgba(255, 77, 0, 0.12) !important; color: #FF4D00 !important; border-color: #FF4D00 !important; }
+        #navbar .nav-cta { position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,.28); background: linear-gradient(135deg, rgba(255,255,255,.2), rgba(255,255,255,.04)); box-shadow: inset 0 1px 0 rgba(255,255,255,.4), inset 0 -1px 0 rgba(255,255,255,.06), 0 8px 22px -10px rgba(2,6,23,.6); backdrop-filter: blur(16px) saturate(170%); -webkit-backdrop-filter: blur(16px) saturate(170%); transition: transform .5s cubic-bezier(.25,1,.5,1), color .3s ease, border-color .3s ease, background .3s ease, box-shadow .3s ease; }
+        #navbar .nav-cta::before { content: ""; position: absolute; inset: 0 0 50% 0; border-radius: 9999px 9999px 40% 40%; background: linear-gradient(180deg, rgba(255,255,255,.28), rgba(255,255,255,0)); pointer-events: none; }
+        #navbar.nav-dark .nav-cta { border-color: rgba(24,24,27,.12) !important; background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(244,244,245,.5)); box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(24,24,27,.04), 0 8px 20px -10px rgba(15,23,42,.3); }
+        #navbar.nav-dark .nav-cta::before { background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,0)); }
+        #navbar .nav-cta:hover, #navbar .nav-cta:focus-visible { transform: scale(1.05); background: linear-gradient(135deg, rgba(255,77,0,.2), rgba(255,77,0,.07)) !important; color: #FF4D00 !important; border-color: #FF4D00 !important; }
 
         .nav-dark.bg-white\/5 {
             background-color: rgba(255, 255, 255, 0.8) !important;
@@ -557,16 +561,14 @@
 
         /* ---------- CONTACT TO FOOTER ---------- */
         .contact-body { background: #f4f4f5; }
-        .contact-fade { height: clamp(190px, 24vh, 260px); background: linear-gradient(180deg, #f4f4f5 0%, #eff0f1 8%, #e3e4e6 17%, #d0d1d5 25%, #b9bbc0 33%, #9ea1a9 42%, #828690 50%, #656a76 58%, #4a505f 67%, #333a4a 75%, #202739 83%, #141b2e 92%, #0f172a 100%); }
+        .contact-fade { height: clamp(380px, 68vh, 620px); background: linear-gradient(180deg, #f4f4f5 0%, #eff0f1 8%, #e3e4e6 17%, #d0d1d5 25%, #b9bbc0 33%, #9ea1a9 42%, #828690 50%, #656a76 58%, #4a505f 67%, #333a4a 75%, #202739 83%, #141b2e 92%, #0f172a 100%); }
         .site-footer { background: #0f172a; }
 
         .resume-dd { position: relative; }
         .resume-dd { display: flex; }
-        .resume-dd__btn { display: inline-flex; align-items: center; gap: .55rem; height: 100%; min-height: 3.75rem; background: none; border: 0; padding: 0 .25rem; color: #71717a; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .875rem; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; transition: color .25s ease; }
-        .resume-dd__btn .lbl { border-bottom: 1px solid #d4d4d8; padding-bottom: .2rem; transition: border-color .25s ease; }
-        .resume-dd.is-open .resume-dd__btn, .resume-dd__btn:focus-visible { color: #FF4D00; }
-        .resume-dd.is-open .resume-dd__btn .lbl, .resume-dd__btn:focus-visible .lbl { border-color: #FF4D00; }
-        @media (hover: hover) { .resume-dd:hover .resume-dd__btn { color: #FF4D00; } .resume-dd:hover .resume-dd__btn .lbl { border-color: #FF4D00; } .resume-dd:hover .resume-dd__menu { opacity: 1; visibility: visible; transform: none; transition: opacity .28s ease, transform .4s cubic-bezier(.22, 1, .36, 1), visibility 0s; } }
+        .resume-dd__btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: .6rem; padding: 1.25rem 2.25rem; border-radius: 9999px; color: #18181b; font-family: 'Geist', sans-serif; font-size: .875rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(244,244,245,.55)); border: 1px solid rgba(24,24,27,.12); box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(24,24,27,.04), 0 10px 24px -12px rgba(15,23,42,.28); backdrop-filter: blur(14px) saturate(160%); -webkit-backdrop-filter: blur(14px) saturate(160%); transition: transform .5s cubic-bezier(.25,1,.5,1), color .3s ease, border-color .3s ease, background .3s ease, box-shadow .3s ease; }
+        .resume-dd.is-open .resume-dd__btn, .resume-dd__btn:focus-visible { color: #FF4D00; border-color: #FF4D00; background: linear-gradient(135deg, rgba(255,77,0,.14), rgba(255,77,0,.05)); transform: scale(1.05); }
+        @media (hover: hover) { .resume-dd:hover .resume-dd__btn { color: #FF4D00; border-color: #FF4D00; background: linear-gradient(135deg, rgba(255,77,0,.14), rgba(255,77,0,.05)); transform: scale(1.05); } .resume-dd:hover .resume-dd__menu { opacity: 1; visibility: visible; transform: none; transition: opacity .28s ease, transform .4s cubic-bezier(.22, 1, .36, 1), visibility 0s; } }
         .resume-dd__menu { position: absolute; right: 0; top: 100%; padding-top: .75rem; z-index: 30; opacity: 0; visibility: hidden; transform: translateY(-6px) scale(.98); transform-origin: top right; transition: opacity .28s ease, transform .4s cubic-bezier(.22, 1, .36, 1), visibility 0s linear .4s; }
         .resume-dd:has(:focus-visible) .resume-dd__menu, .resume-dd.is-open .resume-dd__menu { opacity: 1; visibility: visible; transform: none; transition: opacity .28s ease, transform .4s cubic-bezier(.22, 1, .36, 1), visibility 0s; }
         .resume-dd__panel { background: #fff; border: 1px solid #e4e4e7; border-radius: 1.25rem; padding: .4rem; box-shadow: 0 24px 48px -20px rgba(15, 23, 42, .28); min-width: 17rem; }
@@ -635,7 +637,7 @@
                 <a href="#contact" class="hover:text-[#FF4D00] transition-colors">Contact</a>
             </div>
             <a href="https://linkedin.com/in/ritvikvasundh" target="_blank" rel="noopener"
-                class="nav-cta rounded-full px-6 md:px-8 py-3 md:py-3.5 border border-white/20 text-white text-sm font-semibold uppercase tracking-widest transition-all duration-300">
+                class="nav-cta rounded-full px-6 md:px-8 py-3 md:py-3.5 text-white text-sm font-semibold uppercase tracking-widest">
                 Connect
             </a>
         </div>
@@ -655,8 +657,8 @@
                     <div class="flex flex-col gap-12 text-[10px] font-mono text-white/40 w-full px-8 uppercase tracking-widest"
                         id="facts"></div>
                 </div>
-                <div
-                    class="absolute bottom-8 left-8 text-[10px] font-mono uppercase tracking-widest text-[#FF4D00] flex items-center gap-2">
+                <div id="status-line"
+                    class="absolute bottom-8 left-8 text-[10px] font-mono uppercase tracking-widest flex items-center gap-2" style="color:#ffffff">
                     <div class="w-1.5 h-1.5 bg-[#FF4D00] rounded-full animate-pulse"></div>
                     Open to FDE and applied AI roles
                 </div>
@@ -956,25 +958,25 @@
 
         <!-- CONTACT -->
         <section id="contact" class="relative z-10">
-            <div class="contact-body pt-40 md:pt-48 pb-12 md:pb-10">
+            <div class="contact-body pt-40 md:pt-48 pb-6 md:pb-8">
             <div class="max-w-7xl mx-auto px-6 relative z-10">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center md:px-12">
                     <div class="z-20 relative">
                         <h2 class="typewriter-target text-6xl md:text-8xl font-normal text-zinc-900 leading-[0.85] tracking-tighter font-geist text-left"
                             data-animation-started="false">
-                            GOT A MESSY PROBLEM?
+                            LET'S MAKE THE FIRST CALL.
                         </h2>
                     </div>
                     <div class="flex flex-col items-start gap-10 z-20 relative">
                         <p
                             class="text-xl md:text-2xl font-light text-zinc-600 max-w-md font-geist leading-tight text-left">
-                            And a model that should solve it? <span class="text-zinc-900 font-medium">Send it over. I
-                                reply fast.</span>
+                            Tell me what's slow, manual or broken. <span class="text-zinc-900 font-medium">You'll get a
+                                working version, not a slide deck.</span>
                         </p>
 
-                        <div class="flex flex-row items-stretch gap-6 sm:gap-8 w-full">
+                        <div class="flex flex-row items-center gap-3 sm:gap-4 w-full">
                             <a href="mailto:ritvik2403@gmail.com"
-                                class="group relative overflow-hidden rounded-full bg-zinc-900 text-white px-10 py-5 text-sm font-semibold uppercase tracking-widest transition-all hover:pr-14 font-geist flex-1 sm:flex-none text-center shadow-xl shadow-zinc-900/10">
+                                class="group relative overflow-hidden rounded-full bg-zinc-900 text-white px-10 py-5 text-sm font-semibold uppercase tracking-widest transition-all hover:pr-14 font-geist sm:flex-none text-center shadow-xl shadow-zinc-900/10">
                                 <span class="relative z-10">Email me</span>
                                 <span
                                     class="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
@@ -996,7 +998,7 @@
                                         <polyline points="7 10 12 15 17 10" />
                                         <line x1="12" y1="15" x2="12" y2="3" />
                                     </svg>
-                                    <span class="lbl">Resume</span>
+                                    Resume
                                 </button>
                                 <div class="resume-dd__menu" id="resume-menu">
                                     <div class="resume-dd__panel">
@@ -1641,6 +1643,7 @@
         const warmLayer = document.getElementById('warm-layer');
         const coldReturnLayer = document.getElementById('cold-return-layer');
         const contactFade = document.querySelector('.contact-fade');
+        const statusLine = document.getElementById('status-line');
         const navbar = document.getElementById('navbar');
         const footerEl = document.querySelector('footer');
 
@@ -1652,6 +1655,12 @@
             const scrollPercent = scrollY / (docHeight - windowHeight);
 
             heroLayer.style.opacity = Math.max(0, 1 - scrollVh * 1.2);
+            if (statusLine) {
+                let k = Math.min(1, Math.max(0, (scrollVh * 1.2 - 0.1) / 0.3));
+                k = k * k * (3 - 2 * k);
+                const c = v => Math.round(255 + (v - 255) * k);
+                statusLine.style.color = `rgb(${c(24)}, ${c(24)}, ${c(27)})`;
+            }
 
             let warmOpacity = 0;
             if (scrollVh > 0.3) warmOpacity = (scrollVh - 0.3) * 1.5;
