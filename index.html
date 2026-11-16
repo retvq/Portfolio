@@ -111,11 +111,9 @@
             border-color: rgba(0, 0, 0, 0.2) !important;
         }
 
-        #navbar .nav-cta { position: relative; overflow: hidden; border: 1px solid rgba(255,255,255,.28); background: linear-gradient(135deg, rgba(255,255,255,.2), rgba(255,255,255,.04)); box-shadow: inset 0 1px 0 rgba(255,255,255,.4), inset 0 -1px 0 rgba(255,255,255,.06), 0 8px 22px -10px rgba(2,6,23,.6); backdrop-filter: blur(16px) saturate(170%); -webkit-backdrop-filter: blur(16px) saturate(170%); transition: transform .5s cubic-bezier(.25,1,.5,1), color .3s ease, border-color .3s ease, background .3s ease, box-shadow .3s ease; }
-        #navbar .nav-cta::before { content: ""; position: absolute; inset: 0 0 50% 0; border-radius: 9999px 9999px 40% 40%; background: linear-gradient(180deg, rgba(255,255,255,.28), rgba(255,255,255,0)); pointer-events: none; }
-        #navbar.nav-dark .nav-cta { border-color: rgba(24,24,27,.12) !important; background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(244,244,245,.5)); box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(24,24,27,.04), 0 8px 20px -10px rgba(15,23,42,.3); }
-        #navbar.nav-dark .nav-cta::before { background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,0)); }
-        #navbar .nav-cta:hover, #navbar .nav-cta:focus-visible { transform: scale(1.05); background: linear-gradient(135deg, rgba(255,77,0,.2), rgba(255,77,0,.07)) !important; color: #FF4D00 !important; border-color: #FF4D00 !important; }
+        #navbar .nav-cta { border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.05); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); transition: transform .5s cubic-bezier(.25,1,.5,1), color .3s ease, border-color .3s ease, background-color .3s ease; }
+        #navbar.nav-dark .nav-cta { border-color: rgba(24,24,27,.1) !important; background: rgba(24,24,27,.04); }
+        #navbar .nav-cta:hover, #navbar .nav-cta:focus-visible { transform: scale(1.05); background: rgba(255,77,0,.12) !important; color: #FF4D00 !important; border-color: #FF4D00 !important; }
 
         .nav-dark.bg-white\/5 {
             background-color: rgba(255, 255, 255, 0.8) !important;
@@ -566,8 +564,7 @@
         .story__end { height: 1.5rem; }
 
         /* ---------- CONTACT TO FOOTER ---------- */
-        .contact-body { background: #f4f4f5; }
-        .contact-fade { height: clamp(380px, 68vh, 620px); background: linear-gradient(180deg, #f4f4f5 0%, #eff0f1 8%, #e3e4e6 17%, #d0d1d5 25%, #b9bbc0 33%, #9ea1a9 42%, #828690 50%, #656a76 58%, #4a505f 67%, #333a4a 75%, #202739 83%, #141b2e 92%, #0f172a 100%); }
+        .contact-zone { background: linear-gradient(180deg, #f4f4f5 0%, #f4f4f5 8.0%, #f1f2f3 13.8%, #eaebec 19.5%, #dfe0e2 25.2%, #d0d1d5 31.0%, #bfc1c6 36.8%, #acaeb5 42.5%, #979aa2 48.2%, #828690 54.0%, #6c717d 59.8%, #575d6a 65.5%, #444a59 71.2%, #333a4a 77.0%, #242b3d 82.8%, #192033 88.5%, #12192c 94.2%, #0f172a 100.0%); }
         .site-footer { background: #0f172a; }
 
         .resume-dd { position: relative; }
@@ -965,20 +962,19 @@
         </section>
 
         <!-- CONTACT -->
-        <section id="contact" class="relative z-10">
-            <div class="contact-body pt-40 md:pt-48 pb-6 md:pb-8">
+        <section id="contact" class="contact-zone relative z-10">
+            <div class="pt-40 md:pt-52 pb-52 md:pb-32">
             <div class="max-w-7xl mx-auto px-6 relative z-10">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center md:px-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-24 items-center md:px-12">
                     <div class="z-20 relative">
-                        <h2 class="typewriter-target text-6xl md:text-8xl font-normal text-zinc-900 leading-[0.85] tracking-tighter font-geist text-left"
-                            data-animation-started="false">
+                        <h2 class="typewriter-target text-6xl md:text-8xl font-normal leading-[0.85] tracking-tighter font-geist text-left"
+                            data-animation-started="false" data-ink>
                             LET'S MAKE THE FIRST CALL.
                         </h2>
                     </div>
                     <div class="flex flex-col items-start gap-10 z-20 relative">
-                        <p
-                            class="text-xl md:text-2xl font-light text-zinc-600 max-w-md font-geist leading-tight text-left">
-                            Tell me what's slow, manual or broken. <span class="text-zinc-900 font-medium">You'll get a
+                        <p class="text-xl md:text-2xl font-light max-w-md font-geist leading-tight text-left" data-ink>
+                            <span style="opacity:.72">Tell me what's slow, manual or broken.</span> <span class="font-medium">You'll get a
                                 working version, not a slide deck.</span>
                         </p>
 
@@ -1026,7 +1022,6 @@
                 </div>
             </div>
             </div>
-            <div class="contact-fade" aria-hidden="true"></div>
         </section>
 
         <!-- FOOTER -->
@@ -1650,7 +1645,47 @@
         const heroLayer = document.getElementById('hero-layer');
         const warmLayer = document.getElementById('warm-layer');
         const coldReturnLayer = document.getElementById('cold-return-layer');
-        const contactFade = document.querySelector('.contact-fade');
+        const contactZone = document.getElementById('contact');
+        const NAVY = [15, 23, 42], LIGHT = [244, 244, 245];
+        const smooth = x => { x = Math.min(1, Math.max(0, x)); return x * x * (3 - 2 * x); };
+        // Background colour of the contact gradient at a fraction p of its height (same curve as the CSS)
+        const zoneColor = p => { const e = smooth((p - 0.08) / 0.92); return LIGHT.map((a, i) => Math.round(a + (NAVY[i] - a) * e)); };
+        const lum = ([r, g, b]) => { const f = v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }; return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b); };
+        // Text colour that reads on that background: dark on the light part, light on the navy part
+        // Text colour for a background: a smooth navy-to-white ramp that stays dark through the mid greys
+        // and only turns light once the background is clearly dark, so the letters never match the backdrop
+        const INK_DARK = [15, 23, 42], INK_LIGHT = [248, 250, 252];
+        const inkFor = bg => { const k = smooth((0.15 - lum(bg)) / 0.08); return INK_DARK.map((a, i) => Math.round(a + (INK_LIGHT[i] - a) * k)); };
+        // The same ramp as a vertical gradient covering the whole contact section
+        const inkGradient = (() => {
+            const stops = [];
+            for (let i = 0; i <= 100; i += 2) stops.push(`rgb(${inkFor(zoneColor(i / 100)).join(',')}) ${i}%`);
+            return `linear-gradient(180deg, ${stops.join(', ')})`;
+        })();
+        // Distance from the top of the contact section, ignoring the reveal animation's transforms
+        const topInZone = el => { let y = 0; while (el && el !== contactZone) { y += el.offsetTop; el = el.offsetParent; } return y; };
+        function inkContact() {
+            const H = contactZone.offsetHeight;
+            contactZone.querySelectorAll('[data-ink]').forEach(el => {
+                const words = el.querySelectorAll('.word-span');
+                const parts = words.length ? [...words] : [el];
+                if (words.length) { el.style.backgroundImage = ''; el.style.color = ''; }
+                parts.forEach(part => {
+                    part.style.backgroundImage = inkGradient;
+                    part.style.backgroundSize = `100% ${H}px`;
+                    part.style.backgroundRepeat = 'no-repeat';
+                    part.style.backgroundPosition = `0 ${-topInZone(part)}px`;
+                    part.style.webkitBackgroundClip = 'text';
+                    part.style.backgroundClip = 'text';
+                    part.style.color = 'transparent';
+                    part.style.webkitTextFillColor = 'transparent';
+                });
+            });
+        }
+        window.addEventListener('resize', inkContact);
+        window.addEventListener('load', inkContact);
+        new MutationObserver(() => requestAnimationFrame(inkContact)).observe(contactZone, { childList: true, subtree: true });
+        inkContact();
         const statusLine = document.getElementById('status-line');
         const navbar = document.getElementById('navbar');
         const footerEl = document.querySelector('footer');
@@ -1679,24 +1714,21 @@
             
             coldReturnLayer.style.opacity = Math.min(1, coldOpacity);
 
-            // Header follows the background: white over the light sections, easing back to navy over the footer fade
-            const fr = contactFade.getBoundingClientRect();
-            const navLine = 80;
-            // Progress from the moment the fade comes into view until the bottom of the page,
-            // or until the fade has passed under the header, whichever comes first
-            const fadeDocTop = scrollY + fr.top;
-            const start = fadeDocTop - windowHeight * 0.6;
-            const end = Math.min(docHeight - windowHeight, fadeDocTop + fr.height - navLine);
-            let t = end > start ? (scrollY - start) / (end - start) : 0;
-            t = Math.min(1, Math.max(0, t));
+            // Header follows the background: white over the light sections, then flows with the
+            // contact gradient down to the footer navy, reaching it at the bottom of the page
+            const zr = contactZone.getBoundingClientRect();
+            const zoneDocTop = scrollY + zr.top;
+            const start = zoneDocTop - windowHeight * 0.5;
+            const end = docHeight - windowHeight;
+            const t = end > start ? Math.min(1, Math.max(0, (scrollY - start) / (end - start))) : 0;
             const lightZone = scrollVh > 0.8;
             if (lightZone && t > 0) {
-                const e = t * t * (3 - 2 * t);
-                const mix = (a, b) => Math.round(a + (b - a) * e);
-                navbar.style.setProperty('background-color', `rgba(${mix(255, 15)}, ${mix(255, 23)}, ${mix(255, 42)}, ${(0.8 + 0.16 * e).toFixed(3)})`, 'important');
-                navbar.classList.toggle('nav-dark', t < 0.45);
+                const p1 = 0.08 + 0.92 * t, p2 = Math.min(1, p1 + 0.14);
+                const c1 = zoneColor(p1), c2 = zoneColor(p2);
+                navbar.style.setProperty('background', `linear-gradient(180deg, rgba(${c1.join(',')}, .92), rgba(${c2.join(',')}, .92))`, 'important');
+                navbar.classList.toggle('nav-dark', lum(c1) > 0.2);
             } else {
-                navbar.style.removeProperty('background-color');
+                navbar.style.removeProperty('background');
                 navbar.classList.toggle('nav-dark', lightZone);
             }
         }
