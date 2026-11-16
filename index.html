@@ -13,6 +13,10 @@
     <meta property="og:type" content="website">
 
     <!-- Core Libraries -->
+    <!-- Animated backdrop: fetch the renderer and the scene first, so they load while the curtain plays -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preload" as="script" href="https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js">
+    <link rel="preload" as="fetch" href="assets/us/hero-scene.json" crossorigin>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
@@ -161,12 +165,13 @@
         /* Animated backdrop (Unicorn Studio, same scene as the custom build): greyscaled and tinted
            into the slate palette, then dissolved with a long eased mask so it melts into the gradients */
         .us-backdrop { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
-        .us-backdrop__scene { position: absolute; inset: 0; opacity: .7; filter: grayscale(1) brightness(.85) contrast(1.05); }
+        .us-backdrop__scene { position: absolute; inset: 0; opacity: 0; transition: opacity 1.4s ease; filter: grayscale(1) brightness(.85) contrast(1.05); }
         .us-backdrop--hero { z-index: 0; -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,1.000) 38.0%, rgba(0,0,0,0.980) 43.2%, rgba(0,0,0,0.926) 48.3%, rgba(0,0,0,0.844) 53.5%, rgba(0,0,0,0.741) 58.7%, rgba(0,0,0,0.624) 63.8%, rgba(0,0,0,0.500) 69.0%, rgba(0,0,0,0.376) 74.2%, rgba(0,0,0,0.259) 79.3%, rgba(0,0,0,0.156) 84.5%, rgba(0,0,0,0.074) 89.7%, rgba(0,0,0,0.020) 94.8%, rgba(0,0,0,0.000) 100.0%); mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,1.000) 38.0%, rgba(0,0,0,0.980) 43.2%, rgba(0,0,0,0.926) 48.3%, rgba(0,0,0,0.844) 53.5%, rgba(0,0,0,0.741) 58.7%, rgba(0,0,0,0.624) 63.8%, rgba(0,0,0,0.500) 69.0%, rgba(0,0,0,0.376) 74.2%, rgba(0,0,0,0.259) 79.3%, rgba(0,0,0,0.156) 84.5%, rgba(0,0,0,0.074) 89.7%, rgba(0,0,0,0.020) 94.8%, rgba(0,0,0,0.000) 100.0%); }
         .us-backdrop--hero .us-tint { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(2,6,23,.7) 0%, rgba(2,6,23,.2) 50%, rgba(2,6,23,0) 100%); }
         .us-backdrop--foot { z-index: 1; top: auto; height: var(--foot-h, 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.000) 0.0%, rgba(0,0,0,0.020) 3.8%, rgba(0,0,0,0.074) 7.5%, rgba(0,0,0,0.156) 11.2%, rgba(0,0,0,0.259) 15.0%, rgba(0,0,0,0.376) 18.8%, rgba(0,0,0,0.500) 22.5%, rgba(0,0,0,0.624) 26.2%, rgba(0,0,0,0.741) 30.0%, rgba(0,0,0,0.844) 33.8%, rgba(0,0,0,0.926) 37.5%, rgba(0,0,0,0.980) 41.2%, rgba(0,0,0,1.000) 45.0%, #000 100%); mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.000) 0.0%, rgba(0,0,0,0.020) 3.8%, rgba(0,0,0,0.074) 7.5%, rgba(0,0,0,0.156) 11.2%, rgba(0,0,0,0.259) 15.0%, rgba(0,0,0,0.376) 18.8%, rgba(0,0,0,0.500) 22.5%, rgba(0,0,0,0.624) 26.2%, rgba(0,0,0,0.741) 30.0%, rgba(0,0,0,0.844) 33.8%, rgba(0,0,0,0.926) 37.5%, rgba(0,0,0,0.980) 41.2%, rgba(0,0,0,1.000) 45.0%, #000 100%); }
         .us-backdrop--foot { mix-blend-mode: screen; }
-        .us-backdrop--foot .us-backdrop__scene { opacity: .55; }
+        .us-ready .us-backdrop--hero .us-backdrop__scene { opacity: .7; }
+        .us-ready .us-backdrop--foot .us-backdrop__scene { opacity: .55; }
         @media (prefers-reduced-motion: reduce) { .us-backdrop { display: none; } }
 
         /* Facts list fades out before it reaches the status line at the bottom of the sidebar */
@@ -709,7 +714,7 @@
 
             <!-- Animated backdrop: dissolves into the hero gradient with a long eased mask -->
             <div class="us-backdrop us-backdrop--hero" aria-hidden="true">
-                <div class="us-backdrop__scene" data-us-project="ILgOO23w4wEyPQOKyLO4"></div>
+                <div class="us-backdrop__scene" data-us-project-src="assets/us/hero-scene.json" data-us-dpi="1"></div>
                 <div class="us-tint"></div>
             </div>
 
@@ -739,13 +744,13 @@
                 <div class="max-w-7xl mx-auto px-6 text-center z-10 w-full">
                     <div class="flex flex-col items-center gap-y-4 mb-12">
                         <div id="hero-badge"
-                            class="liquid-glass inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#FF4D00]/30 bg-[#FF4D00]/10 text-orange-200 text-[11px] font-mono uppercase tracking-widest mb-4 opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform"
+                            class="liquid-glass inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#FF4D00]/30 bg-[#FF4D00]/10 text-orange-200 text-[10px] sm:text-[11px] font-mono uppercase tracking-wider sm:tracking-widest whitespace-nowrap mb-4 opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform"
                             data-lg-bezel="10" data-lg-height="20" data-lg-thickness="45" data-lg-ratio="1">
                             <span class="relative flex h-2 w-2">
                                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF4D00] opacity-75"></span>
                                 <span class="relative inline-flex rounded-full h-2 w-2 bg-[#FF4D00]"></span>
                             </span>
-                            Open to work
+                            <span>AI Production Engineer<span class="mx-2 opacity-60" aria-hidden="true">·</span>Open to work</span>
                         </div>
                         <h1 class="leading-[1.1] md:text-7xl lg:text-7xl text-4xl sm:text-5xl font-medium text-white tracking-tighter font-jakarta whitespace-nowrap"
                             id="hero-title-1">
@@ -764,9 +769,7 @@
 
                     <div class="pl-1 border-l-2 border-[#FF4D00] inline-block text-left opacity-0 translate-y-4"
                         id="hero-para-container">
-                        <p class="text-base md:text-lg font-light text-white/60 max-w-[46rem] ml-8 font-manrope leading-relaxed"
-                            id="hero-para" data-words>AI Production Engineer</p>
-                        <p class="text-xl md:text-2xl font-light text-white/70 max-w-[46rem] ml-8 mt-1 font-manrope leading-relaxed"
+                        <p class="text-lg sm:text-xl md:text-2xl font-light text-white/70 max-w-2xl ml-6 md:ml-8 font-manrope leading-relaxed"
                             id="hero-sub" data-words data-strong="Precision over hype.">I build reliable, fallback-first AI products, holding 99.5% uptime at sub-second latency. Precision over hype.</p>
                     </div>
 
@@ -1146,7 +1149,7 @@
 
             <!-- Same animated backdrop behind the footer, rising out of the contact gradient -->
             <div class="us-backdrop us-backdrop--foot" aria-hidden="true">
-                <div class="us-backdrop__scene" data-us-project="ILgOO23w4wEyPQOKyLO4"></div>
+                <div class="us-backdrop__scene" data-us-project-src="assets/us/hero-scene.json" data-us-dpi="1" data-us-lazyload="true"></div>
             </div>
         </div>
     </main>
@@ -1896,21 +1899,25 @@
         })();
     </script>
     <script>
-        // UNICORN STUDIO HERO BACKDROP — loads the animated canvas for the hero
-        // section only; skipped entirely under reduced motion (static gradient remains)
-        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            !function () {
-                if (!window.UnicornStudio) {
-                    window.UnicornStudio = { isInitialized: !1 };
-                    var i = document.createElement("script");
-                    i.src = "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js";
-                    i.onload = function () {
-                        window.UnicornStudio.isInitialized || (UnicornStudio.init(), window.UnicornStudio.isInitialized = !0);
-                    };
-                    (document.head || document.body).appendChild(i);
-                }
-            }();
-        }
+        // ANIMATED BACKDROP: the renderer and scene were preloaded in <head>; start it now and expose
+        // a promise so the loading curtain can wait for it. Resolves false on reduced motion, no WebGL2 or error.
+        window.usReady = (function () {
+            const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            let gl2 = false;
+            try { gl2 = !!document.createElement('canvas').getContext('webgl2'); } catch (e) {}
+            if (reduce || !gl2) return Promise.resolve(false);
+            return new Promise(resolve => {
+                const done = ok => { if (ok) document.documentElement.classList.add('us-ready'); resolve(ok); };
+                const s = document.createElement('script');
+                s.src = "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js";
+                s.onload = () => {
+                    try { Promise.resolve(UnicornStudio.init()).then(() => done(true), () => done(false)); }
+                    catch (e) { done(false); }
+                };
+                s.onerror = () => done(false);
+                document.head.appendChild(s);
+            });
+        })();
     </script>
     <script>
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1958,6 +1965,11 @@
         // 1. LOADER SEQUENCE (same choreography as the main site)
         gsap.to('.loader', { backgroundPosition: "0% 100%", duration: 3, repeat: -1, yoyo: true, ease: "sine.inOut" });
 
+        function padCounter() { this.targets()[0].innerHTML = Math.ceil(this.targets()[0].innerText).toString().padStart(2, '0'); }
+        const curtainGate = Promise.race([
+            window.usReady || Promise.resolve(false),
+            new Promise(r => setTimeout(r, Math.max(400, 4500 - performance.now())))
+        ]);
         const tl = gsap.timeline();
         tl.to('.loader-text', { y: 0, duration: 1, ease: "power3.out" })
             .call(() => {
@@ -1965,13 +1977,15 @@
                     setTimeout(() => word.classList.remove('opacity-0', 'translate-y-4'), 100 + (i * 100));
                 });
             }, null, "<+0.2")
-            .to('.loader-bar', { width: '100%', duration: 1.5, ease: "power2.inOut" }, "-=0.5")
+            .to('.loader-bar', { width: '88%', duration: 1.5, ease: "power2.inOut" }, "-=0.5")
             .to('.loader-counter', {
-                innerText: 100, duration: 1.5, snap: { innerText: 1 }, ease: "power2.inOut",
-                onUpdate: function () {
-                    this.targets()[0].innerHTML = Math.ceil(this.targets()[0].innerText).toString().padStart(2, '0');
-                }
+                innerText: 88, duration: 1.5, snap: { innerText: 1 }, ease: "power2.inOut",
+                onUpdate: padCounter
             }, "<")
+            // Hold at 88% until the animated backdrop is drawing (capped, so a slow network never traps the visitor)
+            .addPause("+=0", () => curtainGate.then(() => tl.play()))
+            .to('.loader-bar', { width: '100%', duration: 0.4, ease: "power2.out" })
+            .to('.loader-counter', { innerText: 100, duration: 0.4, snap: { innerText: 1 }, ease: "power2.out", onUpdate: padCounter }, "<")
             .to('.loader', { yPercent: -100, duration: 1.2, ease: "power4.inOut" })
             .to('#hero-title-1, #hero-title-2', {
                 y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "power2.out",
@@ -1986,8 +2000,7 @@
             .to('#hero-para-container', {
                 opacity: 1, y: 0, duration: 0.1,
                 onStart: () => {
-                    const n = revealWords(document.getElementById('hero-para'));
-                    revealWords(document.getElementById('hero-sub'), n * 50);
+                    revealWords(document.getElementById('hero-sub'));
                 }
             }, "-=0.45")
             .call(() => {
