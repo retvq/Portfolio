@@ -554,6 +554,28 @@
         .story__sign { margin-top: 2rem; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 500; font-size: 1.15rem; letter-spacing: -.02em; color: #18181b; }
         .story__end { height: 1.5rem; }
 
+        /* ---------- CONTACT TO FOOTER ---------- */
+        .contact-body { background: #f4f4f5; }
+        .contact-fade { height: clamp(190px, 24vh, 260px); background: linear-gradient(180deg, #f4f4f5 0%, #eff0f1 8%, #e3e4e6 17%, #d0d1d5 25%, #b9bbc0 33%, #9ea1a9 42%, #828690 50%, #656a76 58%, #4a505f 67%, #333a4a 75%, #202739 83%, #141b2e 92%, #0f172a 100%); }
+        .site-footer { background: #0f172a; }
+
+        .resume-dd { position: relative; }
+        .resume-dd__btn { display: inline-flex; align-items: center; justify-content: center; gap: .75rem; width: 100%; border: 1px solid #18181b; color: #18181b; background: transparent; padding: 1.25rem 2.25rem; font-family: 'Geist', sans-serif; font-size: .875rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; transition: background-color .3s ease, color .3s ease; }
+        .resume-dd__btn svg { transition: transform .35s cubic-bezier(.22, 1, .36, 1); }
+        .resume-dd:hover .resume-dd__btn, .resume-dd.is-open .resume-dd__btn, .resume-dd__btn:focus-visible { background: #18181b; color: #fff; }
+        .resume-dd:hover .resume-dd__btn .chev, .resume-dd.is-open .resume-dd__btn .chev { transform: rotate(180deg); }
+        .resume-dd__menu { position: absolute; left: 0; right: 0; top: 100%; padding-top: .6rem; z-index: 30; opacity: 0; visibility: hidden; transform: translateY(-6px) scale(.98); transform-origin: top center; transition: opacity .28s ease, transform .4s cubic-bezier(.22, 1, .36, 1), visibility 0s linear .4s; }
+        .resume-dd:hover .resume-dd__menu, .resume-dd:focus-within .resume-dd__menu, .resume-dd.is-open .resume-dd__menu { opacity: 1; visibility: visible; transform: none; transition: opacity .28s ease, transform .4s cubic-bezier(.22, 1, .36, 1), visibility 0s; }
+        .resume-dd__panel { background: #fff; border: 1px solid #e4e4e7; border-radius: 1.25rem; padding: .4rem; box-shadow: 0 24px 48px -20px rgba(15, 23, 42, .28); min-width: 17rem; }
+        .resume-dd__item { display: flex; align-items: center; gap: .9rem; padding: .85rem 1rem; border-radius: .9rem; color: #18181b; transition: background-color .2s ease; }
+        .resume-dd__item:hover, .resume-dd__item:focus-visible { background: #f4f4f5; outline: none; }
+        .resume-dd__item b { display: block; font-family: 'Geist', sans-serif; font-weight: 500; font-size: .95rem; }
+        .resume-dd__item small { display: block; font-family: 'Geist', sans-serif; font-weight: 300; font-size: .8rem; color: #71717a; margin-top: .1rem; }
+        .resume-dd__item .ico { flex-shrink: 0; width: 2.25rem; height: 2.25rem; border-radius: .7rem; display: grid; place-items: center; background: #f4f4f5; color: #FF4D00; transition: background-color .2s ease; }
+        .resume-dd__item:hover .ico { background: #fff; }
+        @media (min-width: 640px) { .resume-dd__btn { width: auto; } }
+        @media (prefers-reduced-motion: reduce) { .resume-dd__menu, .resume-dd__btn svg { transition: none; } }
+
         /* ---------- HOW I WORK ---------- */
         .belief h3 { font-family: 'Geist', sans-serif; font-weight: 400; font-size: 1.5rem; line-height: 1.2; letter-spacing: -.035em; color: #18181b; }
         .belief p { margin-top: .75rem; font-family: 'Geist', sans-serif; font-weight: 300; font-size: 1rem; line-height: 1.65; color: #71717a; max-width: 30rem; }
@@ -928,11 +950,10 @@
         </section>
 
         <!-- CONTACT -->
-        <section id="contact" class="pt-32 pb-12 relative z-10">
-            <div class="absolute inset-0 z-0 pointer-events-none"
-                style="background: linear-gradient(180deg, #f4f4f5 0%, #f4f4f5 40%, transparent 100%);"></div>
+        <section id="contact" class="relative z-10">
+            <div class="contact-body pt-40 md:pt-48 pb-12 md:pb-10">
             <div class="max-w-7xl mx-auto px-6 relative z-10">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center md:px-12 mb-20">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center md:px-12">
                     <div class="z-20 relative">
                         <h2 class="typewriter-target text-6xl md:text-8xl font-normal text-zinc-900 leading-[0.85] tracking-tighter font-geist text-left"
                             data-animation-started="false">
@@ -946,7 +967,7 @@
                                 reply fast.</span>
                         </p>
 
-                        <div class="flex flex-col items-start gap-6 w-full">
+                        <div class="flex flex-col sm:flex-row items-stretch sm:items-start gap-4 w-full">
                             <a href="mailto:ritvik2403@gmail.com"
                                 class="group relative overflow-hidden bg-zinc-900 text-white px-10 py-5 text-sm font-semibold uppercase tracking-widest transition-all hover:pr-14 font-geist w-full sm:w-auto text-center shadow-xl shadow-zinc-900/10">
                                 <span class="relative z-10">Email me</span>
@@ -961,32 +982,38 @@
                                 </span>
                             </a>
 
-                            <div class="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-mono uppercase tracking-widest text-zinc-500">
-                                <span class="flex items-center gap-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" aria-hidden="true">
-                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                                        <polyline points="7 10 12 15 17 10" />
-                                        <line x1="12" y1="15" x2="12" y2="3" />
+                            <div class="resume-dd" id="resume-dd">
+                                <button type="button" class="resume-dd__btn" aria-haspopup="true" aria-expanded="false"
+                                    aria-controls="resume-menu">
+                                    Download resume
+                                    <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="m6 9 6 6 6-6" />
                                     </svg>
-                                    Resume
-                                </span>
-                                <a href="resume/Ritvik_Vasundh_FDE.pdf" download
-                                    class="border-b border-zinc-300 pb-1 hover:border-zinc-900 hover:text-zinc-900 transition-colors">FDE
-                                    version</a>
-                                <a href="resume/Ritvik_Vasundh_AI_Engineer.pdf" download
-                                    class="border-b border-zinc-300 pb-1 hover:border-zinc-900 hover:text-zinc-900 transition-colors">AI
-                                    engineer version</a>
+                                </button>
+                                <div class="resume-dd__menu" id="resume-menu">
+                                    <div class="resume-dd__panel">
+                                        <a class="resume-dd__item" href="resume/Ritvik_Vasundh_FDE.pdf" download>
+                                            <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg></span>
+                                            <span><b>FDE version</b><small>For forward deployed roles</small></span>
+                                        </a>
+                                        <a class="resume-dd__item" href="resume/Ritvik_Vasundh_AI_Engineer.pdf" download>
+                                            <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg></span>
+                                            <span><b>AI engineer version</b><small>For AI engineering roles</small></span>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            </div>
+            <div class="contact-fade" aria-hidden="true"></div>
         </section>
 
         <!-- FOOTER -->
-        <footer class="mt-32 border-t border-white/10 bg-white/5 backdrop-blur-md relative overflow-hidden">
+        <footer class="site-footer relative overflow-hidden">
             <div class="px-6 py-16 lg:px-12 relative z-10">
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-12 text-sm">
                     <div class="md:col-span-1">
@@ -1624,12 +1651,24 @@
             warmLayer.style.opacity = Math.min(1, warmOpacity);
 
             let coldOpacity = 0;
-            if (scrollPercent > 0.93) coldOpacity = (scrollPercent - 0.93) * 14;
+            
             coldReturnLayer.style.opacity = Math.min(1, coldOpacity);
 
             navbar.classList.toggle('nav-dark', scrollVh > 0.8 && footerEl.getBoundingClientRect().top > 80);
         }
         window.addEventListener('scroll', onScroll, { passive: true });
+
+        // Resume dropdown: opens on hover with a mouse, on tap for touch, Escape closes
+        (() => {
+            const dd = document.getElementById('resume-dd');
+            if (!dd) return;
+            const btn = dd.querySelector('.resume-dd__btn');
+            const set = open => { dd.classList.toggle('is-open', open); btn.setAttribute('aria-expanded', open); };
+            btn.addEventListener('click', () => set(!dd.classList.contains('is-open')));
+            dd.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') set(false); });
+            document.addEventListener('click', e => { if (!dd.contains(e.target)) set(false); });
+            dd.addEventListener('keydown', e => { if (e.key === 'Escape') { set(false); btn.focus(); } });
+        })();
 
         // 3. TYPEWRITER ENGINE for headings
         const typewriterObserver = new IntersectionObserver((entries) => {
