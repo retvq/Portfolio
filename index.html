@@ -9,7 +9,7 @@
         content="Ritvik Vasundh is an AI engineer in Bengaluru who sits with the client, then builds what they need. UtilPulse, MeetingIQ and more.">
     <!-- Work in progress: keep this page out of search results until it replaces the main site -->
     <meta property="og:title" content="Ritvik Vasundh | AI Engineer">
-    <meta property="og:description" content="From first call to production. AI Production Engineer. I build reliable, fallback-first AI products.">
+    <meta property="og:description" content="LLM Systems. Engineered to ship. AI Production Engineer. I build reliable, fallback-first AI products.">
     <meta property="og:type" content="website">
 
     <!-- Core Libraries -->
@@ -18,7 +18,6 @@
 
     <!-- Fonts (same families as the main site) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yellowtail&amp;display=swap">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Geist:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap">
@@ -120,6 +119,55 @@
             background-color: rgba(255, 255, 255, 0.8) !important;
             backdrop-filter: blur(16px);
         }
+
+        /* --- 10. LIQUID GLASS ---
+           Tier 1 (below): blur + saturation + faux refraction rim — every browser, incl. iOS.
+           Tier 2: Chromium only — JS builds an SVG displacement map per element and swaps the
+           backdrop-filter inline for true refraction (after kube.io/blog/liquid-glass-css-svg). */
+        .liquid-glass {
+            position: relative;
+            backdrop-filter: blur(14px) saturate(160%);
+            -webkit-backdrop-filter: blur(14px) saturate(160%);
+        }
+
+        /* Tier 1 only: faux inner highlights + bent-light rim (no displacement available) */
+        html.lg-tier1 .liquid-glass {
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.28),
+                inset 0 -1px 1px rgba(255, 255, 255, 0.05),
+                inset 0 0 14px -8px rgba(255, 255, 255, 0.28),
+                0 10px 34px -14px rgba(0, 0, 0, 0.55);
+        }
+
+        html.lg-tier1 .liquid-glass::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            pointer-events: none;
+            box-shadow:
+                inset 1.5px 3px 5px -3px rgba(255, 255, 255, 0.55),
+                inset -2px -3px 5px -3px rgba(255, 255, 255, 0.22);
+            mix-blend-mode: screen;
+        }
+
+        /* Tier 2: the SVG filter does all the optics (blur, refraction, specular).
+           Element keeps only the kube.io drop shadow. */
+        html.lg-tier2 .liquid-glass {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
+        }
+
+
+        /* Animated backdrop (Unicorn Studio, same scene as the custom build): greyscaled and tinted
+           into the slate palette, then dissolved with a long eased mask so it melts into the gradients */
+        .us-backdrop { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+        .us-backdrop__scene { position: absolute; inset: 0; opacity: .7; filter: grayscale(1) brightness(.85) contrast(1.05); }
+        .us-backdrop--hero { z-index: 0; -webkit-mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,1.000) 38.0%, rgba(0,0,0,0.980) 43.2%, rgba(0,0,0,0.926) 48.3%, rgba(0,0,0,0.844) 53.5%, rgba(0,0,0,0.741) 58.7%, rgba(0,0,0,0.624) 63.8%, rgba(0,0,0,0.500) 69.0%, rgba(0,0,0,0.376) 74.2%, rgba(0,0,0,0.259) 79.3%, rgba(0,0,0,0.156) 84.5%, rgba(0,0,0,0.074) 89.7%, rgba(0,0,0,0.020) 94.8%, rgba(0,0,0,0.000) 100.0%); mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,1.000) 38.0%, rgba(0,0,0,0.980) 43.2%, rgba(0,0,0,0.926) 48.3%, rgba(0,0,0,0.844) 53.5%, rgba(0,0,0,0.741) 58.7%, rgba(0,0,0,0.624) 63.8%, rgba(0,0,0,0.500) 69.0%, rgba(0,0,0,0.376) 74.2%, rgba(0,0,0,0.259) 79.3%, rgba(0,0,0,0.156) 84.5%, rgba(0,0,0,0.074) 89.7%, rgba(0,0,0,0.020) 94.8%, rgba(0,0,0,0.000) 100.0%); }
+        .us-backdrop--hero .us-tint { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(2,6,23,.7) 0%, rgba(2,6,23,.2) 50%, rgba(2,6,23,0) 100%); }
+        .us-backdrop--foot { z-index: 1; top: auto; height: var(--foot-h, 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.000) 0.0%, rgba(0,0,0,0.020) 3.8%, rgba(0,0,0,0.074) 7.5%, rgba(0,0,0,0.156) 11.2%, rgba(0,0,0,0.259) 15.0%, rgba(0,0,0,0.376) 18.8%, rgba(0,0,0,0.500) 22.5%, rgba(0,0,0,0.624) 26.2%, rgba(0,0,0,0.741) 30.0%, rgba(0,0,0,0.844) 33.8%, rgba(0,0,0,0.926) 37.5%, rgba(0,0,0,0.980) 41.2%, rgba(0,0,0,1.000) 45.0%, #000 100%); mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.000) 0.0%, rgba(0,0,0,0.020) 3.8%, rgba(0,0,0,0.074) 7.5%, rgba(0,0,0,0.156) 11.2%, rgba(0,0,0,0.259) 15.0%, rgba(0,0,0,0.376) 18.8%, rgba(0,0,0,0.500) 22.5%, rgba(0,0,0,0.624) 26.2%, rgba(0,0,0,0.741) 30.0%, rgba(0,0,0,0.844) 33.8%, rgba(0,0,0,0.926) 37.5%, rgba(0,0,0,0.980) 41.2%, rgba(0,0,0,1.000) 45.0%, #000 100%); }
+        .us-backdrop--foot { mix-blend-mode: screen; }
+        .us-backdrop--foot .us-backdrop__scene { opacity: .55; }
+        @media (prefers-reduced-motion: reduce) { .us-backdrop { display: none; } }
 
         /* Facts list fades out before it reaches the status line at the bottom of the sidebar */
         .facts-mask { -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 14%, #000 72%, transparent 84%); mask-image: linear-gradient(180deg, transparent 0, #000 14%, #000 72%, transparent 84%); }
@@ -570,7 +618,7 @@
 
         .resume-dd { position: relative; }
         .resume-dd { display: flex; }
-        .resume-dd__btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: .6rem; padding: 1.25rem 2.25rem; border-radius: 9999px; color: #18181b; font-family: 'Geist', sans-serif; font-size: .875rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(244,244,245,.55)); border: 1px solid rgba(24,24,27,.12); box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(24,24,27,.04), 0 10px 24px -12px rgba(15,23,42,.28); transition: transform .5s cubic-bezier(.25,1,.5,1), color .3s ease, border-color .3s ease, background .3s ease, box-shadow .3s ease; }
+        .resume-dd__btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: .6rem; padding: 1.25rem 2.25rem; border-radius: 9999px; color: #18181b; font-family: 'Geist', sans-serif; font-size: .875rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; background: linear-gradient(135deg, rgba(255,255,255,.42), rgba(255,255,255,.14)); border: 1px solid rgba(24,24,27,.12); box-shadow: inset 0 1px 0 rgba(255,255,255,.7), inset 0 -1px 0 rgba(24,24,27,.04), 0 10px 24px -12px rgba(15,23,42,.28); transition: transform .5s cubic-bezier(.25,1,.5,1), color .3s ease, border-color .3s ease, background .3s ease, box-shadow .3s ease; }
         .resume-dd.is-open .resume-dd__btn, .resume-dd__btn:focus-visible { color: #FF4D00; border-color: #FF4D00; background: linear-gradient(135deg, rgba(255,77,0,.14), rgba(255,77,0,.05)); transform: scale(1.05); }
         @media (hover: hover) { .resume-dd:hover .resume-dd__btn { color: #FF4D00; border-color: #FF4D00; background: linear-gradient(135deg, rgba(255,77,0,.14), rgba(255,77,0,.05)); transform: scale(1.05); } .resume-dd:hover .resume-dd__menu { opacity: 1; visibility: visible; transform: none; transition: opacity .28s ease, transform .4s cubic-bezier(.22, 1, .36, 1), visibility 0s; } }
         .resume-dd__menu { position: absolute; right: 0; top: 100%; padding-top: .75rem; z-index: 30; opacity: 0; visibility: hidden; transform: translateY(-6px) scale(.98); transform-origin: top right; transition: opacity .28s ease, transform .4s cubic-bezier(.22, 1, .36, 1), visibility 0s linear .4s; }
@@ -593,11 +641,6 @@
             .story__sheet, .story__scrim, .wcard, .wcard__more svg { transition: none; }
             html { scroll-behavior: auto; }
         }
-        /* Hero headline: Yellowtail brush script, slant eased back with a counter-skew */
-        #hero-title-1, #hero-title-2 { font-family: 'Yellowtail', cursive !important; font-weight: 400 !important; letter-spacing: 0 !important; line-height: 1.15 !important; transform-origin: 50% 100%; }
-        #hero-title-1 { transform: skewX(10deg); }
-        #hero-title-2 { transform: skewX(10deg); margin-top: -.2rem; }
-        @media (min-width: 768px) { #hero-title-1, #hero-title-2 { font-size: 4.4rem !important; } }
         /* Hide scrollbars everywhere; scrolling still works */
         html, body, * { scrollbar-width: none; -ms-overflow-style: none; }
         html::-webkit-scrollbar, body::-webkit-scrollbar, *::-webkit-scrollbar { display: none; width: 0; height: 0; }
@@ -636,8 +679,9 @@
     <div class="noise-overlay"></div>
 
     <!-- C. NAVIGATION -->
-    <nav class="fixed top-0 w-full z-[60] border-b border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300"
-        id="navbar">
+    <nav class="liquid-glass fixed top-0 w-full z-[60] border-b border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300"
+        id="navbar" data-lg-bezel="21" data-lg-height="27" data-lg-thickness="70" data-lg-ratio="0.7"
+        data-lg-blur="1" data-lg-spec-opacity="0.2" data-lg-spec-sat="4">
         <div class="w-full flex justify-between items-center h-20 px-6 lg:px-12">
             <a href="#top" class="text-sm font-semibold tracking-tighter uppercase text-white flex items-center gap-2">
                 <span class="w-2 h-2 bg-[#FF4D00] rounded-full animate-pulse"></span>
@@ -649,7 +693,9 @@
                 <a href="#contact" class="hover:text-[#FF4D00] transition-colors">Contact</a>
             </div>
             <a href="https://linkedin.com/in/ritvikvasundh" target="_blank" rel="noopener"
-                class="nav-cta rounded-full px-6 md:px-8 py-3 md:py-3.5 text-white text-sm font-semibold uppercase tracking-widest">
+                class="nav-cta liquid-glass rounded-full px-6 md:px-8 py-3 md:py-3.5 text-white text-sm font-semibold uppercase tracking-widest"
+                data-lg-bezel="12" data-lg-height="24" data-lg-thickness="58" data-lg-ratio="1"
+                data-lg-spec-opacity="0.4" data-lg-spec-sat="6">
                 Connect
             </a>
         </div>
@@ -660,6 +706,12 @@
 
         <!-- HERO -->
         <section class="min-h-screen pt-20 grid grid-cols-1 lg:grid-cols-12 relative">
+
+            <!-- Animated backdrop: dissolves into the hero gradient with a long eased mask -->
+            <div class="us-backdrop us-backdrop--hero" aria-hidden="true">
+                <div class="us-backdrop__scene" data-us-project="ILgOO23w4wEyPQOKyLO4"></div>
+                <div class="us-tint"></div>
+            </div>
 
             <!-- Left sidebar: live facts -->
             <div
@@ -686,18 +738,27 @@
 
                 <div class="max-w-7xl mx-auto px-6 text-center z-10 w-full">
                     <div class="flex flex-col items-center gap-y-4 mb-12">
-                        <h1 class="leading-[1.1] md:text-7xl lg:text-7xl text-5xl font-medium text-white tracking-tighter font-jakarta whitespace-nowrap"
+                        <div id="hero-badge"
+                            class="liquid-glass inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#FF4D00]/30 bg-[#FF4D00]/10 text-orange-200 text-[11px] font-mono uppercase tracking-widest mb-4 opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform"
+                            data-lg-bezel="10" data-lg-height="20" data-lg-thickness="45" data-lg-ratio="1">
+                            <span class="relative flex h-2 w-2">
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF4D00] opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-[#FF4D00]"></span>
+                            </span>
+                            Open to work
+                        </div>
+                        <h1 class="leading-[1.1] md:text-7xl lg:text-7xl text-4xl sm:text-5xl font-medium text-white tracking-tighter font-jakarta whitespace-nowrap"
                             id="hero-title-1">
                             <span
-                                class="word-span opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform">From</span> <span
-                                class="word-span opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform">first</span> <span
-                                class="word-span opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform">call</span>
+                                class="word-span opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform bg-clip-text text-transparent bg-[linear-gradient(135deg,#FFFFFF_0%,#94a3b8_100%)]">LLM</span> <span
+                                class="word-span opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform bg-clip-text text-transparent bg-[linear-gradient(135deg,#FFFFFF_0%,#94a3b8_100%)]">Systems.</span>
                         </h1>
-                        <div class="leading-[1.1] md:text-7xl lg:text-7xl text-5xl font-medium text-white/40 tracking-tighter font-jakarta whitespace-nowrap"
+                        <div class="leading-[1.1] md:text-7xl lg:text-7xl text-4xl sm:text-5xl font-medium text-white/40 tracking-tighter font-jakarta whitespace-nowrap"
                             id="hero-title-2">
                             <span
+                                class="word-span opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform">Engineered</span> <span
                                 class="word-span opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform">to</span> <span
-                                class="word-span opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform">production.</span>
+                                class="word-span opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform">ship.</span>
                         </div>
                     </div>
 
@@ -705,14 +766,20 @@
                         id="hero-para-container">
                         <p class="text-base md:text-lg font-light text-white/60 max-w-[46rem] ml-8 font-manrope leading-relaxed"
                             id="hero-para" data-words>AI Production Engineer</p>
-                        <p class="text-xl md:text-2xl font-light text-white max-w-[46rem] ml-8 mt-1 font-manrope leading-relaxed"
-                            id="hero-sub" data-words>I build reliable, fallback-first AI products.</p>
+                        <p class="text-xl md:text-2xl font-light text-white/70 max-w-[46rem] ml-8 mt-1 font-manrope leading-relaxed"
+                            id="hero-sub" data-words data-strong="Precision over hype.">I build reliable, fallback-first AI products, holding 99.5% uptime at sub-second latency. Precision over hype.</p>
                     </div>
 
                     <div class="mt-16 flex justify-center" id="hero-btns">
                         <a href="#work"
-                            class="group px-8 py-3.5 rounded-full font-medium text-sm transition-all inline-flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 text-white hover:bg-white/10 hover:border-white/20 hover:scale-105 font-geist opacity-0 translate-y-4 duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform">
-                            See the work
+                            class="group px-8 py-3.5 rounded-full font-semibold text-sm transition-all inline-flex items-center gap-2 bg-white text-zinc-900 hover:bg-slate-100 hover:scale-105 font-geist opacity-0 translate-y-4 duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform shadow-[0_0_20px_-5px_rgba(255,255,255,0.4)]">
+                            View selected work
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" aria-hidden="true">
+                                <path d="M5 12h14"></path>
+                                <path d="m12 5 7 7-7 7"></path>
+                            </svg>
                         </a>
                     </div>
                 </div>
@@ -969,20 +1036,20 @@
         </section>
 
         <!-- CONTACT -->
-        <section id="contact" class="contact-zone relative z-10">
+        <div class="endzone relative z-10" style="isolation:isolate">
+        <section id="contact" class="contact-zone relative">
             <div class="pt-40 md:pt-52 pb-52 md:pb-32">
             <div class="max-w-7xl mx-auto px-6 relative z-10">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-24 items-center md:px-12">
                     <div class="z-20 relative">
-                        <h2 class="typewriter-target text-6xl md:text-8xl font-normal leading-[0.85] tracking-tighter font-geist text-left"
+                        <h2 class="typewriter-target text-6xl md:text-7xl lg:text-8xl font-normal leading-[0.9] tracking-tighter font-geist text-left"
                             data-animation-started="false" data-ink>
-                            LET'S MAKE THE FIRST CALL.
+                            From first call to production.
                         </h2>
                     </div>
                     <div class="flex flex-col items-start gap-10 z-20 relative">
                         <p class="text-xl md:text-2xl font-light max-w-md font-geist leading-tight text-left" data-ink>
-                            <span style="opacity:.72">Tell me what's slow, manual or broken.</span> <span class="font-medium">You'll get a
-                                working version, not a slide deck.</span>
+                            <span style="opacity:.72">The gap between a demo and a dependable system is engineering.</span> <span class="font-medium">Let's bridge it.</span>
                         </p>
 
                         <div class="flex flex-row items-center gap-3 sm:gap-4 w-full">
@@ -1001,7 +1068,7 @@
                             </a>
 
                             <div class="resume-dd" id="resume-dd">
-                                <button type="button" class="resume-dd__btn" aria-haspopup="true" aria-expanded="false"
+                                <button type="button" class="resume-dd__btn liquid-glass" data-lg-bezel="12" data-lg-height="24" data-lg-thickness="58" data-lg-ratio="1" data-lg-spec-opacity="0.4" data-lg-spec-sat="6" aria-haspopup="true" aria-expanded="false"
                                     aria-controls="resume-menu">
                                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -1076,6 +1143,12 @@
                 class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-[#FF4D00]/5 to-transparent pointer-events-none">
             </div>
         </footer>
+
+            <!-- Same animated backdrop behind the footer, rising out of the contact gradient -->
+            <div class="us-backdrop us-backdrop--foot" aria-hidden="true">
+                <div class="us-backdrop__scene" data-us-project="ILgOO23w4wEyPQOKyLO4"></div>
+            </div>
+        </div>
     </main>
 
     <!-- STORY PANEL -->
@@ -1569,6 +1642,277 @@
 
     <!-- SCRIPTS -->
     <script>
+        // LIQUID GLASS — Tier 2 (Chromium): faithful port of the kube.io implementation
+        // (kube.io/blog/liquid-glass-css-svg), reconstructed from its shipped bundle:
+        //   • 1D refraction LUT: vector Snell (IOR 1.5) over a convex-squircle bezel,
+        //     ray height = h·bezelHeight + thickness (the thickness term is what gives
+        //     the strong lens look), 128 samples.
+        //   • Rounded-rect map: neutral RGB(128,128,0) interior, bezel band displaces
+        //     INWARD, 1px anti-aliased edge, baked at devicePixelRatio (≤2).
+        //   • Filter graph: blur source → displace → saturate masked to a specular rim
+        //     (its own baked map, light at 60°) → blend rim highlight on top.
+        //   • backdrop-filter: url(#…) standalone. Tier 1 CSS covers everything else.
+        (function () {
+            var tier2 = false;
+            try {
+                tier2 = CSS.supports('backdrop-filter', 'url(#lg)') ||
+                    CSS.supports('-webkit-backdrop-filter', 'url(#lg)');
+            } catch (e) { /* older engines: stay tier 1 */ }
+            document.documentElement.classList.add(tier2 ? 'lg-tier2' : 'lg-tier1');
+            if (!tier2) return;
+
+            var SVG_NS = 'http://www.w3.org/2000/svg';
+            var host = document.createElementNS(SVG_NS, 'svg');
+            host.setAttribute('color-interpolation-filters', 'sRGB');
+            host.setAttribute('aria-hidden', 'true');
+            host.style.cssText = 'position:fixed;width:0;height:0;overflow:hidden;pointer-events:none;';
+            document.body.appendChild(host);
+
+            var IOR = 1.5, ETA = 1 / IOR, SAMPLES = 128, LIGHT = Math.PI / 3;
+
+            function squircle(x) { return Math.pow(1 - Math.pow(1 - x, 4), 0.25); }
+
+            /* kube.io buildLUT: refracted-ray horizontal offset per bezel position */
+            function buildLUT(thickness, bezelHeight) {
+                var lut = new Float64Array(SAMPLES), maxAbs = 0, s = 1e-4;
+                for (var i = 0; i < SAMPLES; i++) {
+                    var d = i / SAMPLES;
+                    var hgt = squircle(d);
+                    var slope = (d + s <= 1 ? squircle(d + s) - hgt : hgt - squircle(d - s)) / s;
+                    var nl = Math.sqrt(slope * slope + 1);
+                    var nx = -slope / nl, ny = -1 / nl;
+                    var k = 1 - ETA * ETA * (1 - ny * ny);
+                    var v = 0;
+                    if (k >= 0) {
+                        var q = ETA * ny + Math.sqrt(k);
+                        var tx = -q * nx, ty = ETA - q * ny;
+                        v = tx * (hgt * bezelHeight + thickness) / ty;
+                    }
+                    lut[i] = v;
+                    var a = Math.abs(v);
+                    if (a > maxAbs) maxAbs = a;
+                }
+                return { lut: lut, max: maxAbs || 1 };
+            }
+
+            /* signed distance to the rounded-rect edge (negative inside); equals the
+               kube skeleton sweep wherever radius ≥ bezel, and also handles radius 0 */
+            function sdfInfo(px, py, w, h, rad) {
+                var rx = px - w / 2, ry = py - h / 2;
+                var ox = Math.abs(rx) - (w / 2 - rad), oy = Math.abs(ry) - (h / 2 - rad);
+                var ax = Math.max(ox, 0), ay = Math.max(oy, 0);
+                var outer = Math.sqrt(ax * ax + ay * ay);
+                var dist = Math.min(Math.max(ox, oy), 0) + outer - rad;
+                var gx, gy;
+                if (outer > 0) {
+                    gx = (rx >= 0 ? 1 : -1) * (ax / outer);
+                    gy = (ry >= 0 ? 1 : -1) * (ay / outer);
+                } else if (ox > oy) {
+                    gx = rx >= 0 ? 1 : -1; gy = 0;
+                } else {
+                    gx = 0; gy = ry >= 0 ? 1 : -1;
+                }
+                return { d: dist, gx: gx, gy: gy };
+            }
+
+            function makeCanvas(w, h) {
+                var c = document.createElement('canvas');
+                c.width = w;
+                c.height = h;
+                return c;
+            }
+
+            /* displacement map — neutral interior, inward-pointing bezel band */
+            function dispMap(w, h, rad, bezel, L, dpr) {
+                var W = Math.round(w * dpr), H = Math.round(h * dpr);
+                var cv = makeCanvas(W, H), ctx = cv.getContext('2d');
+                var img = ctx.createImageData(W, H), data = img.data;
+                var bD = bezel * dpr;
+                for (var py = 0; py < H; py++) {
+                    for (var px = 0; px < W; px++) {
+                        var i4 = (py * W + px) * 4;
+                        var r = 128, g = 128;
+                        var s = sdfInfo(px + 0.5, py + 0.5, W, H, rad * dpr);
+                        var depth = -s.d; /* px from the outer edge, device units */
+                        if (depth > -dpr && depth < bD) {
+                            var aa = depth < 0 ? 1 + depth / dpr : 1; /* 1px AA outside edge */
+                            var idx = depth <= 0 ? 0 :
+                                Math.min(SAMPLES - 1, Math.floor(depth / bD * SAMPLES));
+                            var mag = (L.lut[idx] / L.max) * aa;
+                            r = 128 - Math.round(s.gx * mag * 127); /* INWARD */
+                            g = 128 - Math.round(s.gy * mag * 127);
+                        }
+                        data[i4] = r;
+                        data[i4 + 1] = g;
+                        data[i4 + 2] = 0;
+                        data[i4 + 3] = 255;
+                    }
+                }
+                ctx.putImageData(img, 0, 0);
+                return cv.toDataURL();
+            }
+
+            /* specular rim map — ~2 CSS px semicircular bump at the edge, lit from 60° */
+            function specMap(w, h, rad, dpr) {
+                var W = Math.round(w * dpr), H = Math.round(h * dpr);
+                var cv = makeCanvas(W, H), ctx = cv.getContext('2d');
+                var img = ctx.createImageData(W, H), data = img.data;
+                var lx = Math.cos(LIGHT), ly = Math.sin(LIGHT);
+                for (var py = 0; py < H; py++) {
+                    for (var px = 0; px < W; px++) {
+                        var i4 = (py * W + px) * 4;
+                        var s = sdfInfo(px + 0.5, py + 0.5, W, H, rad * dpr);
+                        var depth = -s.d / dpr; /* CSS px from the edge */
+                        if (depth > -1 && depth < 2) {
+                            var aa = depth < 0 ? 1 + depth : 1;
+                            var t = Math.max(0, Math.min(depth, 2));
+                            var bump = Math.sqrt(Math.max(0, 1 - (1 - t) * (1 - t)));
+                            var n = Math.abs(s.gx * lx + (-s.gy) * ly) * bump;
+                            var c = Math.round(255 * n);
+                            data[i4] = c;
+                            data[i4 + 1] = c;
+                            data[i4 + 2] = c;
+                            data[i4 + 3] = Math.round(255 * n * n * aa);
+                        }
+                    }
+                }
+                ctx.putImageData(img, 0, 0);
+                return cv.toDataURL();
+            }
+
+            function feImage(href, w, h, result) {
+                var n = document.createElementNS(SVG_NS, 'feImage');
+                n.setAttribute('href', href);
+                n.setAttribute('x', '0');
+                n.setAttribute('y', '0');
+                n.setAttribute('width', w);
+                n.setAttribute('height', h);
+                n.setAttribute('result', result);
+                return n;
+            }
+
+            function buildFor(el, id) {
+                var rect = el.getBoundingClientRect();
+                var w = Math.round(rect.width), h = Math.round(rect.height);
+                if (!w || !h || w * h > 900000) return; /* hidden or huge: keep tier 1 */
+
+                var ds = el.dataset;
+                var cs = getComputedStyle(el);
+                var rad = Math.min(parseFloat(cs.borderTopLeftRadius) || 0, w / 2, h / 2);
+                var bezel = Math.min(parseFloat(ds.lgBezel) || Math.min(21, Math.min(w, h) / 2),
+                    Math.min(w, h) / 2);
+                var bezelHeight = parseFloat(ds.lgHeight) || bezel * 1.29;
+                var thickness = parseFloat(ds.lgThickness) || bezel * 3.33;
+                var ratio = parseFloat(ds.lgRatio) || 0.85;
+                var blur = ds.lgBlur !== undefined ? parseFloat(ds.lgBlur) : 0.2;
+                var specOpacity = parseFloat(ds.lgSpecOpacity) || 0.4;
+                var specSat = parseFloat(ds.lgSpecSat) || 4;
+                var dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+                var L = buildLUT(thickness, bezelHeight);
+                var scale = L.max * ratio;
+
+                var fid = 'lgf-' + id;
+                var old = document.getElementById(fid);
+                if (old) old.remove();
+                var filter = document.createElementNS(SVG_NS, 'filter');
+                filter.setAttribute('id', fid);
+                filter.setAttribute('color-interpolation-filters', 'sRGB');
+
+                /* kube.io production graph, node for node */
+                var blurNode = document.createElementNS(SVG_NS, 'feGaussianBlur');
+                blurNode.setAttribute('in', 'SourceGraphic');
+                blurNode.setAttribute('stdDeviation', blur);
+                blurNode.setAttribute('result', 'blurred_source');
+                filter.appendChild(blurNode);
+
+                filter.appendChild(feImage(dispMap(w, h, rad, bezel, L, dpr), w, h, 'displacement_map'));
+
+                var disp = document.createElementNS(SVG_NS, 'feDisplacementMap');
+                disp.setAttribute('in', 'blurred_source');
+                disp.setAttribute('in2', 'displacement_map');
+                disp.setAttribute('scale', scale);
+                disp.setAttribute('xChannelSelector', 'R');
+                disp.setAttribute('yChannelSelector', 'G');
+                disp.setAttribute('result', 'displaced');
+                filter.appendChild(disp);
+
+                var sat = document.createElementNS(SVG_NS, 'feColorMatrix');
+                sat.setAttribute('in', 'displaced');
+                sat.setAttribute('type', 'saturate');
+                sat.setAttribute('values', specSat);
+                sat.setAttribute('result', 'displaced_saturated');
+                filter.appendChild(sat);
+
+                filter.appendChild(feImage(specMap(w, h, rad, dpr), w, h, 'specular_layer'));
+
+                var comp = document.createElementNS(SVG_NS, 'feComposite');
+                comp.setAttribute('in', 'displaced_saturated');
+                comp.setAttribute('in2', 'specular_layer');
+                comp.setAttribute('operator', 'in');
+                comp.setAttribute('result', 'specular_saturated');
+                filter.appendChild(comp);
+
+                var fade = document.createElementNS(SVG_NS, 'feComponentTransfer');
+                fade.setAttribute('in', 'specular_layer');
+                fade.setAttribute('result', 'specular_faded');
+                var funcA = document.createElementNS(SVG_NS, 'feFuncA');
+                funcA.setAttribute('type', 'linear');
+                funcA.setAttribute('slope', specOpacity);
+                fade.appendChild(funcA);
+                filter.appendChild(fade);
+
+                var blend1 = document.createElementNS(SVG_NS, 'feBlend');
+                blend1.setAttribute('in', 'specular_saturated');
+                blend1.setAttribute('in2', 'displaced');
+                blend1.setAttribute('mode', 'normal');
+                blend1.setAttribute('result', 'withSaturation');
+                filter.appendChild(blend1);
+
+                var blend2 = document.createElementNS(SVG_NS, 'feBlend');
+                blend2.setAttribute('in', 'specular_faded');
+                blend2.setAttribute('in2', 'withSaturation');
+                blend2.setAttribute('mode', 'normal');
+                filter.appendChild(blend2);
+
+                host.appendChild(filter);
+
+                var bf = 'url(#' + fid + ')';
+                el.style.backdropFilter = bf;
+                el.style.webkitBackdropFilter = bf;
+            }
+
+            var glassEls = Array.prototype.slice.call(document.querySelectorAll('.liquid-glass'));
+            glassEls.forEach(function (el, i) {
+                buildFor(el, i);
+                if ('ResizeObserver' in window) {
+                    var timer = null;
+                    new ResizeObserver(function () {
+                        clearTimeout(timer);
+                        timer = setTimeout(function () { buildFor(el, i); }, 180);
+                    }).observe(el);
+                }
+            });
+        })();
+    </script>
+    <script>
+        // UNICORN STUDIO HERO BACKDROP — loads the animated canvas for the hero
+        // section only; skipped entirely under reduced motion (static gradient remains)
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            !function () {
+                if (!window.UnicornStudio) {
+                    window.UnicornStudio = { isInitialized: !1 };
+                    var i = document.createElement("script");
+                    i.src = "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js";
+                    i.onload = function () {
+                        window.UnicornStudio.isInitialized || (UnicornStudio.init(), window.UnicornStudio.isInitialized = !0);
+                    };
+                    (document.head || document.body).appendChild(i);
+                }
+            }();
+        }
+    </script>
+    <script>
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         // 0. SIDEBAR FACTS (three copies for the seamless loop)
@@ -1596,11 +1940,13 @@
         // split a paragraph into word spans and reveal them in a cascade
         function revealWords(el, startDelay = 0) {
             const words = el.textContent.trim().split(/\s+/);
+            const strongN = el.dataset.strong ? el.dataset.strong.trim().split(/\s+/).length : 0;
             el.textContent = '';
             words.forEach((w, i) => {
                 const s = document.createElement('span');
                 s.textContent = w;
                 s.className = 'word-span opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform';
+                if (i >= words.length - strongN) s.classList.add('text-white');
                 el.appendChild(s);
                 if (i < words.length - 1) el.appendChild(document.createTextNode(' '));
                 void s.offsetWidth;
@@ -1630,6 +1976,8 @@
             .to('#hero-title-1, #hero-title-2', {
                 y: 0, opacity: 1, duration: 1, stagger: 0.1, ease: "power2.out",
                 onStart: () => {
+                    const badge = document.getElementById('hero-badge');
+                    if (badge) badge.classList.remove('opacity-0', 'translate-y-4');
                     document.querySelectorAll('#hero-title-1 .word-span, #hero-title-2 .word-span').forEach((span, index) => {
                         setTimeout(() => span.classList.remove('opacity-0', 'translate-y-4'), index * 50);
                     });
@@ -1689,6 +2037,15 @@
                 });
             });
         }
+        const footBackdrop = document.querySelector('.us-backdrop--foot');
+        function sizeFootBackdrop() {
+            if (!footBackdrop) return;
+            const f = document.querySelector('footer');
+            footBackdrop.style.setProperty('--foot-h', (f.offsetHeight + contactZone.offsetHeight * 0.55) + 'px');
+        }
+        sizeFootBackdrop();
+        window.addEventListener('resize', sizeFootBackdrop);
+        window.addEventListener('load', sizeFootBackdrop);
         window.addEventListener('resize', inkContact);
         window.addEventListener('load', inkContact);
         new MutationObserver(() => requestAnimationFrame(inkContact)).observe(contactZone, { childList: true, subtree: true });
