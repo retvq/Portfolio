@@ -18,6 +18,7 @@
 
     <!-- Fonts (same families as the main site) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yellowtail&amp;display=swap">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;family=Geist:wght@300;400;500;600;700&amp;family=Manrope:wght@300;400;500;600;700;800&amp;family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap">
@@ -592,6 +593,11 @@
             .story__sheet, .story__scrim, .wcard, .wcard__more svg { transition: none; }
             html { scroll-behavior: auto; }
         }
+        /* Hero headline: Yellowtail brush script, slant eased back with a counter-skew */
+        #hero-title-1, #hero-title-2 { font-family: 'Yellowtail', cursive !important; font-weight: 400 !important; letter-spacing: 0 !important; line-height: 1.15 !important; transform-origin: 50% 100%; }
+        #hero-title-1 { transform: skewX(10deg); }
+        #hero-title-2 { transform: skewX(10deg); margin-top: -.2rem; }
+        @media (min-width: 768px) { #hero-title-1, #hero-title-2 { font-size: 4.4rem !important; } }
     </style>
 </head>
 
