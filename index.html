@@ -102,6 +102,7 @@
             border-right: 1px solid rgba(255, 255, 255, 0.08);
         }
 
+        #navbar a, #navbar div { transition: color .35s ease, border-color .35s ease; }
         .nav-dark .text-white { color: #18181b !important; }
         .nav-dark .text-white\/70 { color: #52525b !important; }
 
@@ -570,8 +571,8 @@
         .resume-dd__item:hover, .resume-dd__item:focus-visible { background: #f4f4f5; outline: none; }
         .resume-dd__item b { display: block; font-family: 'Geist', sans-serif; font-weight: 500; font-size: .95rem; }
         .resume-dd__item small { display: block; font-family: 'Geist', sans-serif; font-weight: 300; font-size: .8rem; color: #71717a; margin-top: .1rem; }
-        .resume-dd__item .ico { flex-shrink: 0; width: 2.25rem; height: 2.25rem; border-radius: .7rem; display: grid; place-items: center; background: #f4f4f5; color: #FF4D00; transition: background-color .2s ease; }
-        .resume-dd__item:hover .ico { background: #fff; }
+        .resume-dd__item .ico { transition: background-color .2s ease, color .2s ease; flex-shrink: 0; width: 2.25rem; height: 2.25rem; border-radius: .7rem; display: grid; place-items: center; background: #eef2f7; color: #1e293b; transition: background-color .2s ease; }
+        .resume-dd__item:hover .ico { background: #1e293b; color: #fff; }
         @media (prefers-reduced-motion: reduce) { .resume-dd__menu { transition: none; } }
 
         /* ---------- HOW I WORK ---------- */
@@ -1633,6 +1634,7 @@
         const heroLayer = document.getElementById('hero-layer');
         const warmLayer = document.getElementById('warm-layer');
         const coldReturnLayer = document.getElementById('cold-return-layer');
+        const contactFade = document.querySelector('.contact-fade');
         const navbar = document.getElementById('navbar');
         const footerEl = document.querySelector('footer');
 
@@ -1654,7 +1656,26 @@
             
             coldReturnLayer.style.opacity = Math.min(1, coldOpacity);
 
-            navbar.classList.toggle('nav-dark', scrollVh > 0.8 && footerEl.getBoundingClientRect().top > 80);
+            // Header follows the background: white over the light sections, easing back to navy over the footer fade
+            const fr = contactFade.getBoundingClientRect();
+            const navLine = 80;
+            // Progress from the moment the fade comes into view until the bottom of the page,
+            // or until the fade has passed under the header, whichever comes first
+            const fadeDocTop = scrollY + fr.top;
+            const start = fadeDocTop - windowHeight * 0.6;
+            const end = Math.min(docHeight - windowHeight, fadeDocTop + fr.height - navLine);
+            let t = end > start ? (scrollY - start) / (end - start) : 0;
+            t = Math.min(1, Math.max(0, t));
+            const lightZone = scrollVh > 0.8;
+            if (lightZone && t > 0) {
+                const e = t * t * (3 - 2 * t);
+                const mix = (a, b) => Math.round(a + (b - a) * e);
+                navbar.style.setProperty('background-color', `rgba(${mix(255, 15)}, ${mix(255, 23)}, ${mix(255, 42)}, ${(0.8 + 0.16 * e).toFixed(3)})`, 'important');
+                navbar.classList.toggle('nav-dark', t < 0.45);
+            } else {
+                navbar.style.removeProperty('background-color');
+                navbar.classList.toggle('nav-dark', lightZone);
+            }
         }
         window.addEventListener('scroll', onScroll, { passive: true });
 
