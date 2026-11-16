@@ -1759,7 +1759,6 @@
         document.querySelectorAll('.typewriter-target').forEach(el => typewriterObserver.observe(el));
 
         // 4. ANIMATED COVERS: play only while on screen, loop gently, hold a still frame otherwise
-        const LOOP_MS = 9500;
         const coverTimers = new WeakMap();
 
         function mountCover(host, name) {
@@ -1768,24 +1767,55 @@
             host.appendChild(tpl.content.cloneNode(true));
         }
 
+        // Covers play once, hold the finished drawing, then rewind quickly (eased) to the point where
+        // the first element has just appeared, and play forward again from there. Never back to blank.
+        const HOLD_MS = 2600, REWIND_MS = 750, PAUSE_MS = 180;
+        const easeInOut = x => x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+
+        function coverAnims(host) {
+            return host.getAnimations({ subtree: true }).filter(a => isFinite(a.effect.getComputedTiming().endTime));
+        }
+
         function playCover(host) {
             if (reduceMotion || coverTimers.has(host)) return;
-            const restart = () => {
-                host.classList.remove('is-playing');
-                void host.offsetWidth;
-                host.classList.add('is-playing');
-                host.classList.remove('is-resetting');
+            const state = { timer: 0, raf: 0 };
+            coverTimers.set(host, state);
+
+            host.classList.remove('is-playing');
+            void host.offsetWidth;
+            host.classList.add('is-playing');
+
+            const anims = coverAnims(host);
+            if (!anims.length) return;
+            const ends = anims.map(a => a.effect.getComputedTiming().endTime);
+            const tEnd = Math.max(...ends);
+            // Rewind target: a clean frame where the opening element(s) are fully drawn
+            // (the last finish time within the first 30% of the sequence, or the first element's finish)
+            const early = ends.filter(e => e <= tEnd * 0.3);
+            const tFirst = early.length ? Math.max(...early) : Math.min(...ends);
+
+            const rewind = () => {
+                anims.forEach(a => a.pause());
+                const t0 = performance.now();
+                const step = now => {
+                    const k = Math.min(1, (now - t0) / REWIND_MS);
+                    const t = tEnd - (tEnd - tFirst) * easeInOut(k);
+                    anims.forEach(a => { a.currentTime = t; });
+                    if (k < 1) state.raf = requestAnimationFrame(step);
+                    else state.timer = setTimeout(forward, PAUSE_MS);
+                };
+                state.raf = requestAnimationFrame(step);
             };
-            restart();
-            const id = setInterval(() => {
-                host.classList.add('is-resetting');
-                setTimeout(restart, 480);
-            }, LOOP_MS);
-            coverTimers.set(host, id);
+            const forward = () => {
+                anims.forEach(a => { a.currentTime = tFirst; a.play(); });
+                state.timer = setTimeout(rewind, (tEnd - tFirst) + HOLD_MS);
+            };
+            state.timer = setTimeout(rewind, tEnd + HOLD_MS);
         }
 
         function stopCover(host) {
-            clearInterval(coverTimers.get(host));
+            const state = coverTimers.get(host);
+            if (state) { clearTimeout(state.timer); cancelAnimationFrame(state.raf); }
             coverTimers.delete(host);
             host.classList.remove('is-playing', 'is-resetting');
         }
