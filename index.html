@@ -2048,6 +2048,7 @@
         window.addEventListener('load', sizeFootBackdrop);
         window.addEventListener('resize', inkContact);
         window.addEventListener('load', inkContact);
+        if (document.fonts) document.fonts.ready.then(inkContact);
         new MutationObserver(() => requestAnimationFrame(inkContact)).observe(contactZone, { childList: true, subtree: true });
         inkContact();
         const statusLine = document.getElementById('status-line');
@@ -2117,6 +2118,10 @@
                 if (entry.isIntersecting && entry.target.dataset.animationStarted !== 'true') {
                     entry.target.dataset.animationStarted = 'true';
                     revealWords(entry.target);
+                    // contact heading: re-ink once its word spans exist and have settled
+                    if (entry.target.hasAttribute('data-ink') && typeof inkContact === 'function') {
+                        requestAnimationFrame(inkContact); setTimeout(inkContact, 900);
+                    }
                 }
             });
         }, { threshold: 0.1 });
