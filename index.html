@@ -598,6 +598,9 @@
         #hero-title-1 { transform: skewX(10deg); }
         #hero-title-2 { transform: skewX(10deg); margin-top: -.2rem; }
         @media (min-width: 768px) { #hero-title-1, #hero-title-2 { font-size: 4.4rem !important; } }
+        /* Hide scrollbars everywhere; scrolling still works */
+        html, body, * { scrollbar-width: none; -ms-overflow-style: none; }
+        html::-webkit-scrollbar, body::-webkit-scrollbar, *::-webkit-scrollbar { display: none; width: 0; height: 0; }
     </style>
 </head>
 
