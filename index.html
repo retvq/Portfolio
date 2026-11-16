@@ -632,8 +632,8 @@
         /* ---------- CONTACT TO FOOTER ---------- */
         /* Contact: the light-to-navy fade runs above the text, so the words sit on navy with the
            animated streaks showing behind them and down into the footer */
-        .contact-zone { --rise: 460px; background: linear-gradient(180deg, #f4f4f5 0.0%, #f4f4f5 2.5%, #f4f4f5 5.0%, #f3f3f4 7.5%, #f2f2f3 10.0%, #f0f0f2 12.5%, #eeeef0 15.0%, #ebebed 17.5%, #e7e7e9 20.0%, #e2e3e5 22.5%, #dcdde0 25.0%, #d6d7da 27.5%, #cfd0d4 30.0%, #c7c8cd 32.5%, #bec0c5 35.0%, #b5b7bd 37.5%, #abaeb5 40.0%, #a1a4ac 42.5%, #979aa2 45.0%, #8c9099 47.5%, #828690 50.0%, #777b86 52.5%, #6c717d 55.0%, #626773 57.5%, #585d6a 60.0%, #4e5462 62.5%, #454b5a 65.0%, #3c4352 67.5%, #343b4b 70.0%, #2d3445 72.5%, #272e3f 75.0%, #21283a 77.5%, #1c2436 80.0%, #182032 82.5%, #151d2f 85.0%, #131b2d 87.5%, #11192c 90.0%, #10182b 92.5%, #0f172a 95.0%, #0f172a 97.5%, #0f172a 100.0%) top / 100% var(--rise) no-repeat, #0f172a; }
-        @media (min-width: 768px) { .contact-zone { --rise: 620px; } }
+        .contact-zone { --rise: 240px; background: linear-gradient(180deg, #f4f4f5 0.0%, #f1f1f2 2.5%, #ededef 5.0%, #e9eaeb 7.5%, #e5e5e8 10.0%, #e0e1e4 12.5%, #dbdcdf 15.0%, #d6d7db 17.5%, #d1d2d6 20.0%, #cbcdd1 22.5%, #c5c7cc 25.0%, #bfc1c6 27.5%, #b9bbc1 30.0%, #b2b5bb 32.5%, #acaeb5 35.0%, #a5a8af 37.5%, #9ea1a9 40.0%, #979aa3 42.5%, #90939c 45.0%, #898c96 47.5%, #828690 50.0%, #7a7f89 52.5%, #737883 55.0%, #6c717c 57.5%, #656a76 60.0%, #5e6370 62.5%, #575d6a 65.0%, #515664 67.5%, #4a505e 70.0%, #444a59 72.5%, #3e4453 75.0%, #383e4e 77.5%, #323949 80.0%, #2d3444 82.5%, #282f40 85.0%, #232a3b 87.5%, #1e2637 90.0%, #1a2134 92.5%, #161e30 95.0%, #121a2d 97.5%, #0f172a 100.0%) top / 100% var(--rise) no-repeat, #0f172a; }
+        @media (min-width: 768px) { .contact-zone { --rise: 310px; } }
         .site-footer { background: #0f172a; }
 
         .resume-dd { position: relative; }
@@ -1057,7 +1057,7 @@
         <!-- CONTACT -->
         <div class="endzone relative z-10" style="isolation:isolate">
         <section id="contact" class="contact-zone relative">
-            <div class="pb-24 md:pb-28" style="padding-top: calc(var(--rise) * .62)">
+            <div class="pb-24 md:pb-28" style="padding-top: calc(var(--rise) * .8)">
             <div class="max-w-7xl mx-auto px-6 relative z-10">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-24 items-center md:px-12">
                     <div class="z-20 relative">
@@ -2034,7 +2034,7 @@
         const smooth = x => { x = Math.min(1, Math.max(0, x)); return x * x * (3 - 2 * x); };
         // Background colour of the contact gradient at a fraction p of its height (same curve as the CSS)
         const risePx = () => parseFloat(getComputedStyle(contactZone).getPropertyValue('--rise')) || 260;
-        const smoother = x => { x = Math.min(1, Math.max(0, x)); return x * x * x * (x * (6 * x - 15) + 10); };
+        const smoother = x => { x = Math.min(1, Math.max(0, x)); return 0.55 * x + 0.45 * (0.5 - 0.5 * Math.cos(Math.PI * x)); };
         const zoneColor = p => { const e = smoother(p * (contactZone.offsetHeight || 1) / risePx()); return LIGHT.map((a, i) => Math.round(a + (NAVY[i] - a) * e)); };
         const lum = ([r, g, b]) => { const f = v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }; return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b); };
         // Text colour that reads on that background: dark on the light part, light on the navy part
