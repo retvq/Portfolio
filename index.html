@@ -560,12 +560,11 @@
         .site-footer { background: #0f172a; }
 
         .resume-dd { position: relative; }
-        .resume-dd__btn { display: inline-flex; align-items: center; justify-content: center; gap: .75rem; width: 100%; border: 1px solid #18181b; color: #18181b; background: transparent; padding: 1.25rem 2.25rem; font-family: 'Geist', sans-serif; font-size: .875rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; transition: background-color .3s ease, color .3s ease; }
-        .resume-dd__btn svg { transition: transform .35s cubic-bezier(.22, 1, .36, 1); }
-        .resume-dd:hover .resume-dd__btn, .resume-dd.is-open .resume-dd__btn, .resume-dd__btn:focus-visible { background: #18181b; color: #fff; }
-        .resume-dd:hover .resume-dd__btn .chev, .resume-dd.is-open .resume-dd__btn .chev { transform: rotate(180deg); }
-        .resume-dd__menu { position: absolute; left: 0; right: 0; top: 100%; padding-top: .6rem; z-index: 30; opacity: 0; visibility: hidden; transform: translateY(-6px) scale(.98); transform-origin: top center; transition: opacity .28s ease, transform .4s cubic-bezier(.22, 1, .36, 1), visibility 0s linear .4s; }
-        .resume-dd:hover .resume-dd__menu, .resume-dd:focus-within .resume-dd__menu, .resume-dd.is-open .resume-dd__menu { opacity: 1; visibility: visible; transform: none; transition: opacity .28s ease, transform .4s cubic-bezier(.22, 1, .36, 1), visibility 0s; }
+        .resume-dd__btn { display: inline-flex; align-items: center; gap: .5rem; background: none; border: 0; border-bottom: 1px solid #d4d4d8; padding: 0 0 .25rem; color: #71717a; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .875rem; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; transition: color .25s ease, border-color .25s ease; }
+        .resume-dd.is-open .resume-dd__btn, .resume-dd__btn:focus-visible { color: #18181b; border-color: #18181b; }
+        @media (hover: hover) { .resume-dd:hover .resume-dd__btn { color: #18181b; border-color: #18181b; } .resume-dd:hover .resume-dd__menu { opacity: 1; visibility: visible; transform: none; transition: opacity .28s ease, transform .4s cubic-bezier(.22, 1, .36, 1), visibility 0s; } }
+        .resume-dd__menu { position: absolute; left: 0; top: 100%; padding-top: .75rem; z-index: 30; opacity: 0; visibility: hidden; transform: translateY(-6px) scale(.98); transform-origin: top center; transition: opacity .28s ease, transform .4s cubic-bezier(.22, 1, .36, 1), visibility 0s linear .4s; }
+        .resume-dd:has(:focus-visible) .resume-dd__menu, .resume-dd.is-open .resume-dd__menu { opacity: 1; visibility: visible; transform: none; transition: opacity .28s ease, transform .4s cubic-bezier(.22, 1, .36, 1), visibility 0s; }
         .resume-dd__panel { background: #fff; border: 1px solid #e4e4e7; border-radius: 1.25rem; padding: .4rem; box-shadow: 0 24px 48px -20px rgba(15, 23, 42, .28); min-width: 17rem; }
         .resume-dd__item { display: flex; align-items: center; gap: .9rem; padding: .85rem 1rem; border-radius: .9rem; color: #18181b; transition: background-color .2s ease; }
         .resume-dd__item:hover, .resume-dd__item:focus-visible { background: #f4f4f5; outline: none; }
@@ -573,8 +572,7 @@
         .resume-dd__item small { display: block; font-family: 'Geist', sans-serif; font-weight: 300; font-size: .8rem; color: #71717a; margin-top: .1rem; }
         .resume-dd__item .ico { flex-shrink: 0; width: 2.25rem; height: 2.25rem; border-radius: .7rem; display: grid; place-items: center; background: #f4f4f5; color: #FF4D00; transition: background-color .2s ease; }
         .resume-dd__item:hover .ico { background: #fff; }
-        @media (min-width: 640px) { .resume-dd__btn { width: auto; } }
-        @media (prefers-reduced-motion: reduce) { .resume-dd__menu, .resume-dd__btn svg { transition: none; } }
+        @media (prefers-reduced-motion: reduce) { .resume-dd__menu { transition: none; } }
 
         /* ---------- HOW I WORK ---------- */
         .belief h3 { font-family: 'Geist', sans-serif; font-weight: 400; font-size: 1.5rem; line-height: 1.2; letter-spacing: -.035em; color: #18181b; }
@@ -967,7 +965,7 @@
                                 reply fast.</span>
                         </p>
 
-                        <div class="flex flex-col sm:flex-row items-stretch sm:items-start gap-4 w-full">
+                        <div class="flex flex-col items-start gap-6 w-full">
                             <a href="mailto:ritvik2403@gmail.com"
                                 class="group relative overflow-hidden bg-zinc-900 text-white px-10 py-5 text-sm font-semibold uppercase tracking-widest transition-all hover:pr-14 font-geist w-full sm:w-auto text-center shadow-xl shadow-zinc-900/10">
                                 <span class="relative z-10">Email me</span>
@@ -985,11 +983,13 @@
                             <div class="resume-dd" id="resume-dd">
                                 <button type="button" class="resume-dd__btn" aria-haspopup="true" aria-expanded="false"
                                     aria-controls="resume-menu">
-                                    Download resume
-                                    <svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                        <path d="m6 9 6 6 6-6" />
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                        <polyline points="7 10 12 15 17 10" />
+                                        <line x1="12" y1="15" x2="12" y2="3" />
                                     </svg>
+                                    Resume
                                 </button>
                                 <div class="resume-dd__menu" id="resume-menu">
                                     <div class="resume-dd__panel">
@@ -1666,6 +1666,7 @@
             const set = open => { dd.classList.toggle('is-open', open); btn.setAttribute('aria-expanded', open); };
             btn.addEventListener('click', () => set(!dd.classList.contains('is-open')));
             dd.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') set(false); });
+            window.addEventListener('scroll', () => { if (dd.classList.contains('is-open')) set(false); }, { passive: true });
             document.addEventListener('click', e => { if (!dd.contains(e.target)) set(false); });
             dd.addEventListener('keydown', e => { if (e.key === 'Escape') { set(false); btn.focus(); } });
         })();
