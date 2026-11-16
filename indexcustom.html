@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ritvik Vasundh — AI Engineer</title>
+    <link rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23020617'/%3E%3Ccircle cx='16' cy='16' r='7' fill='%23FF4D00'/%3E%3C/svg%3E">
+    <meta name="description"
+        content="Ritvik Vasundh — AI engineer in Bengaluru building production-grade LLM systems: multi-modal RAG pipelines, agentic architectures, and the evaluation harnesses that keep them reliable.">
+
+    <!-- Core Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Fonts: Growth Page Selection (Manrope, Plus Jakarta Sans, Geist) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link id="all-fonts-link-font-newsreader" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..800&amp;display=swap">
+    <link id="all-fonts-link-font-jakarta" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap">
+    <link id="all-fonts-link-font-geist" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap">
+    <link id="all-fonts-link-font-manrope" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap">
+    <link id="all-fonts-link-font-geist-mono" rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap">
+    <style id="all-fonts-style-font-jakarta">
+        .font-jakarta {
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+        }
+    </style>
+    <style id="all-fonts-style-font-geist">
+        .font-geist {
+            font-family: 'Geist', sans-serif !important;
+        }
+    </style>
+    <style id="all-fonts-style-font-manrope">
+        .font-manrope {
+            font-family: 'Manrope', sans-serif !important;
+        }
+    </style>
+
+    <style>
+        /* BASE SETTINGS - Growth Page Style */
+        body {
+            color: #1A1A1A;
+            font-family: 'Manrope', sans-serif;
+            /* Growth Body Font */
+            overflow-x: hidden;
+        }
+
+        .font-jakarta {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* Growth Headline Font */
+        .font-geist {
+            font-family: 'Geist', sans-serif;
+        }
+
+        .font-mono {
+            font-family: 'Geist Mono', monospace;
+        }
+
+        /* Assuming Geist Mono or fallback */
+
+        /* --- 1. ALBA LOADER STYLES --- */
+        .loader {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            will-change: transform;
+        }
+
+        /* --- 2. GROWTH PARALLAX BACKGROUND --- */
+        .parallax-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+            will-change: opacity;
+            transition: opacity 0.1s linear;
+        }
+
+        #hero-layer {
+            /* Growth's Dark Depth Gradient */
+            background: linear-gradient(180deg, #020617 0%, #1e293b 40%, #64748b 80%, #94a3b8 100%);
+            z-index: -20;
+            /* Deepest Layer */
+        }
+
+        #warm-layer {
+            /* Growth's Warm Reveal Gradient */
+            background: linear-gradient(0deg, rgba(255, 241, 225, 0.5) 0%, rgba(255, 255, 255, 0) 60%);
+            z-index: -10;
+        }
+
+        #cold-return-layer {
+            /* Return to Cold Gradient for Footer */
+            background: linear-gradient(0deg, #020617 0%, #1e293b 40%, #64748b 80%, transparent 100%);
+            z-index: -5;
+            /* Above warm layer, below noise */
+        }
+
+        /* --- 3. ALBA/VANTAGE NOISE OVERLAY --- */
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50;
+            /* Above content, below nav/loader */
+            opacity: 0.04;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            mix-blend-mode: overlay;
+        }
+
+        /* --- 4. VANTAGE MARQUEE ANIMATION --- */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            animation: marquee-vertical 30s linear infinite;
+            /* Slower for elegance */
+        }
+
+        /* Five identical, perfectly-periodic copies (each row carries its own mb-12,
+           so N rows = N equal units). Translating by exactly one copy = -20% lands the
+           reset frame pixel-identical to the start → seamless loop. Five copies keep
+           four below the fold at max scroll, so the sidebar never shows a bottom gap. */
+        @keyframes marquee-vertical {
+            0% {
+                transform: translateY(0);
+            }
+
+            100% {
+                transform: translateY(-20%);
+            }
+        }
+
+        /* --- 5. TYPEWRITER UTILS --- */
+        .word-span {
+            display: inline-block;
+            white-space: pre-wrap;
+            will-change: transform, opacity;
+        }
+
+        /* --- 6. GLASSMORPHIC UTILITY --- */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        /* --- 10. LIQUID GLASS ---
+           Tier 1 (below): blur + saturation + faux refraction rim — every browser, incl. iOS.
+           Tier 2: Chromium only — JS builds an SVG displacement map per element and swaps the
+           backdrop-filter inline for true refraction (after kube.io/blog/liquid-glass-css-svg). */
+        .liquid-glass {
+            position: relative;
+            backdrop-filter: blur(14px) saturate(160%);
+            -webkit-backdrop-filter: blur(14px) saturate(160%);
+        }
+
+        /* Tier 1 only: faux inner highlights + bent-light rim (no displacement available) */
+        html.lg-tier1 .liquid-glass {
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.28),
+                inset 0 -1px 1px rgba(255, 255, 255, 0.05),
+                inset 0 0 14px -8px rgba(255, 255, 255, 0.28),
+                0 10px 34px -14px rgba(0, 0, 0, 0.55);
+        }
+
+        html.lg-tier1 .liquid-glass::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            pointer-events: none;
+            box-shadow:
+                inset 1.5px 3px 5px -3px rgba(255, 255, 255, 0.55),
+                inset -2px -3px 5px -3px rgba(255, 255, 255, 0.22);
+            mix-blend-mode: screen;
+        }
+
+        /* Tier 2: the SVG filter does all the optics (blur, refraction, specular).
+           Element keeps only the kube.io drop shadow. */
+        html.lg-tier2 .liquid-glass {
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
+        }
+
+        /* Dissolves the sidebar's bottom and right edges into the hero backdrop */
+        .sidebar-fade {
+            -webkit-mask-image: linear-gradient(to bottom, black 0%, black 72%, transparent 98%),
+                linear-gradient(to right, black 0%, black 84%, transparent 100%);
+            -webkit-mask-composite: source-in;
+            mask-image: linear-gradient(to bottom, black 0%, black 72%, transparent 98%),
+                linear-gradient(to right, black 0%, black 84%, transparent 100%);
+            mask-composite: intersect;
+        }
+
+        /* Custom Scrollbar Hide */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* --- 7. NAV DARK MODE --- */
+        .nav-dark .text-white {
+            color: #18181b !important;
+        }
+
+        .nav-dark .text-white\/70 {
+            color: #52525b !important;
+        }
+
+        .nav-dark .text-white\/60 {
+            color: #71717a !important;
+        }
+
+        .nav-dark button,
+        .nav-dark .nav-cta {
+            color: #18181b !important;
+            border-color: rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .nav-dark button:hover,
+        .nav-dark .nav-cta:hover {
+            background-color: rgba(0, 0, 0, 0.05) !important;
+        }
+
+        .nav-dark .bg-white\/5 {
+            background-color: rgba(255, 255, 255, 0.8) !important;
+            backdrop-filter: blur(16px);
+        }
+
+        /* --- 8. REDUCED MOTION --- */
+        @media (prefers-reduced-motion: reduce) {
+            .marquee-content {
+                animation: none;
+            }
+
+            .word-span,
+            .loader-word {
+                transition: none !important;
+            }
+
+            html {
+                scroll-behavior: auto;
+            }
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-[#FF4D00] selection:text-white">
+
+    <!-- A. ALBA LOADING CURTAIN (Z-INDEX 9999) -->
+    <!-- Updated to match Hero "Cold" State: Deep Slate Background + Jakarta Fonts -->
+    <div
+        class="loader fixed inset-0 z-[100] bg-[linear-gradient(to_bottom,#dbeafe,#020617)] bg-[length:100%_200%] text-white flex flex-col items-center justify-center font-semibold tracking-[0.2em] text-2xl uppercase">
+        <div class="relative overflow-hidden mb-8">
+            <div
+                class="loader-text translate-y-full flex gap-4 items-center font-mono font-medium tracking-wider text-xl uppercase">
+                <div class="w-3 h-3 bg-[#FF4D00] rounded-full animate-pulse"></div>
+                <!-- Hero-matched spans with Premium Gradient -->
+                <span
+                    class="loader-word opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60">Ritvik</span>
+                <span
+                    class="loader-word opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform bg-clip-text text-transparent bg-gradient-to-b from-white to-white/60">Vasundh</span>
+            </div>
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-1 bg-[#1e293b]">
+            <div class="loader-bar h-full bg-[#FF4D00] w-0"></div> <!-- Vantage Accent -->
+        </div>
+        <div class="absolute bottom-8 right-8 text-xs tracking-widest text-[#FF4D00] font-mono">
+            <span class="loader-counter">00</span><span class="text-white/50">%</span>
+        </div>
+    </div>
+
+    <!-- B. BACKGROUND LAYERS (Z-INDEX -10/-20) -->
+    <!-- Base Layer: Ensures the light gray background is always behind the hero gradient -->
+    <div id="base-layer"
+        style="position: fixed; inset: 0; background-color: #f4f4f5; z-index: -100; pointer-events: none;"></div>
+    <div id="hero-layer" class="parallax-layer" style="opacity: 1;"></div>
+    <div id="warm-layer" class="parallax-layer" style="opacity: 0;"></div>
+    <div id="cold-return-layer" class="parallax-layer" style="opacity: 0;"></div>
+    <div class="noise-overlay"></div>
+
+    <!-- C. NAVIGATION (Z-INDEX 60) -->
+    <nav class="liquid-glass fixed top-0 w-full z-[60] border-b border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300"
+        id="navbar" data-lg-bezel="21" data-lg-height="27" data-lg-thickness="70" data-lg-ratio="0.7"
+        data-lg-blur="1" data-lg-spec-opacity="0.2" data-lg-spec-sat="4">
+        <div class="w-full flex justify-between items-center h-20 px-6 lg:px-12">
+            <div class="text-sm font-semibold tracking-tighter uppercase text-white flex items-center gap-2">
+                <div class="w-2 h-2 bg-[#FF4D00] rounded-full animate-pulse"></div>
+                Ritvik Vasundh
+            </div>
+            <div class="hidden md:flex space-x-12 text-xs font-mono uppercase tracking-widest text-white/70">
+                <a href="#work" class="hover:text-[#FF4D00] transition-colors">Work</a>
+                <a href="#experience" class="hover:text-[#FF4D00] transition-colors">Experience</a>
+                <a href="#contact" class="hover:text-[#FF4D00] transition-colors">Contact</a>
+            </div>
+            <a href="mailto:ritvik2403@gmail.com"
+                class="nav-cta liquid-glass inline-block rounded-full px-8 py-4 border border-white/20 text-white text-sm font-semibold uppercase tracking-widest hover:bg-white/10 transition-all duration-300"
+                data-lg-bezel="12" data-lg-height="24" data-lg-thickness="58" data-lg-ratio="1"
+                data-lg-spec-opacity="0.4" data-lg-spec-sat="6">
+                Connect
+            </a>
+        </div>
+    </nav>
+
+    <!-- D. MAIN LAYOUT (COMBINED VANTAGE GRID + GLASS SIDEBAR) -->
+    <main class="relative z-10 w-full overflow-hidden">
+
+        <!-- GRID CONTAINER -->
+        <section class="min-h-screen pt-20 grid grid-cols-1 lg:grid-cols-12 relative">
+
+            <!-- ANIMATED HERO BACKDROP (Unicorn Studio) — scoped to this section, masked out at the bottom
+                 so it hands off to the slate parallax gradient instead of following the scroll -->
+            <div class="absolute inset-0 z-0 pointer-events-none" aria-hidden="true"
+                style="mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 100%);">
+                <div data-us-project="ILgOO23w4wEyPQOKyLO4" class="absolute inset-0 opacity-70"
+                    style="filter: grayscale(1) brightness(0.85) contrast(1.05);"></div>
+                <!-- Cold tint pulls the canvas into the hero's deep-slate palette -->
+                <div class="absolute inset-0 bg-gradient-to-b from-[#020617]/70 via-[#020617]/20 to-transparent">
+                </div>
+            </div>
+
+            <!-- LEFT SIDEBAR: "The Engine" (Cols 3) -->
+            <!-- Modified Vantage Sidebar -> Glassmorphic (Growth Style) -->
+            <div class="hidden lg:block lg:col-span-3 relative h-screen sticky top-0">
+                <!-- Glass layer + marquee live in a masked layer so both edges dissolve;
+                     the System Pulse indicator sits outside it and stays fully visible -->
+                <div class="absolute inset-0 glass-panel sidebar-fade overflow-hidden">
+                <!-- Vertical Marquee — three identical periodic copies for a seamless loop -->
+                <div class="marquee-content absolute top-0 left-0 w-full pointer-events-none">
+                    <div
+                        class="flex flex-col text-[10px] font-mono text-white/40 w-full px-8 uppercase tracking-widest">
+                        <!-- Copy 1 -->
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">AVAILABILITY</span><span
+                                class="text-[#FF4D00] typewriter-target">IMMEDIATE</span></div>
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">TIMEZONE</span><span
+                                class="typewriter-target">GMT+5:30</span></div>
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">STACK</span><span
+                                class="typewriter-target">PY · SQL · REACT</span></div>
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">HACKATHONS</span><span
+                                class="typewriter-target">4× NATIONAL</span></div>
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">FOCUS</span><span
+                                class="typewriter-target">LLM SYSTEMS</span></div>
+
+                        <!-- Copy 2 -->
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">AVAILABILITY</span><span
+                                class="text-[#FF4D00] typewriter-target">IMMEDIATE</span></div>
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">TIMEZONE</span><span
+                                class="typewriter-target">GMT+5:30</span></div>
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">STACK</span><span
+                                class="typewriter-target">PY · SQL · REACT</span></div>
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">HACKATHONS</span><span
+                                class="typewriter-target">4× NATIONAL</span></div>
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">FOCUS</span><span
+                                class="typewriter-target">LLM SYSTEMS</span></div>
+
+                        <!-- Copy 3 -->
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">AVAILABILITY</span><span
+                                class="text-[#FF4D00] typewriter-target">IMMEDIATE</span></div>
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">TIMEZONE</span><span
+                                class="typewriter-target">GMT+5:30</span></div>
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">STACK</span><span
+                                class="typewriter-target">PY · SQL · REACT</span></div>
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">HACKATHONS</span><span
+                                class="typewriter-target">4× NATIONAL</span></div>
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">FOCUS</span><span
+                                class="typewriter-target">LLM SYSTEMS</span></div>
+
+                        <!-- Copy 4 -->
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">AVAILABILITY</span><span
+                                class="text-[#FF4D00] typewriter-target">IMMEDIATE</span></div>
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">TIMEZONE</span><span
+                                class="typewriter-target">GMT+5:30</span></div>
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">STACK</span><span
+                                class="typewriter-target">PY · SQL · REACT</span></div>
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">HACKATHONS</span><span
+                                class="typewriter-target">4× NATIONAL</span></div>
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">FOCUS</span><span
+                                class="typewriter-target">LLM SYSTEMS</span></div>
+
+                        <!-- Copy 5 -->
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">AVAILABILITY</span><span
+                                class="text-[#FF4D00] typewriter-target">IMMEDIATE</span></div>
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">TIMEZONE</span><span
+                                class="typewriter-target">GMT+5:30</span></div>
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">STACK</span><span
+                                class="typewriter-target">PY · SQL · REACT</span></div>
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">HACKATHONS</span><span
+                                class="typewriter-target">4× NATIONAL</span></div>
+                        <div class="border-b border-white/5 pb-2 mb-12 flex justify-between"><span
+                                class="typewriter-target">FOCUS</span><span
+                                class="typewriter-target">LLM SYSTEMS</span></div>
+                    </div>
+                </div>
+                </div>
+
+                <div
+                    class="absolute bottom-8 left-8 text-[10px] font-mono uppercase tracking-widest text-[#FF4D00] flex items-center gap-2">
+                    <div class="w-1.5 h-1.5 bg-[#FF4D00] rounded-full animate-pulse"></div>
+                    <span class="typewriter-target">System Pulse</span>
+                </div>
+            </div>
+
+            <!-- RIGHT CONTENT: "The Stage" (Cols 9) -->
+            <!-- Vantage Structure + Growth Typography Effects -->
+            <div class="col-span-1 lg:col-span-9 flex flex-col justify-center px-6 lg:px-24 py-32 relative">
+
+                <!-- Ambient Glow (Growth Style) behind text -->
+                <div
+                    class="absolute top-1/2 left-1/4 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/10 blur-[120px] rounded-full pointer-events-none mix-blend-screen">
+                </div>
+
+                <div class="max-w-7xl mx-auto px-6 text-center z-10 w-full">
+                    <div class="reveal-trigger flex flex-col items-center gap-y-4 mb-12">
+                        <!-- Status Badge (NeuraLink-style pill, re-tinted to the site accent) -->
+                        <div id="hero-badge"
+                            class="liquid-glass inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#FF4D00]/30 bg-[#FF4D00]/10 text-orange-200 text-[11px] font-mono uppercase tracking-widest mb-4 opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform"
+                            data-lg-bezel="10" data-lg-height="20" data-lg-thickness="45" data-lg-ratio="1">
+                            <span class="relative flex h-2 w-2">
+                                <span
+                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF4D00] opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-[#FF4D00]"></span>
+                            </span>
+                            Open to work · Immediate joiner
+                        </div>
+                        <!-- Growth Page Hero Typography & Animation Structure -->
+                        <h1 class="typewriter-target leading-[1.1] md:text-7xl lg:text-7xl text-4xl sm:text-5xl font-medium text-white tracking-tighter font-jakarta whitespace-nowrap"
+                            id="hero-title-1" data-animation-started="false">
+                            <span
+                                class="word-span opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform bg-clip-text text-transparent bg-[linear-gradient(135deg,#FFFFFF_0%,#94a3b8_100%)]">LLM</span>
+                            <span
+                                class="word-span opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform bg-clip-text text-transparent bg-[linear-gradient(135deg,#FFFFFF_0%,#94a3b8_100%)]">Systems.</span>
+                        </h1>
+
+                        <div class="typewriter-target leading-[1.1] md:text-7xl lg:text-7xl text-4xl sm:text-5xl font-medium text-white/40 tracking-tighter font-jakarta whitespace-nowrap"
+                            id="hero-title-2" data-animation-started="false">
+                            <span
+                                class="word-span opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform">Engineered</span>
+                            <span
+                                class="word-span opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform">to</span>
+                            <span
+                                class="word-span opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform">ship.</span>
+                        </div>
+                    </div>
+
+                    <div class="reveal-trigger delay-300 pl-1 border-l-2 border-[#FF4D00] inline-block text-left opacity-0 translate-y-4"
+                        id="hero-para-container">
+                        <p class="text-xl md:text-2xl font-light text-white/70 max-w-2xl ml-8 font-manrope leading-relaxed"
+                            id="hero-para">
+                            Multi-modal RAG pipelines and agentic architectures, holding 99.9% uptime at sub-second latency.
+                            <span class="text-white">Precision over hype.</span>
+                        </p>
+                    </div>
+
+                    <!-- CTA Buttons (NeuraLink pill pair, site palette) -->
+                    <div class="mt-16 flex flex-col sm:flex-row justify-center items-center gap-4 reveal-trigger delay-500"
+                        id="hero-btns">
+                        <a href="#work"
+                            class="group px-8 py-3.5 rounded-full font-semibold text-sm transition-all inline-flex items-center gap-2 bg-white text-zinc-900 hover:bg-slate-100 hover:scale-105 font-geist opacity-0 translate-y-4 duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform shadow-[0_0_20px_-5px_rgba(255,255,255,0.4)]">
+                            View selected work
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="w-4 h-4 group-hover:translate-x-0.5 transition-transform">
+                                <path d="M5 12h14"></path>
+                                <path d="m12 5 7 7-7 7"></path>
+                            </svg>
+                        </a>
+                        <a href="#transition"
+                            class="liquid-glass group px-8 py-3.5 rounded-full font-medium text-sm transition-all inline-flex items-center gap-2 bg-white/5 backdrop-blur-md border border-white/10 text-white hover:bg-white/10 hover:border-white/20 hover:scale-105 font-geist opacity-0 translate-y-4 duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform"
+                            data-lg-bezel="14" data-lg-height="25" data-lg-thickness="63" data-lg-ratio="1"
+                            data-lg-spec-sat="6">
+                            How I build
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Transition + Strategic Partner Section (Merged Hot Zone) -->
+        <section class="flex flex-col relative z-10" id="transition">
+            <!-- Extended Background Gradient (Transparent -> White -> Transparent for blending) -->
+            <div class="absolute inset-0 z-0 pointer-events-none"
+                style="background: linear-gradient(180deg, rgba(244,244,245,0) 0%, #f4f4f5 10%, #f4f4f5 80%, rgba(244,244,245,0) 100%);">
+            </div>
+
+            <!-- Transition Text (Spotlight) -->
+            <div class="min-h-screen flex items-center justify-center relative z-10">
+                <div class="max-w-5xl mx-auto px-6 text-center">
+                    <h2 class="typewriter-target leading-[1.4] md:text-5xl lg:text-6xl text-3xl font-light text-zinc-900 tracking-tighter font-geist"
+                        data-animation-started="false">I connect retrieval, agentic reasoning, evaluation and
+                        fault-tolerant infrastructure into one system that makes AI dependable.</h2>
+                </div>
+            </div>
+
+            <!-- About Content -->
+            <div class="z-10 relative pb-64">
+                <div class="max-w-7xl mx-auto px-6">
+                    <div class="grid lg:grid-cols-12 gap-12 items-center">
+                        <div class="lg:col-span-7 reveal-on-scroll">
+                            <!-- HEADLINE -->
+                            <h2
+                                class="text-4xl md:text-5xl lg:text-5xl leading-tight mb-8 font-light font-geist tracking-tighter text-zinc-900">
+                                <span class="block text-zinc-400 typewriter-target">Not just demos.</span>
+                                <span class="block text-zinc-900 typewriter-target">Systems that ship.</span>
+                            </h2>
+
+                            <div class="space-y-6 text-lg font-light leading-relaxed text-zinc-600">
+                                <p class="font-geist">
+                                    I'm Ritvik Vasundh, an AI engineer in Bengaluru building production-grade LLM
+                                    systems — multi-modal RAG pipelines, agentic architectures, and the evaluation
+                                    harnesses that keep them honest.
+                                </p>
+                                <p class="font-geist">
+                                    Currently an AI Developer Intern at Utilitarian Labs, automating BRD generation
+                                    end to end. 4× national hackathon winner, including Smart India Hackathon 2024.
+                                </p>
+                            </div>
+
+                            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mt-12 pt-8 border-t border-zinc-200">
+                                <!-- Semantic Retrieval -->
+                                <div class="reveal-on-scroll delay-100 flex items-center gap-3 group cursor-default">
+                                    <div
+                                        class="flex items-center justify-center w-8 h-8 rounded-lg bg-white border border-zinc-100 text-zinc-500 transition-colors group-hover:bg-zinc-100 group-hover:text-zinc-700">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                                            <circle cx="12" cy="12" r="10"></circle>
+                                            <line x1="22" x2="18" y1="12" y2="12"></line>
+                                            <line x1="6" x2="2" y1="12" y2="12"></line>
+                                            <line x1="12" x2="12" y1="6" y2="2"></line>
+                                            <line x1="12" x2="12" y1="22" y2="18"></line>
+                                        </svg>
+                                    </div>
+                                    <span
+                                        class="text-sm font-medium text-zinc-600 group-hover:text-zinc-900 transition-colors font-geist">
+                                        Semantic Retrieval
+                                    </span>
+                                </div>
+
+                                <!-- Prompt Engineering -->
+                                <div class="reveal-on-scroll delay-100 flex items-center gap-3 group cursor-default">
+                                    <div
+                                        class="flex items-center justify-center w-8 h-8 rounded-lg bg-white border border-zinc-100 text-zinc-500 transition-colors group-hover:bg-zinc-100 group-hover:text-zinc-700">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                                            <polyline points="4 17 10 11 4 5"></polyline>
+                                            <line x1="12" x2="20" y1="19" y2="19"></line>
+                                        </svg>
+                                    </div>
+                                    <span
+                                        class="text-sm font-medium text-zinc-600 group-hover:text-zinc-900 transition-colors font-geist">
+                                        Prompt Engineering
+                                    </span>
+                                </div>
+
+                                <!-- Multi-Modal RAG -->
+                                <div class="reveal-on-scroll delay-200 flex items-center gap-3 group cursor-default">
+                                    <div
+                                        class="flex items-center justify-center w-8 h-8 rounded-lg bg-white border border-zinc-100 text-zinc-500 transition-colors group-hover:bg-zinc-100 group-hover:text-zinc-700">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                                            <rect width="18" height="7" x="3" y="3" rx="1"></rect>
+                                            <rect width="9" height="7" x="3" y="14" rx="1"></rect>
+                                            <rect width="5" height="7" x="16" y="14" rx="1"></rect>
+                                        </svg>
+                                    </div>
+                                    <span
+                                        class="text-sm font-medium text-zinc-600 group-hover:text-zinc-900 transition-colors font-geist">
+                                        Multi-Modal RAG
+                                    </span>
+                                </div>
+
+                                <!-- Agentic Architectures -->
+                                <div class="reveal-on-scroll delay-200 flex items-center gap-3 group cursor-default">
+                                    <div
+                                        class="flex items-center justify-center w-8 h-8 rounded-lg bg-white border border-zinc-100 text-zinc-500 transition-colors group-hover:bg-zinc-100 group-hover:text-zinc-700">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                                            <path d="M12 8V4H8"></path>
+                                            <rect width="16" height="12" x="4" y="8" rx="2"></rect>
+                                            <path d="M2 14h2"></path>
+                                            <path d="M20 14h2"></path>
+                                            <path d="M15 13v2"></path>
+                                            <path d="M9 13v2"></path>
+                                        </svg>
+                                    </div>
+                                    <span
+                                        class="text-sm font-medium text-zinc-600 group-hover:text-zinc-900 transition-colors font-geist">
+                                        Agentic Architectures
+                                    </span>
+                                </div>
+
+                                <!-- Evaluation & QA -->
+                                <div class="reveal-on-scroll delay-300 flex items-center gap-3 group cursor-default">
+                                    <div
+                                        class="flex items-center justify-center w-8 h-8 rounded-lg bg-white border border-zinc-100 text-zinc-500 transition-colors group-hover:bg-zinc-100 group-hover:text-zinc-700">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                                            <path d="M3 3v16a2 2 0 0 0 2 2h16"></path>
+                                            <path d="M18 17V9"></path>
+                                            <path d="M13 17V5"></path>
+                                            <path d="M8 17v-3"></path>
+                                        </svg>
+                                    </div>
+                                    <span
+                                        class="text-sm font-medium text-zinc-600 group-hover:text-zinc-900 transition-colors font-geist">
+                                        Evaluation & QA
+                                    </span>
+                                </div>
+
+                                <!-- Multi-Agent Reasoning -->
+                                <div class="reveal-on-scroll delay-300 flex items-center gap-3 group cursor-default">
+                                    <div
+                                        class="flex items-center justify-center w-8 h-8 rounded-lg bg-white border border-zinc-100 text-zinc-500 transition-colors group-hover:bg-zinc-100 group-hover:text-zinc-700">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                            stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4">
+                                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                            <path d="M16 3.128a4 4 0 0 1 0 7.744"></path>
+                                            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                            <circle cx="9" cy="7" r="4"></circle>
+                                        </svg>
+                                    </div>
+                                    <span
+                                        class="text-sm font-medium text-zinc-600 group-hover:text-zinc-900 transition-colors font-geist">
+                                        Multi-Agent Reasoning
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-4 lg:col-start-9 reveal-on-scroll delay-200">
+                            <div
+                                class="aspect-[3/4] rounded-2xl overflow-hidden relative shadow-xl border border-zinc-200/50 bg-[#020617]">
+                                <div
+                                    class="absolute inset-0 bg-[linear-gradient(180deg,#020617_0%,#1e293b_75%,#334155_100%)]">
+                                </div>
+                                <div
+                                    class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-blue-500/10 blur-[80px] rounded-full pointer-events-none">
+                                </div>
+                                <div
+                                    class="absolute inset-0 p-6 flex flex-col font-mono text-[11px] uppercase tracking-widest">
+                                    <div class="flex items-center gap-2 text-[#FF4D00]">
+                                        <div class="w-1.5 h-1.5 bg-[#FF4D00] rounded-full animate-pulse"></div>
+                                        Runtime Profile
+                                    </div>
+                                    <div class="mt-8 space-y-4 text-white/50">
+                                        <div class="border-b border-white/10 pb-2 flex justify-between">
+                                            <span>ROLE</span><span class="text-white">AI ENGINEER</span>
+                                        </div>
+                                        <div class="border-b border-white/10 pb-2 flex justify-between">
+                                            <span>FOCUS</span><span class="text-white">LLM SYSTEMS</span>
+                                        </div>
+                                        <div class="border-b border-white/10 pb-2 flex justify-between">
+                                            <span>BASE</span><span class="text-white">BENGALURU</span>
+                                        </div>
+                                        <div class="border-b border-white/10 pb-2 flex justify-between">
+                                            <span>UPTIME</span><span class="text-white">99.9%</span>
+                                        </div>
+                                        <div class="border-b border-white/10 pb-2 flex justify-between">
+                                            <span>LATENCY</span><span class="text-white">SUB-SECOND</span>
+                                        </div>
+                                        <div class="border-b border-white/10 pb-2 flex justify-between">
+                                            <span>STATUS</span><span class="text-[#FF4D00]">IMMEDIATE JOINER</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="liquid-glass absolute bottom-5 left-5 right-5 p-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 shadow-lg flex items-center justify-between gap-3 transform transition-all duration-300 hover:bg-white/20"
+                                    data-lg-bezel="12" data-lg-height="25" data-lg-thickness="63" data-lg-ratio="0.9"
+                                    data-lg-spec-sat="6">
+                                    <div>
+                                        <div class="text-white font-jakarta font-semibold text-sm leading-tight">
+                                            Ritvik Vasundh
+                                        </div>
+                                        <div class="text-white/70 font-geist text-xs mt-0.5 font-medium">
+                                            AI Engineer — LLM Systems &amp; Execution
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section class="z-10 pt-32 pb-32 relative" id="experience">
+            <!-- Extended Background -->
+            <div class="absolute inset-0 z-0 pointer-events-none bg-[#f4f4f5]"></div>
+
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-20">
+                    <div class="reveal-on-scroll self-center">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="h-px w-8 bg-zinc-300"></div>
+                            <span class="text-xs font-medium tracking-widest uppercase text-zinc-400 font-geist">
+                                Experience · Feb 2026 — Present
+                            </span>
+                        </div>
+                        <h2 class="typewriter-target leading-[1.15] md:text-5xl text-4xl font-light text-zinc-900 mb-8 min-h-[3ch] font-geist tracking-tighter"
+                            data-animation-started="false">AI Developer Intern at Utilitarian Labs</h2>
+                        <p class="leading-relaxed text-lg font-light text-zinc-500 max-w-md font-geist">
+                            Architecting the BRD generation pipeline that turns 4–6 months of drafting into a 1–2 week
+                            delivery.
+                        </p>
+                    </div>
+
+                    <div class="lg:mt-0 mt-8 space-y-6">
+                        <!-- Card 1: Data Silos -->
+                        <div
+                            class="reveal-on-scroll delay-100 p-8 rounded-2xl border transition-colors bg-white border-zinc-200 hover:border-zinc-300 shadow-sm">
+                            <div class="flex items-start gap-4">
+                                <div class="p-2 rounded-lg bg-slate-100 text-slate-700">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" class="w-5 h-5">
+                                        <path
+                                            d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z">
+                                        </path>
+                                        <path
+                                            d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12">
+                                        </path>
+                                        <path
+                                            d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17">
+                                        </path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold mb-2 text-zinc-900 font-geist">End-to-End BRD
+                                        Pipeline</h3>
+                                    <p class="leading-relaxed text-sm text-zinc-500 font-geist">
+                                        Automates SOW creation, proposal generation, and transcript/email integration
+                                        with QA validation across the delivery flow.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 2: Manual Processes -->
+                        <div
+                            class="reveal-on-scroll delay-200 p-8 rounded-2xl border transition-colors bg-white border-zinc-200 hover:border-zinc-300 shadow-sm">
+                            <div class="flex items-start gap-4">
+                                <div class="p-2 rounded-lg bg-zinc-50 text-zinc-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" class="w-5 h-5">
+                                        <path d="M12 20v2"></path>
+                                        <path d="M12 2v2"></path>
+                                        <path d="M17 20v2"></path>
+                                        <path d="M17 2v2"></path>
+                                        <path d="M2 12h2"></path>
+                                        <path d="M2 17h2"></path>
+                                        <path d="M2 7h2"></path>
+                                        <path d="M20 12h2"></path>
+                                        <path d="M20 17h2"></path>
+                                        <path d="M20 7h2"></path>
+                                        <path d="M7 20v2"></path>
+                                        <path d="M7 2v2"></path>
+                                        <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                                        <rect x="8" y="8" width="8" height="8" rx="1"></rect>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold mb-2 text-zinc-900 font-geist">Context Aggregation
+                                        Layer</h3>
+                                    <p class="text-zinc-500 text-sm leading-relaxed font-geist">
+                                        Ingests client meetings, transcripts, and email threads to ground every BRD in
+                                        accurate scope — eliminating feature drift.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3: Wrong Target Audience -->
+                        <div
+                            class="reveal-on-scroll delay-300 p-8 rounded-2xl border transition-colors bg-white border-zinc-200 hover:border-zinc-300 shadow-sm">
+                            <div class="flex items-start gap-4">
+                                <div class="p-2 rounded-lg bg-slate-100 text-slate-700">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" class="w-5 h-5">
+                                        <path
+                                            d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z">
+                                        </path>
+                                        <path d="m9 12 2 2 4-4"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold mb-2 text-zinc-900 font-geist">Automated QA &amp;
+                                        Formatting</h3>
+                                    <p class="text-zinc-500 text-sm leading-relaxed font-geist">
+                                        QA checks and a PDF formatting engine keep every output consistent with 6+
+                                        years of company standards.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Method Section -->
+        <section class="relative z-10 py-20 overflow-hidden" id="system">
+            <div class="absolute inset-0 z-0 pointer-events-none bg-[#f4f4f5]"></div>
+            <div class="absolute inset-0 pointer-events-none">
+                <div
+                    class="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-blue-200/20 rounded-full blur-[120px] mix-blend-multiply animate-pulse">
+                </div>
+                <div
+                    class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-indigo-200/20 rounded-full blur-[120px] mix-blend-multiply">
+                </div>
+            </div>
+
+            <div class="max-w-[90rem] mx-auto px-4 md:px-6 relative z-10">
+                <div
+                    class="relative rounded-[2.5rem] bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.05)] p-8 md:p-16 overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-transparent opacity-60 pointer-events-none">
+                    </div>
+
+                    <div class="relative z-10">
+                        <div class="reveal-on-scroll text-center mb-16 max-w-full mx-auto">
+                            <div
+                                class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/50 border border-white/60 backdrop-blur-md mb-8 shadow-sm">
+                                <div class="w-1.5 h-1.5 rounded-full bg-zinc-400"></div>
+                                <span class="text-[11px] font-bold uppercase tracking-[0.2em] text-zinc-500 font-geist">
+                                    The Method
+                                </span>
+                            </div>
+
+                            <h2 class="typewriter-target text-4xl md:text-5xl lg:text-6xl text-zinc-900 font-light leading-[1.1] md:whitespace-nowrap min-h-[1.2em] font-geist tracking-tighter"
+                                data-animation-started="false">From retrieval to production</h2>
+                            <p class="md:text-xl text-lg font-light text-zinc-600 font-geist mt-5">
+                                Four disciplines, one dependable pipeline.
+                            </p>
+                        </div>
+
+                        <!-- 4 Steps Grid -->
+                        <div class="grid md:grid-cols-4 gap-12 md:gap-8">
+                            <!-- Step 1 -->
+                            <div class="reveal-on-scroll group relative">
+                                <div
+                                    class="absolute -left-4 -top-4 w-24 h-24 bg-gradient-to-br from-zinc-200/20 to-transparent rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                </div>
+                                <span
+                                    class="block md:text-7xl group-hover:text-zinc-900/60 transition-colors duration-500 select-none text-6xl font-medium text-zinc-900/40 font-jakarta mb-4 relative">01</span>
+                                <div
+                                    class="relative pl-1 border-l border-transparent group-hover:border-zinc-300/50 transition-colors duration-300">
+                                    <h3 class="text-lg font-semibold mb-2 text-zinc-900 tracking-tight font-geist">
+                                        Retrieve</h3>
+                                    <p class="text-zinc-500 text-sm leading-relaxed font-light font-geist">
+                                        Multi-modal RAG with semantic retrieval and embeddings — every answer grounded
+                                        in real context.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div class="reveal-on-scroll delay-100 group relative">
+                                <div
+                                    class="absolute -left-4 -top-4 w-24 h-24 bg-gradient-to-br from-zinc-200/20 to-transparent rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                </div>
+                                <span
+                                    class="relative block text-6xl md:text-7xl text-zinc-900/40 mb-4 group-hover:text-zinc-900/60 transition-colors duration-500 select-none font-medium font-jakarta">02</span>
+                                <div
+                                    class="relative pl-1 border-l border-transparent group-hover:border-zinc-300/50 transition-colors duration-300">
+                                    <h3 class="text-lg font-semibold mb-2 text-zinc-900 tracking-tight font-geist">
+                                        Reason</h3>
+                                    <p class="text-zinc-500 text-sm leading-relaxed font-light font-geist">
+                                        Agentic architectures with multi-agent reasoning and tool calling — each agent
+                                        scoped to a job it does reliably.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div class="reveal-on-scroll delay-200 group relative">
+                                <div
+                                    class="absolute -left-4 -top-4 w-24 h-24 bg-gradient-to-br from-zinc-200/20 to-transparent rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                </div>
+                                <span
+                                    class="relative block text-6xl md:text-7xl text-zinc-900/40 mb-4 group-hover:text-zinc-900/60 transition-colors duration-500 select-none font-medium font-jakarta">03</span>
+                                <div
+                                    class="relative pl-1 border-l border-transparent group-hover:border-zinc-300/50 transition-colors duration-300">
+                                    <h3 class="text-lg font-semibold mb-2 text-zinc-900 tracking-tight font-geist">
+                                        Evaluate</h3>
+                                    <p class="text-zinc-500 text-sm leading-relaxed font-light font-geist">
+                                        Automated output evaluation and QA pipelines judge quality before anything
+                                        ships.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Step 4 -->
+                            <div class="reveal-on-scroll delay-300 group relative">
+                                <div
+                                    class="absolute -left-4 -top-4 w-24 h-24 bg-gradient-to-br from-zinc-200/20 to-transparent rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                </div>
+                                <span
+                                    class="relative block text-6xl md:text-7xl text-zinc-900/40 mb-4 group-hover:text-zinc-900/60 transition-colors duration-500 select-none font-medium font-jakarta">04</span>
+                                <div
+                                    class="relative pl-1 border-l border-transparent group-hover:border-zinc-300/50 transition-colors duration-300">
+                                    <h3 class="text-lg font-semibold mb-2 text-zinc-900 tracking-tight font-geist">
+                                        Harden</h3>
+                                    <p class="text-zinc-500 text-sm leading-relaxed font-light font-geist">
+                                        AsyncIO, circuit breaking, retries, caching — 99.9% uptime and sub-second
+                                        latency in production.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Selected Work Section -->
+        <section id="work" class="py-32 z-10 relative">
+            <div class="absolute inset-0 z-0 pointer-events-none bg-[#f4f4f5]"></div>
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-20 gap-8">
+                    <div class="reveal-on-scroll">
+                        <h2 class="typewriter-target text-4xl md:text-5xl mb-2 text-zinc-900 font-light min-h-[1.2em] font-geist tracking-tighter"
+                            data-animation-started="false">Selected Work</h2>
+                        <p class="text-zinc-500 font-light text-lg font-geist">
+                            Systems shipped under real constraints.
+                        </p>
+                    </div>
+                    <a href="#contact"
+                        class="reveal-on-scroll text-sm transition-colors flex items-center gap-2 border-b pb-1 text-zinc-900 hover:text-zinc-600 border-zinc-300 font-geist">
+                        Get in touch
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                            class="w-4 h-4">
+                            <path d="M7 7h10v10"></path>
+                            <path d="M7 17 17 7"></path>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- Project 1: KAVACH -->
+                    <div class="reveal-on-scroll group relative border-t transition-colors border-zinc-200 hover:border-zinc-400">
+                        <div class="flex flex-col md:flex-row md:items-start gap-6 pt-10 pb-10 justify-between">
+                            <div class="md:w-1/3">
+                                <h3
+                                    class="text-2xl group-hover:text-slate-600 transition-colors text-zinc-800 font-medium font-jakarta">
+                                    KAVACH</h3>
+                                <span
+                                    class="block mt-2 text-[10px] font-mono uppercase tracking-widest text-[#FF4D00]">Smart
+                                    India Hackathon 2024 · Winner</span>
+                            </div>
+                            <p class="md:w-1/2 text-zinc-500 text-base font-light font-geist">
+                                National-scale healthcare analytics for the Ministry of Health — data across 22 disease
+                                categories from hospital to national level, with a RAG pipeline over government
+                                policies that generated 10 new policy recommendations with budget estimates. Delivered
+                                across three evaluation rounds in under 24 hours.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: MeetChamp -->
+                    <div class="reveal-on-scroll delay-100 group relative border-t transition-colors border-zinc-200 hover:border-zinc-400">
+                        <div class="py-10 flex flex-col md:flex-row md:items-start justify-between gap-6">
+                            <div class="md:w-1/3">
+                                <h3
+                                    class="text-2xl group-hover:text-slate-600 transition-colors text-zinc-800 font-medium font-jakarta">
+                                    MeetChamp</h3>
+                                <span
+                                    class="block mt-2 text-[10px] font-mono uppercase tracking-widest text-zinc-400">Enterprise
+                                    Meeting Intelligence · Desktop</span>
+                            </div>
+                            <p class="md:w-1/2 text-zinc-500 text-base font-light font-geist">
+                                Full-stack meeting tracking across Google Meet, Teams, Zoom, and WebEx — Parakeet V2
+                                transcription and speaker diarization with cascading fallback to Deepgram and OpenAI
+                                Whisper, an admin dashboard with tone alerts and device log aggregation on
+                                Supabase/Postgres, and an automated post-meeting email pipeline for summaries, action
+                                items, and TLDRs.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: UtilDraw -->
+                    <div class="reveal-on-scroll delay-200 group relative border-t transition-colors border-zinc-200 hover:border-zinc-400">
+                        <div class="py-10 flex flex-col md:flex-row md:items-start justify-between gap-6">
+                            <div class="md:w-1/3">
+                                <h3
+                                    class="text-2xl group-hover:text-slate-600 transition-colors text-zinc-800 font-medium font-jakarta">
+                                    UtilDraw</h3>
+                                <span
+                                    class="block mt-2 text-[10px] font-mono uppercase tracking-widest text-zinc-400">AI
+                                    Diagramming · React Flow</span>
+                            </div>
+                            <p class="md:w-1/2 text-zinc-500 text-base font-light font-geist">
+                                Lucid-inspired diagramming for Salesforce flowchart development — a RAG model retrieves
+                                and customizes templates from a 1,500+ flowchart dataset, and natural-language canvas
+                                edits render three confidence-scored variants as selectable React Flow-compatible JSON.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: Financial Intelligence -->
+                    <div class="reveal-on-scroll delay-300 group relative border-t transition-colors border-zinc-200 hover:border-zinc-400">
+                        <div class="py-10 flex flex-col md:flex-row md:items-start justify-between gap-6">
+                            <div class="md:w-1/3">
+                                <h3
+                                    class="text-2xl group-hover:text-slate-600 transition-colors text-zinc-800 font-medium font-jakarta">
+                                    Financial Intelligence</h3>
+                                <span
+                                    class="block mt-2 text-[10px] font-mono uppercase tracking-widest text-zinc-400">Agentic
+                                    Multi-Modal RAG</span>
+                            </div>
+                            <p class="md:w-1/2 text-zinc-500 text-base font-light font-geist">
+                                Agentic multi-modal RAG over financial PDFs with cross-modal question answering,
+                                validated against a 100+ query evaluation harness.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Track Record Section -->
+        <section class="z-10 border-zinc-200/60 border-t pt-32 pb-32 relative" id="proof">
+            <div class="absolute inset-0 z-0 pointer-events-none bg-[#f4f4f5]"></div>
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div class="reveal-on-scroll">
+                    <div class="text-center max-w-3xl mr-auto mb-16 ml-auto space-y-6">
+                        <div
+                            class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/40 border border-white/60 backdrop-blur-md shadow-sm">
+                            <span class="relative flex h-2 w-2">
+                                <span
+                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF4D00] opacity-75"></span>
+                                <span class="relative inline-flex rounded-full h-2 w-2 bg-zinc-400"></span>
+                            </span>
+                            <span
+                                class="text-xs font-semibold uppercase tracking-widest text-zinc-600 font-geist">Track Record</span>
+                        </div>
+
+                        <div class="space-y-2">
+                            <h2 class="typewriter-target text-4xl md:text-5xl lg:text-6xl font-light text-zinc-900 leading-[1.1] font-geist tracking-tighter"
+                                data-animation-started="false">Results that count</h2>
+                            <p class="md:text-3xl text-2xl font-medium text-zinc-400 tracking-tight font-jakarta">
+                                Wins, stages, numbers</p>
+                        </div>
+                    </div>
+
+                    <!-- Bento Grid Layout -->
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                        <!-- Left Tall Card -->
+                        <div
+                            class="lg:col-span-5 overflow-hidden flex flex-col hover:shadow-xl transition-shadow duration-300 bg-white h-full border-zinc-200/50 border rounded-[2.5rem] p-8 md:p-10 relative shadow-sm justify-between">
+                            <div class="space-y-6">
+                                <div>
+                                    <div class="text-7xl font-medium tracking-tighter text-zinc-900 font-jakarta">4×
+                                    </div>
+                                    <div class="text-lg font-medium text-zinc-500 font-geist mt-2">National hackathon
+                                        wins
+                                    </div>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" class="text-[#FF4D00] w-8 h-8 opacity-90">
+                                    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path>
+                                    <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path>
+                                    <path d="M4 22h16"></path>
+                                    <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"></path>
+                                    <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"></path>
+                                    <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"></path>
+                                </svg>
+                                <p class="leading-relaxed font-light text-zinc-600 font-geist text-base md:text-lg">
+                                    Smart India Hackathon 2024 — KAVACH: a national-scale healthcare analytics system
+                                    for the Ministry of Health, processing data across 22 disease categories from
+                                    hospital to national level.
+                                </p>
+                                <p class="leading-relaxed font-light text-zinc-600 font-geist text-base md:text-lg">
+                                    Delivered under 24-hour constraints across three evaluation rounds, iterating
+                                    rapidly on judge feedback.
+                                </p>
+                                <p class="leading-relaxed font-light text-zinc-600 font-geist text-base md:text-lg">
+                                    Four national wins, one pattern: rapid, high-quality delivery under pressure.
+                                </p>
+                            </div>
+                            <div class="mt-8 pt-8 border-t border-zinc-100 flex items-center gap-4">
+                                <div
+                                    class="w-12 h-12 rounded-full bg-zinc-100 border-2 border-white shadow-sm flex items-center justify-center text-zinc-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" class="w-5 h-5">
+                                        <circle cx="12" cy="8" r="6"></circle>
+                                        <path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="text-base font-semibold text-zinc-900 font-geist">Smart India Hackathon
+                                        2024</div>
+                                    <div class="text-sm text-zinc-500 font-geist">KAVACH — Ministry of Health
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right Column -->
+                        <div class="lg:col-span-7 flex flex-col gap-6 h-full">
+                            <!-- Top Wide Card -->
+                            <div
+                                class="overflow-hidden hover:shadow-xl transition-shadow duration-300 bg-white border-zinc-200/50 border rounded-[2.5rem] p-8 md:p-10 relative shadow-sm h-full">
+                                <div class="flex flex-col h-full justify-between">
+                                    <div class="space-y-6">
+                                        <div>
+                                            <div
+                                                class="text-7xl font-medium tracking-tighter text-zinc-900 font-jakarta">
+                                                600+</div>
+                                            <div class="text-lg font-medium text-zinc-500 font-geist mt-2">Hackathon
+                                                participants led</div>
+                                        </div>
+                                        <p
+                                            class="text-zinc-600 font-light leading-relaxed font-geist text-base md:text-lg">
+                                            Lead organizer of DSU DevHack — two national hackathons run end to end,
+                                            from problem statements to final judging.
+                                        </p>
+                                    </div>
+                                    <div class="mt-8 pt-8 border-t border-zinc-100 flex items-center gap-4">
+                                        <div
+                                            class="w-12 h-12 rounded-full bg-zinc-100 border-2 border-white shadow-sm flex items-center justify-center text-zinc-600">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                                                class="w-5 h-5">
+                                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                                                <path d="M16 3.128a4 4 0 0 1 0 7.744"></path>
+                                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                                <circle cx="9" cy="7" r="4"></circle>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <div class="text-base font-semibold text-zinc-900 font-geist">DSU DevHack
+                                            </div>
+                                            <div class="text-sm text-zinc-500 font-geist">Lead Organizer — 2 national
+                                                hackathons
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Bottom Row Grid -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1">
+                                <!-- Bottom Left (White) -->
+                                <div
+                                    class="relative overflow-hidden rounded-[2.5rem] bg-white border border-zinc-200/50 p-8 md:p-10 shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col justify-between h-full">
+                                    <div class="space-y-6">
+                                        <div>
+                                            <div
+                                                class="text-7xl font-medium tracking-tighter text-zinc-900 font-jakarta">
+                                                2×</div>
+                                            <div class="text-lg font-medium text-zinc-500 font-geist mt-2">Talks
+                                                delivered</div>
+                                        </div>
+                                        <p
+                                            class="leading-relaxed font-light text-zinc-600 font-geist text-base md:text-lg">
+                                            Two-time speaker at Microsoft Season of AI.
+                                        </p>
+                                    </div>
+                                    <div class="mt-8 pt-8 border-t border-zinc-100 flex items-center gap-4">
+                                        <div
+                                            class="w-12 h-12 rounded-full bg-zinc-100 border-2 border-white shadow-sm flex items-center justify-center text-zinc-600">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                                                class="w-5 h-5">
+                                                <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+                                                <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                                                <line x1="12" x2="12" y1="19" y2="22"></line>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <div class="text-base font-semibold text-zinc-900 font-geist">Microsoft
+                                                Season of AI</div>
+                                            <div class="text-sm text-zinc-500 font-geist">Speaker (2×)
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Bottom Right (Dark) -->
+                                <div
+                                    class="relative overflow-hidden rounded-[2.5rem] bg-zinc-950 border border-zinc-800 p-8 md:p-10 shadow-xl shadow-zinc-900/20 flex flex-col justify-between h-full group hover:border-zinc-700 transition-colors">
+                                    <div
+                                        class="absolute top-0 right-0 w-32 h-32 bg-zinc-800/30 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2">
+                                    </div>
+                                    <div class="relative z-10 space-y-6">
+                                        <div>
+                                            <div class="text-7xl font-medium tracking-tighter text-white font-jakarta">
+                                                8.2</div>
+                                            <div class="text-lg font-medium text-zinc-400 font-geist mt-2">CGPA / 10 —
+                                                B.Tech CS (AI &amp; ML)</div>
+                                        </div>
+                                        <p
+                                            class="text-zinc-300 font-light leading-relaxed font-geist text-base md:text-lg">
+                                            Dayananda Sagar University, Bengaluru — graduating 2026. Coursework in
+                                            Machine Learning, NLP, Statistics, Databases, and Operating Systems.
+                                        </p>
+                                    </div>
+                                    <div
+                                        class="relative z-10 flex items-center gap-4 mt-8 pt-8 border-t border-zinc-800">
+                                        <div
+                                            class="w-12 h-12 rounded-full bg-zinc-900 border-2 border-zinc-800 shadow-sm flex items-center justify-center text-[#FF4D00]">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                                                class="w-5 h-5">
+                                                <path
+                                                    d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z">
+                                                </path>
+                                                <path d="M22 10v6"></path>
+                                                <path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"></path>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <div class="text-base font-semibold text-white font-geist">Dayananda Sagar
+                                                University
+                                            </div>
+                                            <div class="text-sm text-zinc-500 font-geist">Bachelor of Technology —
+                                                Class of 2026</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA / Contact Section -->
+        <section id="contact" class="pt-32 pb-12 relative z-10">
+            <div class="absolute inset-0 z-0 pointer-events-none"
+                style="background: linear-gradient(180deg, #f4f4f5 0%, #f4f4f5 40%, transparent 100%);"></div>
+            <div class="max-w-7xl mx-auto px-6 relative z-10">
+                <div
+                    class="reveal-on-scroll grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-24 items-center md:px-12 mb-20">
+                    <div class="z-20 relative">
+                        <h2 class="typewriter-target text-6xl md:text-8xl font-normal text-zinc-900 leading-[0.85] tracking-tighter font-geist text-left"
+                            data-animation-started="false">
+                            READY TO <br> SHIP AI <br> BEYOND <br> THE DEMO?
+                        </h2>
+                    </div>
+                    <div class="flex flex-col items-start gap-10 z-20 relative">
+                        <p
+                            class="text-xl md:text-2xl font-light text-zinc-600 max-w-md font-geist leading-tight text-left">
+                            The gap between a demo and a dependable system is engineering. <span
+                                class="text-zinc-900 font-medium">Let's
+                                bridge it.</span>
+                        </p>
+
+                        <div class="flex flex-col items-start gap-6 w-full">
+                            <a href="mailto:ritvik2403@gmail.com"
+                                class="group relative overflow-hidden inline-block bg-zinc-900 text-white px-10 py-5 text-sm font-semibold uppercase tracking-widest transition-all hover:pr-14 font-geist w-full sm:w-auto text-center shadow-xl shadow-zinc-900/10">
+                                <span class="relative z-10">Email Me</span>
+                                <span
+                                    class="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M5 12h14" />
+                                        <path d="m12 5 7 7-7 7" />
+                                    </svg>
+                                </span>
+                            </a>
+
+                            <a href="RitvikVasundh_Resume.pdf" download="RitvikVasundh_Resume.pdf"
+                                class="flex items-center gap-2 text-sm font-mono uppercase tracking-widest border-b border-zinc-300 pb-1 hover:border-zinc-900 text-zinc-500 hover:text-zinc-900 transition-colors font-geist">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                    <polyline points="7 10 12 15 17 10" />
+                                    <line x1="12" y1="15" x2="12" y2="3" />
+                                </svg>
+                                Download Résumé
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER: Vantage Structure + Growth Glassmorphism -->
+        <footer class="mt-32 border-t border-white/10 bg-white/5 backdrop-blur-md relative overflow-hidden">
+            <!-- Footer Content -->
+            <div class="px-6 py-16 lg:px-12 relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 text-sm">
+                    <!-- Column 1: Brand -->
+                    <div class="md:col-span-1">
+                        <span
+                            class="font-semibold tracking-tighter uppercase text-lg block mb-6 text-white/90 font-jakarta typewriter-target">Ritvik
+                            Vasundh</span>
+                        <span class="font-mono text-xs opacity-50 block text-white/60 typewriter-target">© 2026 RITVIK
+                            VASUNDH</span>
+                    </div>
+
+                    <!-- Column 2: Sitemap -->
+                    <div>
+                        <h5
+                            class="font-mono text-xs uppercase tracking-widest opacity-50 mb-6 text-white/60 typewriter-target">
+                            Sitemap</h5>
+                        <ul class="space-y-3 opacity-80 text-white/80 font-manrope">
+                            <li><a href="#work" class="hover:text-[#FF4D00] transition-colors">Work</a></li>
+                            <li><a href="#experience" class="hover:text-[#FF4D00] transition-colors">Experience</a></li>
+                            <li><a href="#system" class="hover:text-[#FF4D00] transition-colors">Method</a></li>
+                            <li><a href="#contact" class="hover:text-[#FF4D00] transition-colors">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 3: Social -->
+                    <div>
+                        <h5
+                            class="font-mono text-xs uppercase tracking-widest opacity-50 mb-6 text-white/60 typewriter-target">
+                            Social</h5>
+                        <ul class="space-y-3 opacity-80 text-white/80 font-manrope">
+                            <li><a href="https://linkedin.com/in/ritvikvasundh" target="_blank" rel="noopener"
+                                    class="hover:text-[#FF4D00] transition-colors">LinkedIn</a></li>
+                            <li><a href="https://github.com/retvq" target="_blank" rel="noopener"
+                                    class="hover:text-[#FF4D00] transition-colors">GitHub</a></li>
+                            <li><a href="mailto:ritvik2403@gmail.com"
+                                    class="hover:text-[#FF4D00] transition-colors">Email</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Column 4: Status (Vantage Signature) -->
+                    <div class="md:col-span-1 flex flex-col justify-end items-start md:items-end">
+                        <span
+                            class="font-mono text-xs text-[#FF4D00] block mb-2 tracking-widest typewriter-target">SYSTEM_STATUS:
+                            NOMINAL</span>
+                        <div class="flex gap-1">
+                            <div class="w-1 h-4 bg-[#FF4D00]"></div>
+                            <div class="w-1 h-4 bg-[#FF4D00]/50"></div>
+                            <div class="w-1 h-4 bg-[#FF4D00]/30"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Decor: Bottom Noise/Gradient hint -->
+            <div
+                class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-[#FF4D00]/5 to-transparent pointer-events-none">
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- SCRIPTS -->
+    <script>
+        // LIQUID GLASS — Tier 2 (Chromium): faithful port of the kube.io implementation
+        // (kube.io/blog/liquid-glass-css-svg), reconstructed from its shipped bundle:
+        //   • 1D refraction LUT: vector Snell (IOR 1.5) over a convex-squircle bezel,
+        //     ray height = h·bezelHeight + thickness (the thickness term is what gives
+        //     the strong lens look), 128 samples.
+        //   • Rounded-rect map: neutral RGB(128,128,0) interior, bezel band displaces
+        //     INWARD, 1px anti-aliased edge, baked at devicePixelRatio (≤2).
+        //   • Filter graph: blur source → displace → saturate masked to a specular rim
+        //     (its own baked map, light at 60°) → blend rim highlight on top.
+        //   • backdrop-filter: url(#…) standalone. Tier 1 CSS covers everything else.
+        (function () {
+            var tier2 = false;
+            try {
+                tier2 = CSS.supports('backdrop-filter', 'url(#lg)') ||
+                    CSS.supports('-webkit-backdrop-filter', 'url(#lg)');
+            } catch (e) { /* older engines: stay tier 1 */ }
+            document.documentElement.classList.add(tier2 ? 'lg-tier2' : 'lg-tier1');
+            if (!tier2) return;
+
+            var SVG_NS = 'http://www.w3.org/2000/svg';
+            var host = document.createElementNS(SVG_NS, 'svg');
+            host.setAttribute('color-interpolation-filters', 'sRGB');
+            host.setAttribute('aria-hidden', 'true');
+            host.style.cssText = 'position:fixed;width:0;height:0;overflow:hidden;pointer-events:none;';
+            document.body.appendChild(host);
+
+            var IOR = 1.5, ETA = 1 / IOR, SAMPLES = 128, LIGHT = Math.PI / 3;
+
+            function squircle(x) { return Math.pow(1 - Math.pow(1 - x, 4), 0.25); }
+
+            /* kube.io buildLUT: refracted-ray horizontal offset per bezel position */
+            function buildLUT(thickness, bezelHeight) {
+                var lut = new Float64Array(SAMPLES), maxAbs = 0, s = 1e-4;
+                for (var i = 0; i < SAMPLES; i++) {
+                    var d = i / SAMPLES;
+                    var hgt = squircle(d);
+                    var slope = (d + s <= 1 ? squircle(d + s) - hgt : hgt - squircle(d - s)) / s;
+                    var nl = Math.sqrt(slope * slope + 1);
+                    var nx = -slope / nl, ny = -1 / nl;
+                    var k = 1 - ETA * ETA * (1 - ny * ny);
+                    var v = 0;
+                    if (k >= 0) {
+                        var q = ETA * ny + Math.sqrt(k);
+                        var tx = -q * nx, ty = ETA - q * ny;
+                        v = tx * (hgt * bezelHeight + thickness) / ty;
+                    }
+                    lut[i] = v;
+                    var a = Math.abs(v);
+                    if (a > maxAbs) maxAbs = a;
+                }
+                return { lut: lut, max: maxAbs || 1 };
+            }
+
+            /* signed distance to the rounded-rect edge (negative inside); equals the
+               kube skeleton sweep wherever radius ≥ bezel, and also handles radius 0 */
+            function sdfInfo(px, py, w, h, rad) {
+                var rx = px - w / 2, ry = py - h / 2;
+                var ox = Math.abs(rx) - (w / 2 - rad), oy = Math.abs(ry) - (h / 2 - rad);
+                var ax = Math.max(ox, 0), ay = Math.max(oy, 0);
+                var outer = Math.sqrt(ax * ax + ay * ay);
+                var dist = Math.min(Math.max(ox, oy), 0) + outer - rad;
+                var gx, gy;
+                if (outer > 0) {
+                    gx = (rx >= 0 ? 1 : -1) * (ax / outer);
+                    gy = (ry >= 0 ? 1 : -1) * (ay / outer);
+                } else if (ox > oy) {
+                    gx = rx >= 0 ? 1 : -1; gy = 0;
+                } else {
+                    gx = 0; gy = ry >= 0 ? 1 : -1;
+                }
+                return { d: dist, gx: gx, gy: gy };
+            }
+
+            function makeCanvas(w, h) {
+                var c = document.createElement('canvas');
+                c.width = w;
+                c.height = h;
+                return c;
+            }
+
+            /* displacement map — neutral interior, inward-pointing bezel band */
+            function dispMap(w, h, rad, bezel, L, dpr) {
+                var W = Math.round(w * dpr), H = Math.round(h * dpr);
+                var cv = makeCanvas(W, H), ctx = cv.getContext('2d');
+                var img = ctx.createImageData(W, H), data = img.data;
+                var bD = bezel * dpr;
+                for (var py = 0; py < H; py++) {
+                    for (var px = 0; px < W; px++) {
+                        var i4 = (py * W + px) * 4;
+                        var r = 128, g = 128;
+                        var s = sdfInfo(px + 0.5, py + 0.5, W, H, rad * dpr);
+                        var depth = -s.d; /* px from the outer edge, device units */
+                        if (depth > -dpr && depth < bD) {
+                            var aa = depth < 0 ? 1 + depth / dpr : 1; /* 1px AA outside edge */
+                            var idx = depth <= 0 ? 0 :
+                                Math.min(SAMPLES - 1, Math.floor(depth / bD * SAMPLES));
+                            var mag = (L.lut[idx] / L.max) * aa;
+                            r = 128 - Math.round(s.gx * mag * 127); /* INWARD */
+                            g = 128 - Math.round(s.gy * mag * 127);
+                        }
+                        data[i4] = r;
+                        data[i4 + 1] = g;
+                        data[i4 + 2] = 0;
+                        data[i4 + 3] = 255;
+                    }
+                }
+                ctx.putImageData(img, 0, 0);
+                return cv.toDataURL();
+            }
+
+            /* specular rim map — ~2 CSS px semicircular bump at the edge, lit from 60° */
+            function specMap(w, h, rad, dpr) {
+                var W = Math.round(w * dpr), H = Math.round(h * dpr);
+                var cv = makeCanvas(W, H), ctx = cv.getContext('2d');
+                var img = ctx.createImageData(W, H), data = img.data;
+                var lx = Math.cos(LIGHT), ly = Math.sin(LIGHT);
+                for (var py = 0; py < H; py++) {
+                    for (var px = 0; px < W; px++) {
+                        var i4 = (py * W + px) * 4;
+                        var s = sdfInfo(px + 0.5, py + 0.5, W, H, rad * dpr);
+                        var depth = -s.d / dpr; /* CSS px from the edge */
+                        if (depth > -1 && depth < 2) {
+                            var aa = depth < 0 ? 1 + depth : 1;
+                            var t = Math.max(0, Math.min(depth, 2));
+                            var bump = Math.sqrt(Math.max(0, 1 - (1 - t) * (1 - t)));
+                            var n = Math.abs(s.gx * lx + (-s.gy) * ly) * bump;
+                            var c = Math.round(255 * n);
+                            data[i4] = c;
+                            data[i4 + 1] = c;
+                            data[i4 + 2] = c;
+                            data[i4 + 3] = Math.round(255 * n * n * aa);
+                        }
+                    }
+                }
+                ctx.putImageData(img, 0, 0);
+                return cv.toDataURL();
+            }
+
+            function feImage(href, w, h, result) {
+                var n = document.createElementNS(SVG_NS, 'feImage');
+                n.setAttribute('href', href);
+                n.setAttribute('x', '0');
+                n.setAttribute('y', '0');
+                n.setAttribute('width', w);
+                n.setAttribute('height', h);
+                n.setAttribute('result', result);
+                return n;
+            }
+
+            function buildFor(el, id) {
+                var rect = el.getBoundingClientRect();
+                var w = Math.round(rect.width), h = Math.round(rect.height);
+                if (!w || !h || w * h > 900000) return; /* hidden or huge: keep tier 1 */
+
+                var ds = el.dataset;
+                var cs = getComputedStyle(el);
+                var rad = Math.min(parseFloat(cs.borderTopLeftRadius) || 0, w / 2, h / 2);
+                var bezel = Math.min(parseFloat(ds.lgBezel) || Math.min(21, Math.min(w, h) / 2),
+                    Math.min(w, h) / 2);
+                var bezelHeight = parseFloat(ds.lgHeight) || bezel * 1.29;
+                var thickness = parseFloat(ds.lgThickness) || bezel * 3.33;
+                var ratio = parseFloat(ds.lgRatio) || 0.85;
+                var blur = ds.lgBlur !== undefined ? parseFloat(ds.lgBlur) : 0.2;
+                var specOpacity = parseFloat(ds.lgSpecOpacity) || 0.4;
+                var specSat = parseFloat(ds.lgSpecSat) || 4;
+                var dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+                var L = buildLUT(thickness, bezelHeight);
+                var scale = L.max * ratio;
+
+                var fid = 'lgf-' + id;
+                var old = document.getElementById(fid);
+                if (old) old.remove();
+                var filter = document.createElementNS(SVG_NS, 'filter');
+                filter.setAttribute('id', fid);
+                filter.setAttribute('color-interpolation-filters', 'sRGB');
+
+                /* kube.io production graph, node for node */
+                var blurNode = document.createElementNS(SVG_NS, 'feGaussianBlur');
+                blurNode.setAttribute('in', 'SourceGraphic');
+                blurNode.setAttribute('stdDeviation', blur);
+                blurNode.setAttribute('result', 'blurred_source');
+                filter.appendChild(blurNode);
+
+                filter.appendChild(feImage(dispMap(w, h, rad, bezel, L, dpr), w, h, 'displacement_map'));
+
+                var disp = document.createElementNS(SVG_NS, 'feDisplacementMap');
+                disp.setAttribute('in', 'blurred_source');
+                disp.setAttribute('in2', 'displacement_map');
+                disp.setAttribute('scale', scale);
+                disp.setAttribute('xChannelSelector', 'R');
+                disp.setAttribute('yChannelSelector', 'G');
+                disp.setAttribute('result', 'displaced');
+                filter.appendChild(disp);
+
+                var sat = document.createElementNS(SVG_NS, 'feColorMatrix');
+                sat.setAttribute('in', 'displaced');
+                sat.setAttribute('type', 'saturate');
+                sat.setAttribute('values', specSat);
+                sat.setAttribute('result', 'displaced_saturated');
+                filter.appendChild(sat);
+
+                filter.appendChild(feImage(specMap(w, h, rad, dpr), w, h, 'specular_layer'));
+
+                var comp = document.createElementNS(SVG_NS, 'feComposite');
+                comp.setAttribute('in', 'displaced_saturated');
+                comp.setAttribute('in2', 'specular_layer');
+                comp.setAttribute('operator', 'in');
+                comp.setAttribute('result', 'specular_saturated');
+                filter.appendChild(comp);
+
+                var fade = document.createElementNS(SVG_NS, 'feComponentTransfer');
+                fade.setAttribute('in', 'specular_layer');
+                fade.setAttribute('result', 'specular_faded');
+                var funcA = document.createElementNS(SVG_NS, 'feFuncA');
+                funcA.setAttribute('type', 'linear');
+                funcA.setAttribute('slope', specOpacity);
+                fade.appendChild(funcA);
+                filter.appendChild(fade);
+
+                var blend1 = document.createElementNS(SVG_NS, 'feBlend');
+                blend1.setAttribute('in', 'specular_saturated');
+                blend1.setAttribute('in2', 'displaced');
+                blend1.setAttribute('mode', 'normal');
+                blend1.setAttribute('result', 'withSaturation');
+                filter.appendChild(blend1);
+
+                var blend2 = document.createElementNS(SVG_NS, 'feBlend');
+                blend2.setAttribute('in', 'specular_faded');
+                blend2.setAttribute('in2', 'withSaturation');
+                blend2.setAttribute('mode', 'normal');
+                filter.appendChild(blend2);
+
+                host.appendChild(filter);
+
+                var bf = 'url(#' + fid + ')';
+                el.style.backdropFilter = bf;
+                el.style.webkitBackdropFilter = bf;
+            }
+
+            var glassEls = Array.prototype.slice.call(document.querySelectorAll('.liquid-glass'));
+            glassEls.forEach(function (el, i) {
+                buildFor(el, i);
+                if ('ResizeObserver' in window) {
+                    var timer = null;
+                    new ResizeObserver(function () {
+                        clearTimeout(timer);
+                        timer = setTimeout(function () { buildFor(el, i); }, 180);
+                    }).observe(el);
+                }
+            });
+        })();
+    </script>
+    <script>
+        // UNICORN STUDIO HERO BACKDROP — loads the animated canvas for the hero
+        // section only; skipped entirely under reduced motion (static gradient remains)
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            !function () {
+                if (!window.UnicornStudio) {
+                    window.UnicornStudio = { isInitialized: !1 };
+                    var i = document.createElement("script");
+                    i.src = "https://cdn.jsdelivr.net/gh/hiunicornstudio/unicornstudio.js@v1.4.29/dist/unicornStudio.umd.js";
+                    i.onload = function () {
+                        window.UnicornStudio.isInitialized || (UnicornStudio.init(), window.UnicornStudio.isInitialized = !0);
+                    };
+                    (document.head || document.body).appendChild(i);
+                }
+            }();
+        }
+    </script>
+    <script>
+        // 0. REDUCED MOTION: skip the loader and reveal content immediately
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion) {
+            const loaderEl = document.querySelector('.loader');
+            if (loaderEl) loaderEl.remove();
+            document.querySelectorAll('.word-span, #hero-para-container, #hero-btns a, #hero-badge').forEach(el => {
+                el.classList.remove('opacity-0', 'translate-y-4');
+            });
+        }
+
+        // 0b. AMBIENT LOADER BACKGROUND
+        // Independent tween to ensure gradient keeps moving even when curtain lifts
+        gsap.to('.loader', {
+            backgroundPosition: "0% 100%",
+            duration: 3,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut"
+        });
+
+        // 1. ALBA LOADER SEQUENCE
+        const tl = gsap.timeline();
+
+        tl.to('.loader-text', { y: 0, duration: 1, ease: "power3.out" })
+            // Animate Curtain Words immediately after container reveals
+            .call(() => {
+                document.querySelectorAll('.loader-word').forEach((word, i) => {
+                    // 1. Reveal (No Blink added)
+                    setTimeout(() => word.classList.remove('opacity-0', 'translate-y-4'), 100 + (i * 100));
+                });
+            }, null, "<+0.2")
+            .to('.loader-bar', { width: '100%', duration: 1.5, ease: "power2.inOut" }, "-=0.5")
+            .to('.loader-counter', {
+                innerText: 100,
+                duration: 1.5,
+                snap: { innerText: 1 },
+                ease: "power2.inOut",
+                onUpdate: function () {
+                    this.targets()[0].innerHTML = Math.ceil(this.targets()[0].innerText).toString().padStart(2, '0');
+                }
+            }, "<")
+            .to('.loader', {
+                yPercent: -100,
+                duration: 1.2,
+                ease: "power4.inOut",
+            })
+            // Trigger Home Text Animations after loader
+            .to('#hero-title-1, #hero-title-2', {
+                y: 0,
+                opacity: 1,
+                duration: 1,
+                stagger: 0.1, // Faster stagger for containers
+                ease: "power2.out",
+                onStart: () => {
+                    const badge = document.getElementById('hero-badge');
+                    if (badge) badge.classList.remove('opacity-0', 'translate-y-4');
+
+                    document.querySelectorAll('#hero-title-1, #hero-title-2').forEach(el => {
+                        el.classList.add('active');
+                    });
+
+                    // Specific fix for Growth Hero Spans (remove opacity-0/translate-y-4)
+                    document.querySelectorAll('.word-span').forEach((span, index) => {
+                        setTimeout(() => {
+                            span.classList.remove('opacity-0', 'translate-y-4');
+                        }, index * 50); // Balanced cascade
+                    });
+                }
+            }, "-=1.2") // Start animation EXACTLY when curtain starts lifting
+
+            // 3. Hero Paragraph Animation (Replicating "Typewriter Engine" Logic)
+            .to('#hero-para-container', {
+                opacity: 1,
+                y: 0,
+                duration: 0.1,
+                onStart: () => {
+                    const para = document.getElementById('hero-para');
+                    if (para) {
+                        // Cleanest Strategy that matches "Typewriter Engine":
+                        // 1. Clear content.
+                        // 2. Re-append split words as spans.
+
+                        para.innerHTML = '';
+
+                        const part1 = "Multi-modal RAG pipelines and agentic architectures, holding 99.9% uptime at sub-second latency.";
+                        const part2 = "Precision over hype."; // This needs to be white
+
+                        const createSpan = (text, className = "") => {
+                            const s = document.createElement('span');
+                            s.textContent = text;
+                            // EXACT classes from Typewriter Engine
+                            s.className = `word-span opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform ${className}`;
+                            return s;
+                        };
+
+                        // Helper to append space (not animated)
+                        const appendSpace = () => para.appendChild(document.createTextNode(' '));
+
+                        // Append Part 1 Words
+                        const part1Words = part1.split(' ');
+                        part1Words.forEach((w, i) => {
+                            const s = createSpan(w);
+                            para.appendChild(s);
+                            if (i < part1Words.length - 1) appendSpace();
+
+                            // Force reflow and animate
+                            void s.offsetWidth;
+                            setTimeout(() => s.classList.remove('opacity-0', 'translate-y-4'), i * 50);
+                        });
+
+                        // Space between parts
+                        appendSpace();
+
+                        // Append Part 2 Words (White)
+                        const part2Words = part2.split(' ');
+                        const part1Len = part1Words.length;
+
+                        part2Words.forEach((w, i) => {
+                            const s = createSpan(w, "text-white");
+                            para.appendChild(s);
+                            if (i < part2Words.length - 1) appendSpace();
+
+                            void s.offsetWidth;
+                            // Animate (offset by part 1 length)
+                            setTimeout(() => s.classList.remove('opacity-0', 'translate-y-4'), (part1Len + i) * 50);
+                        });
+                    }
+                }
+            }, "-=0.45") // Reduced delay by 0.2s (starts earlier)
+
+            .call(() => {
+                const btns = document.querySelectorAll('#hero-btns a');
+                btns.forEach((btn, i) => {
+                    // Match text physics: 200ms stagger, CSS handles ease/duration
+                    setTimeout(() => btn.classList.remove('opacity-0', 'translate-y-4'), i * 200);
+                });
+            }, null, "<+0.6"); // Sync buttons mid-way
+
+        // 2. PARALLAX BACKGROUND LOGIC (From Growth)
+        const heroLayer = document.getElementById('hero-layer');
+        const warmLayer = document.getElementById('warm-layer');
+        const coldReturnLayer = document.getElementById('cold-return-layer');
+
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const docHeight = document.documentElement.scrollHeight;
+
+            const scrollVh = scrollY / windowHeight;
+            const scrollPercent = scrollY / (docHeight - windowHeight);
+
+            // 1. Hero State (Top): Fade out Dark
+            if (heroLayer) heroLayer.style.opacity = Math.max(0, 1 - scrollVh * 1.2);
+
+            // 2. Middle State: Fade in Warm
+            if (warmLayer) {
+                let warmOpacity = 0;
+                // Fade in starting at 0.3vh, peak in middle, fade out at end
+                if (scrollVh > 0.3) warmOpacity = (scrollVh - 0.3) * 1.5;
+                // Start fading out warm layer as we approach bottom (last 5%)
+                if (scrollPercent > 0.95) warmOpacity = Math.max(0, 1 - (scrollPercent - 0.95) * 20);
+
+                warmLayer.style.opacity = Math.min(1, warmOpacity);
+            }
+
+            // 3. Footer State (Bottom): Fade in Cold Loop
+            if (coldReturnLayer) {
+                let coldOpacity = 0;
+                // Start fading in during last 7% of page
+                if (scrollPercent > 0.93) {
+                    coldOpacity = (scrollPercent - 0.93) * 14;
+                }
+                coldReturnLayer.style.opacity = Math.min(1, coldOpacity);
+            }
+
+            // 4. Navbar Theme Logic
+            const navbar = document.getElementById('navbar');
+            if (navbar) {
+                // Switch to dark nav when we are past the hero (e.g., > 80vh) and before the footer (approx < 95% total scroll)
+                // Extended to 0.95 to align with new content length and padding
+                if (scrollVh > 0.8 && scrollPercent < 0.95) {
+                    navbar.classList.add('nav-dark');
+                } else {
+                    navbar.classList.remove('nav-dark');
+                }
+            }
+        });
+
+
+
+        // 3. ROBUST TYPEWRITER ENGINE (From Growth Page)
+        const typewriterTargets = document.querySelectorAll('.typewriter-target');
+
+        // Initial setup only for targets not already animated by GSAP loader
+        // (The hero title is handled by GSAP, but others will use this observer)
+
+        const typewriterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && entry.target.dataset.animationStarted !== 'true') {
+                    entry.target.dataset.animationStarted = 'true';
+                    const el = entry.target;
+                    const rawText = el.textContent.trim();
+
+                    // Don't split if it's already split (handled by GSAP or previous run)
+                    if (el.querySelector('.word-span')) return;
+
+                    el.innerHTML = ''; // Clear content
+                    const words = rawText.split(/\s+/);
+
+                    words.forEach((word, index) => {
+                        const span = document.createElement('span');
+                        span.textContent = word;
+                        span.className = 'word-span opacity-0 translate-y-4 transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] will-change-transform';
+                        el.appendChild(span);
+
+                        if (index < words.length - 1) el.appendChild(document.createTextNode(' '));
+
+                        // Stagger fade-in
+                        setTimeout(() => {
+                            span.classList.remove('opacity-0', 'translate-y-4');
+                        }, index * 50); // 50ms per word
+                    });
+                }
+            });
+        }, { threshold: 0.1 });
+
+        // Observe footer and other text elements
+        typewriterTargets.forEach(el => typewriterObserver.observe(el));
+
+    </script>
+</body>
+
+</html>
