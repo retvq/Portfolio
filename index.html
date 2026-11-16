@@ -630,7 +630,9 @@
         .story__end { height: 1.5rem; }
 
         /* ---------- CONTACT TO FOOTER ---------- */
-        .contact-zone { background: linear-gradient(180deg, #f4f4f5 0%, #f4f4f5 8.0%, #f1f2f3 13.8%, #eaebec 19.5%, #dfe0e2 25.2%, #d0d1d5 31.0%, #bfc1c6 36.8%, #acaeb5 42.5%, #979aa2 48.2%, #828690 54.0%, #6c717d 59.8%, #575d6a 65.5%, #444a59 71.2%, #333a4a 77.0%, #242b3d 82.8%, #192033 88.5%, #12192c 94.2%, #0f172a 100.0%); }
+        /* Contact stays light behind its text; the fade to the footer navy runs in a fixed band below the buttons,
+           so no word ever sits across the light-to-dark change */
+        .contact-zone { --fade: 440px; background: linear-gradient(180deg, #f4f4f5 0.0%, #f1f2f3 6.2%, #eaebec 12.5%, #dfe0e2 18.8%, #d0d1d5 25.0%, #bfc1c6 31.2%, #acaeb5 37.5%, #979aa2 43.8%, #828690 50.0%, #6c717d 56.2%, #575d6a 62.5%, #444a59 68.8%, #333a4a 75.0%, #242b3d 81.2%, #192033 87.5%, #12192c 93.8%, #0f172a 100.0%) bottom / 100% var(--fade) no-repeat, #f4f4f5; }
         .site-footer { background: #0f172a; }
 
         .resume-dd { position: relative; }
@@ -1054,7 +1056,7 @@
         <!-- CONTACT -->
         <div class="endzone relative z-10" style="isolation:isolate">
         <section id="contact" class="contact-zone relative">
-            <div class="pt-24 md:pt-28 pb-52 md:pb-32">
+            <div class="pt-24 md:pt-28" style="padding-bottom: calc(var(--fade) - 20px)">
             <div class="max-w-7xl mx-auto px-6 relative z-10">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-24 items-center md:px-12">
                     <div class="z-20 relative">
@@ -2030,7 +2032,8 @@
         const NAVY = [15, 23, 42], LIGHT = [244, 244, 245];
         const smooth = x => { x = Math.min(1, Math.max(0, x)); return x * x * (3 - 2 * x); };
         // Background colour of the contact gradient at a fraction p of its height (same curve as the CSS)
-        const zoneColor = p => { const e = smooth((p - 0.08) / 0.92); return LIGHT.map((a, i) => Math.round(a + (NAVY[i] - a) * e)); };
+        const fadePx = () => parseFloat(getComputedStyle(contactZone).getPropertyValue('--fade')) || 440;
+        const zoneColor = p => { const H = contactZone.offsetHeight || 1, f0 = 1 - fadePx() / H; const e = smooth((p - f0) / (1 - f0)); return LIGHT.map((a, i) => Math.round(a + (NAVY[i] - a) * e)); };
         const lum = ([r, g, b]) => { const f = v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }; return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b); };
         // Text colour that reads on that background: dark on the light part, light on the navy part
         // Text colour for a background: a smooth navy-to-white ramp that stays dark through the mid greys
@@ -2038,15 +2041,16 @@
         const INK_DARK = [15, 23, 42], INK_LIGHT = [248, 250, 252];
         const inkFor = bg => { const k = smooth((0.15 - lum(bg)) / 0.08); return INK_DARK.map((a, i) => Math.round(a + (INK_LIGHT[i] - a) * k)); };
         // The same ramp as a vertical gradient covering the whole contact section
-        const inkGradient = (() => {
+        const inkGradientNow = () => {
             const stops = [];
             for (let i = 0; i <= 100; i += 2) stops.push(`rgb(${inkFor(zoneColor(i / 100)).join(',')}) ${i}%`);
             return `linear-gradient(180deg, ${stops.join(', ')})`;
-        })();
+        };
         // Distance from the top of the contact section, ignoring the reveal animation's transforms
         const topInZone = el => { let y = 0; while (el && el !== contactZone) { y += el.offsetTop; el = el.offsetParent; } return y; };
         function inkContact() {
             const H = contactZone.offsetHeight;
+            const inkGradient = inkGradientNow();
             contactZone.querySelectorAll('[data-ink]').forEach(el => {
                 const words = el.querySelectorAll('.word-span');
                 const parts = words.length ? [...words] : [el];
@@ -2067,7 +2071,7 @@
         function sizeFootBackdrop() {
             if (!footBackdrop) return;
             const f = document.querySelector('footer');
-            footBackdrop.style.setProperty('--foot-h', (f.offsetHeight + contactZone.offsetHeight * 0.55) + 'px');
+            footBackdrop.style.setProperty('--foot-h', (f.offsetHeight + fadePx() * 0.85) + 'px');
         }
         sizeFootBackdrop();
         window.addEventListener('resize', sizeFootBackdrop);
