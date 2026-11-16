@@ -632,8 +632,16 @@
         /* ---------- CONTACT TO FOOTER ---------- */
         /* Contact: the light-to-navy fade runs above the text, so the words sit on navy with the
            animated streaks showing behind them and down into the footer */
-        .contact-zone { --rise: 240px; background: linear-gradient(180deg, #f4f4f5 0.0%, #f1f1f2 2.5%, #ededef 5.0%, #e9eaeb 7.5%, #e5e5e8 10.0%, #e0e1e4 12.5%, #dbdcdf 15.0%, #d6d7db 17.5%, #d1d2d6 20.0%, #cbcdd1 22.5%, #c5c7cc 25.0%, #bfc1c6 27.5%, #b9bbc1 30.0%, #b2b5bb 32.5%, #acaeb5 35.0%, #a5a8af 37.5%, #9ea1a9 40.0%, #979aa3 42.5%, #90939c 45.0%, #898c96 47.5%, #828690 50.0%, #7a7f89 52.5%, #737883 55.0%, #6c717c 57.5%, #656a76 60.0%, #5e6370 62.5%, #575d6a 65.0%, #515664 67.5%, #4a505e 70.0%, #444a59 72.5%, #3e4453 75.0%, #383e4e 77.5%, #323949 80.0%, #2d3444 82.5%, #282f40 85.0%, #232a3b 87.5%, #1e2637 90.0%, #1a2134 92.5%, #161e30 95.0%, #121a2d 97.5%, #0f172a 100.0%) top / 100% var(--rise) no-repeat, #0f172a; }
-        @media (min-width: 768px) { .contact-zone { --rise: 310px; } }
+        /* One continuous white-to-navy fade: it starts behind the lower part of the How I work card
+           (--pre px) and finishes in the top --rise px of the contact section */
+        :root { --pre: 300px; --rise: 200px; }
+        .approach-bg { background: linear-gradient(180deg, #f4f4f5 0.0%, #f1f1f3 3.3%, #efeff0 6.7%, #ececed 10.0%, #e8e9eb 13.3%, #e5e5e8 16.7%, #e1e2e4 20.0%, #dddee1 23.3%, #d9dadd 26.7%, #d5d6da 30.0%, #d1d2d6 33.3%, #ccced2 36.7%, #c8c9ce 40.0%, #c3c5ca 43.3%, #bec0c5 46.7%, #b9bbc1 50.0%, #b4b6bc 53.3%, #aeb1b7 56.7%, #a9acb3 60.0%, #a4a6ae 63.3%, #9ea1a9 66.7%, #989ca4 70.0%, #93969f 73.3%, #8d919a 76.7%, #878b95 80.0%, #828690 83.3%, #7c808a 86.7%, #767a85 90.0%, #707580 93.3%, #6b6f7b 96.7%, #656a76 100.0%) bottom / 100% 300px no-repeat, #f4f4f5; }
+        .contact-zone { background: linear-gradient(180deg, #656a76 0.0%, #616673 3.3%, #5e6370 6.7%, #5a5f6c 10.0%, #565c69 13.3%, #535866 16.7%, #4f5563 20.0%, #4c5260 23.3%, #484e5d 26.7%, #454b5a 30.0%, #424857 33.3%, #3e4554 36.7%, #3b4251 40.0%, #383f4e 43.3%, #353c4c 46.7%, #323949 50.0%, #2f3646 53.3%, #2c3344 56.7%, #2a3142 60.0%, #272e3f 63.3%, #242c3d 66.7%, #22293b 70.0%, #1f2738 73.3%, #1d2436 76.7%, #1b2234 80.0%, #192032 83.3%, #161e31 86.7%, #141c2f 90.0%, #131a2d 93.3%, #11192c 96.7%, #0f172a 100.0%) top / 100% 200px no-repeat, #0f172a; }
+        @media (min-width: 768px) {
+            :root { --pre: 380px; --rise: 240px; }
+            .approach-bg { background: linear-gradient(180deg, #f4f4f5 0.0%, #f1f1f3 3.3%, #eeeff0 6.7%, #ebeced 10.0%, #e8e8ea 13.3%, #e5e5e7 16.7%, #e1e1e4 20.0%, #dddee1 23.3%, #d9dadd 26.7%, #d4d6d9 30.0%, #d0d1d5 33.3%, #cbcdd1 36.7%, #c7c8cd 40.0%, #c2c3c8 43.3%, #bdbec4 46.7%, #b7b9bf 50.0%, #b2b4ba 53.3%, #adafb6 56.7%, #a7aab1 60.0%, #a1a4ac 63.3%, #9c9fa7 66.7%, #9699a2 70.0%, #90949c 73.3%, #8a8e97 76.7%, #848892 80.0%, #7e838d 83.3%, #797d88 86.7%, #737782 90.0%, #6d727d 93.3%, #676c78 96.7%, #616773 100.0%) bottom / 100% 380px no-repeat, #f4f4f5; }
+            .contact-zone { background: linear-gradient(180deg, #616773 0.0%, #5e6370 3.3%, #5a606d 6.7%, #575c6a 10.0%, #535967 13.3%, #505664 16.7%, #4d5261 20.0%, #494f5e 23.3%, #464c5b 26.7%, #434958 30.0%, #404655 33.3%, #3c4352 36.7%, #394050 40.0%, #363d4d 43.3%, #333a4a 46.7%, #313748 50.0%, #2e3545 53.3%, #2b3243 56.7%, #283041 60.0%, #262d3e 63.3%, #232b3c 66.7%, #21283a 70.0%, #1f2638 73.3%, #1c2436 76.7%, #1a2234 80.0%, #182032 83.3%, #161e30 86.7%, #141c2f 90.0%, #121a2d 93.3%, #11192b 96.7%, #0f172a 100.0%) top / 100% 240px no-repeat, #0f172a; }
+        }
         .site-footer { background: #0f172a; }
 
         .resume-dd { position: relative; }
@@ -998,7 +1006,7 @@
 
         <!-- HOW I WORK -->
         <section class="relative z-10 pt-20 pb-3 overflow-hidden" id="approach">
-            <div class="absolute inset-0 z-0 pointer-events-none bg-[#f4f4f5]"></div>
+            <div class="absolute inset-0 z-0 pointer-events-none approach-bg"></div>
             <div class="absolute inset-0 pointer-events-none">
                 <div
                     class="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-blue-200/20 rounded-full blur-[120px] mix-blend-multiply">
@@ -1009,7 +1017,7 @@
             </div>
             <div class="max-w-[90rem] mx-auto px-4 md:px-6 relative z-10">
                 <div
-                    class="relative rounded-[2.5rem] bg-white/40 backdrop-blur-2xl border border-white/60 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.05)] p-8 md:p-16 overflow-hidden">
+                    class="relative rounded-[2.5rem] bg-white/95 backdrop-blur-2xl border border-white/60 shadow-[0_18px_50px_-18px_rgba(15,23,42,0.35)] p-8 md:p-16 overflow-hidden">
                     <div
                         class="absolute inset-0 bg-gradient-to-br from-white/60 via-transparent to-transparent opacity-60 pointer-events-none">
                     </div>
@@ -1057,7 +1065,7 @@
         <!-- CONTACT -->
         <div class="endzone relative z-10" style="isolation:isolate">
         <section id="contact" class="contact-zone relative">
-            <div class="pb-24 md:pb-28" style="padding-top: calc(var(--rise) * .8)">
+            <div class="pb-24 md:pb-28" style="padding-top: calc(var(--rise) * .75)">
             <div class="max-w-7xl mx-auto px-6 relative z-10">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-24 items-center md:px-12">
                     <div class="z-20 relative">
@@ -2033,9 +2041,10 @@
         const NAVY = [15, 23, 42], LIGHT = [244, 244, 245];
         const smooth = x => { x = Math.min(1, Math.max(0, x)); return x * x * (3 - 2 * x); };
         // Background colour of the contact gradient at a fraction p of its height (same curve as the CSS)
-        const risePx = () => parseFloat(getComputedStyle(contactZone).getPropertyValue('--rise')) || 260;
+        const risePx = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--rise')) || 200;
         const smoother = x => { x = Math.min(1, Math.max(0, x)); return 0.55 * x + 0.45 * (0.5 - 0.5 * Math.cos(Math.PI * x)); };
-        const zoneColor = p => { const e = smoother(p * (contactZone.offsetHeight || 1) / risePx()); return LIGHT.map((a, i) => Math.round(a + (NAVY[i] - a) * e)); };
+        const prePx = () => parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--pre')) || 300;
+        const zoneColor = p => { const T = prePx() + risePx(); const e = smoother((prePx() + p * (contactZone.offsetHeight || 1)) / T); return LIGHT.map((a, i) => Math.round(a + (NAVY[i] - a) * e)); };
         const lum = ([r, g, b]) => { const f = v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); }; return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b); };
         // Text colour that reads on that background: dark on the light part, light on the navy part
         // Text colour for a background: a smooth navy-to-white ramp that stays dark through the mid greys
