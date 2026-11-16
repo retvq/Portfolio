@@ -751,8 +751,6 @@
                     <div class="space-y-2">
                         <h2 class="typewriter-target text-4xl md:text-5xl lg:text-6xl font-light text-zinc-900 leading-[1.1] font-geist tracking-tighter"
                             data-animation-started="false">Built, broken, fixed, shipped</h2>
-                        <p class="md:text-3xl text-2xl font-medium text-zinc-400 tracking-tight font-jakarta">
-                            Open any card for the story</p>
                     </div>
                 </div>
 
@@ -1546,7 +1544,7 @@
         </section>
         <section class="story__part">
             <h3>What we built</h3>
-            <p>OCR that turns paper registers into data in one scan, disease tracking across 22 categories, and my part: a RAG model over government health policies. It didn't just say which schemes were working. It found the gaps and proposed 10 new policies, each with a budget and an expected impact.</p><p>We also built an emergency request network between hospitals, for anything from blood to equipment, and photo-based sanitation checks.</p>
+            <p>OCR that turns paper registers into data in one scan, disease tracking across 22 categories, and my part: a RAG model over government health policies. It didn't just say which schemes were working. It found the gaps and proposed 10 new policies, each with a budget and an expected impact.</p><p>The problem statement went beyond counting. The data was meant to help the government design more effective, better-targeted schemes, so the policy model pointed at where money and effort would matter most.</p><p>We also built an emergency request network between hospitals, for anything from blood to equipment, and photo-based sanitation checks.</p>
         </section>
         <section class="story__part story__part--broke">
             <h3>The moment</h3>
@@ -1807,7 +1805,11 @@
                 state.raf = requestAnimationFrame(step);
             };
             const forward = () => {
-                anims.forEach(a => { a.currentTime = tFirst; a.play(); });
+                // Clamp per animation: play() on an animation already past its end would restart it from 0
+                anims.forEach((a, i) => {
+                    if (ends[i] > tFirst) { a.currentTime = tFirst; a.play(); }
+                    else { a.pause(); a.currentTime = ends[i]; }
+                });
                 state.timer = setTimeout(rewind, (tEnd - tFirst) + HOLD_MS);
             };
             state.timer = setTimeout(rewind, tEnd + HOLD_MS);
